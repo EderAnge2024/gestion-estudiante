@@ -40,7 +40,7 @@ const TeacherForm = ()=>{
 
     return(
         <div>
-            <h1>Student Form</h1>
+            <h1>Teacher Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input

@@ -54,6 +54,6 @@ docenteRouters.delete("/:id", async(req, res)=>{
     }
 })
 
-module. exports={
+module.exports={
     docenteRouters
 }

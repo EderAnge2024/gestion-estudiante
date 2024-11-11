@@ -7,9 +7,9 @@ const StudentList =()=>{
     useEffect(() => {
         fetchStudents()
     },[])
-    const handleDelete =(id)=>{
+    const handleDelete =(dni)=>{
         if(window.confirm("are you sure?")){
-            deleteStudent(id)
+            deleteStudent(dni)
         }
        
     }
@@ -18,9 +18,9 @@ const StudentList =()=>{
             <h1>Student List</h1>{students.map((user) =>{
                     return (
                         <div>
-                            <h3>{user.firstName} {user.lastName}</h3>
-                            <button onClick={() => editStudent(user.id,user.student)}>⛏️</button>
-                            <button onClick={() => handleDelete(user.id)}>✖️</button>
+                            <h3>{user.nombre} {user.apellido}</h3>
+                            <button onClick={() => editStudent(user.dni,user.student)}>⛏️</button>
+                            <button onClick={() => handleDelete(user.dni)}>✖️</button>
                         </div>
                     )
                 })

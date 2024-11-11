@@ -6,8 +6,8 @@ const UserForm = ()=>{
     const {addUser} = useUserStore()
 
     const [userData, setUserData] = useState({
-        name:"",
-        credidts:""
+        nombreUsuario:"",
+        contraseña:""
        
 
     });
@@ -25,8 +25,8 @@ const UserForm = ()=>{
         e.preventDefault();
         addUser(userData)
         setUserData({
-            name:"",
-            credidts:""
+            nombreUsuario:"",
+            contraseña:""
         })
         alert("User added successfully")
       
@@ -39,18 +39,18 @@ const UserForm = ()=>{
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter name"
+                placeholder="Enter user"
                 required
-                name="nombre"
-                value={userData.name}
+                name="usuario"
+                value={userData.nombreUsuario}
                 onChange={handleInputchange}
                 />
                 <input
                 type="text"
-                placeholder="Enter credits"
+                placeholder="Enter contra"
                 required
-                name="credits"
-                value={userData.credidts}
+                name="contraseñas"
+                value={userData.contraseña}
                 onChange={handleInputchange}
                 />
                

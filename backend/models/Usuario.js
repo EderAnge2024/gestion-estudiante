@@ -11,7 +11,7 @@ const Usuario = sequelize.define('Usuario',{
         type: DataTypes.STRING,
         allowNull: false// PARA QUE no VAYA VACIO
     },
-    contrasena: {
+    contraseña: {
         type: DataTypes.STRING,
         allowNull: false
     }

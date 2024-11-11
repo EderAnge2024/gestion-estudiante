@@ -14,7 +14,7 @@ usuarioRouters.post("/",async(req, res)=>{
         res.status(400).json({error: error. message})       
     }
 }) 
-// creamo la ruta para ver todos los estudiantes get
+// creamo la ruta para ver todos los usuarios get
 usuarioRouters.get("/",async(req,res)=>{
     try {
         const usuarios = await getAllUsuariosController()
@@ -54,6 +54,6 @@ usuarioRouters.delete("/:id", async(req, res)=>{
     }
 })
 
-module. exports={
+module.exports={
     usuarioRouters
 }

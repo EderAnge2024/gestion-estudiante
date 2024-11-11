@@ -18,8 +18,8 @@ const CourseList =()=>{
             <h1>Student List</h1>{courses.map((user) =>{
                     return (
                         <div >
-                            <h3>{user.firstName} {user.lastName}</h3>
-                            <button onClick={() => edidCourse(user.id,user.student)}>⛏️</button>
+                            <h3>{user.nombre} {user.creditos}</h3>
+                            <button onClick={() => edidCourse(user.id,user.course)}>⛏️</button>
                             <button onClick={() => handleDelete(user.id)}>✖️</button>
                         </div>
                     )
