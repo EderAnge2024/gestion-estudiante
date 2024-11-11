@@ -17,7 +17,7 @@ const StudentList =()=>{
         <div>
             <h1>Student List</h1>{students.map((user) =>{
                     return (
-                        <div className={Style.container}>
+                        <div>
                             <h3>{user.firstName} {user.lastName}</h3>
                             <button onClick={() => editStudent(user.id,user.student)}>⛏️</button>
                             <button onClick={() => handleDelete(user.id)}>✖️</button>

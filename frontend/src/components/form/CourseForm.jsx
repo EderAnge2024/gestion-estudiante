@@ -1,34 +1,34 @@
 import { useState } from "react"
 import axios from 'axios'
-import useUserStore from "../../store/UserStore";
+import useCourseStore from "../../store/CourseStore";
 
-const UserForm = ()=>{
-    const {addUser} = useUserStore()
+const CourseForm = ()=>{
+    const {addCourse} = useCourseStore()
 
-    const [userData, setUserData] = useState({
+    const [courseData, setCourseData] = useState({
         name:"",
         credidts:""
        
 
     });
-    console.log(userData);
+    console.log(courseData);
 
     const handleInputchange = (e)=>{
         const {name,value} = e.target;
-        setUserData({
-            ...userData,
+        setCourseData({
+            ...courseData,
             [name]:value
         })
 
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        addUser(userData)
-        setUserData({
+        addCourse(courseData)
+        setCourseData({
             name:"",
             credidts:""
         })
-        alert("User added successfully")
+        alert("course added successfully")
       
     }
 
@@ -41,8 +41,8 @@ const UserForm = ()=>{
                 type="text"
                 placeholder="Enter name"
                 required
-                name="nombre"
-                value={userData.name}
+                name="dni"
+                value={courseData.name}
                 onChange={handleInputchange}
                 />
                 <input
@@ -50,7 +50,7 @@ const UserForm = ()=>{
                 placeholder="Enter credits"
                 required
                 name="credits"
-                value={userData.credidts}
+                value={courseData.credidts}
                 onChange={handleInputchange}
                 />
                
@@ -59,4 +59,4 @@ const UserForm = ()=>{
         </div>
     )
 }
-export default UserForm
+export default CourseForm

@@ -39,13 +39,7 @@ const StudentForm = ()=>{
             direccion:""
         })
         alert("studend added successfully")
-        // try {
-        //     const responce = await axios.post("http://localhost:3001/student",studentData)
-        //     console.log("Responce",responce.data);
-        // } catch (error) {
-        //     console.log("error:",error)
-        // }
-
+       
     }
 
     return(

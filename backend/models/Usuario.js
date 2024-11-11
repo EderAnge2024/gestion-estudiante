@@ -9,7 +9,7 @@ const Usuario = sequelize.define('Usuario',{
     },
     nombreUsuario: {
         type: DataTypes.STRING,
-        allowNull: false// PARA QUE VAYA VACIO
+        allowNull: false// PARA QUE no VAYA VACIO
     },
     contrasena: {
         type: DataTypes.STRING,

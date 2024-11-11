@@ -24,7 +24,7 @@ const useStudentStore = create((set)=>({
     deleteStudent: async (id) => {
         try {
             const response = await axios.delete(`http://localhost:3001/student/${id}`)
-            console.log("Estudent deleted:",response.data)
+            console.log("Student deleted:",response.data)
             set((state)=>(
                 {students: state.students.filter((student) => student.id !== id)}
             ))         

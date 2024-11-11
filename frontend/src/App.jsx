@@ -4,6 +4,7 @@ import HomeComponent from './components/home/HomeComponent';
 import StudentForm from './components/form/StudentForm';
 import StudentList from './components/lists/StudentList';
 
+
 function App() {
  
 
@@ -12,8 +13,9 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomeComponent/>}/>
-        <Route path='/form' element={<StudentForm/>}/>
+        <Route path='/formStudent' element={<StudentForm/>}/>
         <Route path='/studentList' element={<StudentList/>}/>
+        
       
       </Routes>
       </BrowserRouter>
