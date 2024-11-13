@@ -15,13 +15,13 @@ const Docente = sequelize.define('Docente',{
         type: DataTypes.STRING,
         allowNull: false
     },
+    telefono: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     
     direccion: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    telefono: {
-        type: DataTypes.INTEGER,
         allowNull: false
     },
     email: {

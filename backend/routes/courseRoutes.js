@@ -6,9 +6,9 @@ const courseRouters = Router()
 // create nuew Course
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 courseRouters.post("/",async(req, res)=>{
-    const {id,name,credits} = req.body
+    const {id,planEstudio_id,docente_id,name,credits} = req.body
     try {
-        const newCourse = await createCourseController({id,name,credits})
+        const newCourse = await createCourseController({id,planEstudio_id,docente_id,name,credits})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newCourse)
     } catch (error) {

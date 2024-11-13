@@ -1,7 +1,7 @@
 const Course= require('../models/Course')
-const createCourseController = async({id,name,credits})=>{
+const createCourseController = async({id,planEstudio_id,docente_id,name,credits})=>{
     try {
-        const newCourse = await Course.create({id,name,credits})
+        const newCourse = await Course.create({id,planEstudio_id,docente_id,name,credits})
         return newCourse
     } catch (error) {
         throw new Error(error.message)

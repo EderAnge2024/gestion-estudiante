@@ -7,14 +7,37 @@ const Course = sequelize.define('Course',{
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    planEstudio_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'PlanEstudios', // Nombre de la tabla con la que se va arelcionar
+            key: 'id' // Clave primaria de la tabla 'Students'
+        }
+    },
+    docente_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Docentes', // Nombre de la tabla con la que se va arelcionar
+            key: 'id' // Clave primaria de la tabla 'Students'
+        }
+    },
+    nombre: {
         type: DataTypes.STRING,
         allowNull: false// PARA QUE NO VAYA VACIO
     },
-    credits: {
+    credito: {
+        type: DataTypes.STRING,
+    allowNull: false
+    },
+    ciclo: {
         type: DataTypes.STRING,
     allowNull: false
     }
+}, {
+    tableName: 'Courses', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
+    timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 })
 
 module.exports= Course    
