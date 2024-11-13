@@ -5,7 +5,7 @@ const useUserStore = create((set)=>({
     users: [],
     addUser: async (user) => {
         try {
-            const response = await axios.post("http://localhost:3001/user",user)
+            const response = await axios.post("http://localhost:3001/usuario",user)
             set((state) => ({users: [...state.users, response.data]}))
 
         } catch (error) {
@@ -15,7 +15,7 @@ const useUserStore = create((set)=>({
     },
     fetchUsers: async () =>{
         try {
-            const response = await axios.get("http://localhost:3001/user")
+            const response = await axios.get("http://localhost:3001/usuario")
             set({users: response.data})
         } catch (error){
             console.log("Error fetching user",error.message)
@@ -23,7 +23,7 @@ const useUserStore = create((set)=>({
     },
     deleteuser: async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3001/user/${id}`)
+            const response = await axios.delete(`http://localhost:3001/usuario/${id}`)
             console.log("user deleted:",response.data)
             set((state)=>(
                 {users: state.users.filter((user) => user.id !== id)}

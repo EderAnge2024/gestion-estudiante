@@ -5,7 +5,7 @@ const useTeacherStore = create((set)=>({
     teachers: [],
     addTeacher: async (teacher) => {
         try {
-            const response = await axios.post("http://localhost:3001/teacher",teacher)
+            const response = await axios.post("http://localhost:3001/docente",teacher)
             set((state) => ({teachers: [...state.teachers, response.data]}))
 
         } catch (error) {
@@ -15,7 +15,7 @@ const useTeacherStore = create((set)=>({
     },
     fetchTeachers: async () =>{
         try {
-            const response = await axios.get("http://localhost:3001/teacher")
+            const response = await axios.get("http://localhost:3001/docente")
             set({teachers: response.data})
         } catch (error){
             console.log("Error fetching teacher",error.message)
@@ -23,7 +23,7 @@ const useTeacherStore = create((set)=>({
     },
     deleteTeacher: async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3001/teacher/${id}`)
+            const response = await axios.delete(`http://localhost:3001/docente/${id}`)
             console.log("Teacher deleted:",response.data)
             set((state)=>(
                 {teachers: state.teachers.filter((teacher) => teacher.id !== id)}
