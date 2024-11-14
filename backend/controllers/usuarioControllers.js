@@ -1,7 +1,10 @@
 const Usuario= require('../models/Usuario')
-const createUsuarioController = async({id,nombreUsuario,contrasena})=>{
+const bcrypt= require('bcrypt')
+
+const createUsuarioController = async({id,nombreUsuario,contraseña})=>{
+    const hashedPassword = await bcrypt.hash(contraseña,10)
     try {
-        const newUsuario = await Usuario.create({id,nombreUsuario,contrasena})
+        const newUsuario = await Usuario.create({id,nombreUsuario,contraseña:hashedPassword})
         return newUsuario
     } catch (error) {
         throw new Error(error.message)

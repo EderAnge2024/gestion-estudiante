@@ -5,9 +5,9 @@ const usuarioRouters = Router()
 // create nuew student
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 usuarioRouters.post("/",async(req, res)=>{
-    const {id,nombreUsuario,contrasena} = req.body
+    const {id,nombreUsuario,contraseña} = req.body
     try {
-        const newUsuario = await createUsuarioController({id,nombreUsuario,contrasena})
+        const newUsuario = await createUsuarioController({id,nombreUsuario,contraseña})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newUsuario)
     } catch (error) {
