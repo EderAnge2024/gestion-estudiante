@@ -10,6 +10,11 @@ const PreriquisitoCurso = require('./PrerrequisitoCurso')
 const PeriodoAcademico = require('./PeriodoAcademico')
 const GestionGrupo = require('./GestionGrupo')
 const Docente = require('./Docente')
+const Actividad = require('./Actividad')
+const Matricula = require('./Matricula')
+const Nota = require('./Nota')
+const Permiso = require('./Permiso')
+const Rol = require('./Rol')
 
 const db={
     sequelize,
@@ -21,7 +26,12 @@ const db={
     PreriquisitoCurso,
     PeriodoAcademico,
     GestionGrupo,
-    Docente
+    Docente,
+    Actividad,
+    Matricula,
+    Nota,
+    Permiso,
+    Rol
     // agregar mas modelos aqui
 }
 

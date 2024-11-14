@@ -20,7 +20,7 @@ const getAllStudentsController = async () =>{
 // para actualizar
 const updateStudentByIdController = async (dni, studentData)=>{
     try {
-        const student = await Student.findByPk(id)
+        const student = await Student.findByPk(dni)
         if(!student){
             return null
         }

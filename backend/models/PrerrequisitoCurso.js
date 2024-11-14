@@ -31,5 +31,7 @@ const PreriquisitoCurso = sequelize.define('PreriquisitoCurso',{
     tableName: 'PreriquisitoCursos', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 })
+PreriquisitoCurso.belongsTo(require('./Student'), { foreignKey: 'student_id' });
+PreriquisitoCurso.belongsTo(require('./Course'), { foreignKey: 'curso_id' });
 
 module.exports= PreriquisitoCurso

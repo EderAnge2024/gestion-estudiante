@@ -36,4 +36,7 @@ const GestionGrupo = sequelize.define('GestionGrupo', {
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 });
 
+GestionGrupo.belongsTo(require('./Course'), { foreignKey: 'curso_id' });
+GestionGrupo.belongsTo(require('./Docente'), { foreignKey: 'docente_id' });
+
 module.exports = GestionGrupo;

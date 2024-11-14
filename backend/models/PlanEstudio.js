@@ -27,5 +27,6 @@ const PlanEstudio = sequelize.define('PlanEstudio', {
     tableName: 'PlanEstudios', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 });
+PlanEstudio.belongsTo(require('./Student'), { foreignKey: 'student_id' });
 
 module.exports = PlanEstudio;

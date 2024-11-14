@@ -39,5 +39,8 @@ const Course = sequelize.define('Course',{
     tableName: 'Courses', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 })
+// Definir la relación con el modelo Usuario si es necesario
+Course.belongsTo(require('./Docente'), { foreignKey: 'docente_id' });
+Course.belongsTo(require('./PlanEstudio'), { foreignKey: 'planEstudio_id' });
 
 module.exports= Course    
