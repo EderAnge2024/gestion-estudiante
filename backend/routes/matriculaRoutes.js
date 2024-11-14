@@ -5,9 +5,9 @@ const matriculaRouters = Router()
 // create nuew Matricula
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 matriculaRouters.post("/",async(req, res)=>{
-    const {id, fecha, estudent_id,grupo_id,periodoAcademico_id} = req.body
+    const {id, fecha,carrera, estudent_id,grupo_id,periodoAcademico_id} = req.body
     try {
-        const newMatricula = await createMatriculaController({id, fecha, estudent_id,grupo_id,periodoAcademico_id})
+        const newMatricula = await createMatriculaController({id, fecha, carrera, estudent_id,grupo_id,periodoAcademico_id})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newMatricula)
     } catch (error) {

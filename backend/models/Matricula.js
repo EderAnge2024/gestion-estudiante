@@ -11,6 +11,10 @@ const Matricula = sequelize.define('Matricula',{
         type: DataTypes.STRING,
         allowNull: false// PARA QUE VAYA VACIO
     },
+    carrera:{
+        type: DataTypes.STRING,
+        allowNull:false  
+    },
     estudent_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

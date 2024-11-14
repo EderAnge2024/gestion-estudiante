@@ -1,7 +1,7 @@
 const Matricula= require('../models/Matricula')
-const createMatriculaController = async({id, fecha, estudent_id,grupo_id,periodoAcademico_id})=>{
+const createMatriculaController = async({id, fecha,carrera, estudent_id,grupo_id,periodoAcademico_id})=>{
     try {
-        const newMatricula = await Matricula.create({id, fecha, estudent_id,grupo_id,periodoAcademico_id})
+        const newMatricula = await Matricula.create({id, fecha,carrera, estudent_id,grupo_id,periodoAcademico_id})
         return newMatricula
     } catch (error) {
         throw new Error(error.message)
