@@ -12,6 +12,8 @@ const {matriculaRouters} = require('../routes/matriculaRoutes')
 const {notaRouters} = require('../routes/notaRoutes')
 const {permisoRouters} = require('../routes/permisoRoutes')
 const {rolRouters} = require('../routes/rolRoutes')
+const contraRoutes = require('../routes/contraRoutes')
+
 
 //const { Course } = require('../models')
 // creamos el enrutador
@@ -29,5 +31,6 @@ router.use('/matricula',matriculaRouters)
 router.use('/nota',notaRouters)
 router.use('/permiso',permisoRouters)
 router.use('/rol',rolRouters)
+router.use('/contra',contraRoutes)
 
 module.exports = router
