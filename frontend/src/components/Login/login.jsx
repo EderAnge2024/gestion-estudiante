@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import NavegadorIncicio from '../navegador/navaegadorIncio';
 
 const Login = () => {
     const [nombreUsuario, setNombreUsuario] = useState('');
@@ -31,6 +32,7 @@ const Login = () => {
 
     return (
         <div>
+            <div><NavegadorIncicio></NavegadorIncicio></div>
             <h1>Iniciar sesión</h1>
             <form onSubmit={handleSubmit}>
                 <input

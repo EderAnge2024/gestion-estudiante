@@ -1,0 +1,15 @@
+
+.link{
+
+    padding: 10px 10px; /* Espaciado interno */
+    background-color: #7a8b98; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    text-decoration: none; /* Quitar subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 5px solid black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 10px;
+    margin-left: 10px;
+    align-content: center;
+}

@@ -1,9 +1,10 @@
 import { useState } from "react"
 import axios from 'axios'
 import useUserStore from "../../store/UserStore";
+import Navegador from "../navegador/Navegador";
 
 const UserForm = ()=>{
-    const {addUser} = useUserStore()
+    const {addUsuario} = useUserStore()
 
     const [userData, setUserData] = useState({
         nombreUsuario:"",
@@ -23,7 +24,7 @@ const UserForm = ()=>{
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        addUser(userData)
+        addUsuario(userData)
         setUserData({
             nombreUsuario:"",
             contraseña:""
@@ -34,6 +35,7 @@ const UserForm = ()=>{
 
     return(
         <div>
+            <div><Navegador></Navegador></div>
             <h1>Student Form</h1>
             <form 
             onSubmit={handleSubmit}>
@@ -41,7 +43,7 @@ const UserForm = ()=>{
                 type="text"
                 placeholder="Enter user"
                 required
-                name="usuario"
+                name="nombreUsuario"
                 value={userData.nombreUsuario}
                 onChange={handleInputchange}
                 />
@@ -49,7 +51,7 @@ const UserForm = ()=>{
                 type="text"
                 placeholder="Enter contra"
                 required
-                name="contraseñas"
+                name="contraseña"
                 value={userData.contraseña}
                 onChange={handleInputchange}
                 />

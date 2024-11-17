@@ -12,7 +12,7 @@ const PreriquisitoCurso = sequelize.define('PreriquisitoCurso',{
         allowNull: false,
         references: {
             model: 'Students', // Nombre de la tabla con la que se va arelcionar
-            key: 'dni' // Clave primaria de la tabla 'Students'
+            key: 'id' // Clave primaria de la tabla 'Students'
         }
     },
     curso_id: {

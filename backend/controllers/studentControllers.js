@@ -1,7 +1,7 @@
 const Student= require('../models/Student')
-const createStudentController = async({dni,nombre,apellido,telefono,email,apoderado,direccion})=>{
+const createStudentController = async({id, dni,nombre,apellido,telefono,email,apoderado,direccion})=>{
     try {
-        const newStudent = await Student.create({dni,nombre,apellido,telefono,email,apoderado,direccion})
+        const newStudent = await Student.create({id, dni,nombre,apellido,telefono,email,apoderado,direccion})
         return newStudent
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllStudentsController = async () =>{
 }
 
 // para actualizar
-const updateStudentByIdController = async (dni, studentData)=>{
+const updateStudentByIdController = async (id, studentData)=>{
     try {
-        const student = await Student.findByPk(dni)
+        const student = await Student.findByPk(id)
         if(!student){
             return null
         }
@@ -32,9 +32,9 @@ const updateStudentByIdController = async (dni, studentData)=>{
 }
 // para eliminar
 
-const deletedStudentByIdController = async(dni)=>{
+const deletedStudentByIdController = async(id)=>{
    try {
-    const student= await Student.findByPk(dni)
+    const student= await Student.findByPk(id)
     if(!student){
         return null
     }

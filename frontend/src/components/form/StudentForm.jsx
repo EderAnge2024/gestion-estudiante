@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 import useStudentStore from "../../store/StudentStore";
+import Navegador from "../navegador/Navegador";
 
 const StudentForm = ()=>{
     const {addStudent} = useStudentStore()
@@ -44,6 +45,7 @@ const StudentForm = ()=>{
 
     return(
         <div>
+            <div><Navegador></Navegador></div>
             <h1>Student Form</h1>
             <form 
             onSubmit={handleSubmit}>

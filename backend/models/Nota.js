@@ -20,7 +20,7 @@ const Nota = sequelize.define('Nota',{
         allowNull: false,
         references: {
             model: 'Students', // Nombre de la tabla con la que se va arelcionar
-            key: 'dni' // Clave primaria de la tabla 'Students'
+            key: 'id' // Clave primaria de la tabla 'Students'
         }
     },
     fecha_ingre_nota: {

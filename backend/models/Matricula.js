@@ -20,7 +20,7 @@ const Matricula = sequelize.define('Matricula',{
         allowNull: false,
         references: {
             model: 'Students', // Nombre de la tabla con la que se va arelcionar
-            key: 'dni' // Clave primaria de la tabla 'Students'
+            key: 'id' // Clave primaria de la tabla 'Students'
         }
     },
     grupo_id: {

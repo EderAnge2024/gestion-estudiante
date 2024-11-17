@@ -5,9 +5,9 @@ const studentRouters = Router()
 // create nuew student
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 studentRouters.post("/",async(req, res)=>{
-    const {dni,nombre,apellido,telefono,email,apoderado,direccion} = req.body
+    const {id, dni,nombre,apellido,telefono,email,apoderado,direccion} = req.body
     try {
-        const newStudent = await createStudentController({dni,nombre,apellido,telefono,email,apoderado,direccion})
+        const newStudent = await createStudentController({id,dni,nombre,apellido,telefono,email,apoderado,direccion})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newStudent)
     } catch (error) {
@@ -29,7 +29,7 @@ studentRouters.put("/:id", async(req,res)=>{
     const {id}= req.params
     const studentData= req.body
     try {
-        const updateStudent = await updateStudentByIdController(dni, studentData)
+        const updateStudent = await updateStudentByIdController(id, studentData)
         if(!updateStudent){
             return res.status(404).json({error: "studiante no encontrado"})
         }
@@ -41,10 +41,10 @@ studentRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-studentRouters.delete("/:dni", async(req, res)=>{
-    const {dni} = req.params
+studentRouters.delete("/:id", async(req, res)=>{
+    const {id} = req.params
     try {
-        const deletedStudent = await deletedStudentByIdController(dni)
+        const deletedStudent = await deletedStudentByIdController(id)
         if(!deletedStudent){
             return res.status.apply(404).json({error: "Studiante no encontrado"})
         }
