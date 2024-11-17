@@ -80,14 +80,6 @@ const UserList = ()=>{
                                 onChange={handleInputChange} 
                                 placeholder="contraseña"
                             />
-                            <input
-                                type="text" 
-                                name="email" 
-                                value={formData.email} 
-                                onChange={handleInputChange} 
-                                placeholder="email"
-                            />
-                            
                             <button onClick={handleUpdate}>Save</button>
                             <button onClick={() => setEditingUsuario(null)}>Cancel</button>
                         </div>

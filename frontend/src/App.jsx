@@ -2,7 +2,7 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'  // esto envuelve todo
 import StudentForm from './components/form/StudentForm'
 import StudentList from './components/lists/StudentList'
-import Login from './components/home/login'
+import Login from './components/Login/login'
 import UserForm from './components/form/UserForm'
 import UserList from './components/lists/UserList'
 
