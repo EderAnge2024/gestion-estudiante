@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import stilo from './navegadorStilo.module.css'
 
-const NavegadorIncicio = () => {
+const NavegadorInicio = () => {
     return (
         <div >            
             <nav className={stilo.padre}>
@@ -12,4 +12,4 @@ const NavegadorIncicio = () => {
     );
 }
 
-export default NavegadorIncicio;
+export default NavegadorInicio;
