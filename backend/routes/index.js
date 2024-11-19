@@ -13,6 +13,7 @@ const {notaRouters} = require('../routes/notaRoutes')
 const {permisoRouters} = require('../routes/permisoRoutes')
 const {rolRouters} = require('../routes/rolRoutes')
 const contraRoutes = require('../routes/contraRoutes')
+const {preriquisitoCursoRouters} = require('../routes/prerrequisitoCursoRoutes')
 
 
 //const { Course } = require('../models')
@@ -32,5 +33,6 @@ router.use('/nota',notaRouters)
 router.use('/permiso',permisoRouters)
 router.use('/rol',rolRouters)
 router.use('/contra',contraRoutes)
+router.use('/preriquisitoCurso',preriquisitoCursoRouters)
 
 module.exports = router

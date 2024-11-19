@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    overflow: hidden;
+    height: 100%;
+  }
+  
+  .loginWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding-top: 20px;
+  }
+  
+  .cabeza {
+    color: #007BFF;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .logincontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(248, 246, 246);
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    color: #333;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  
+  .tituloContainer {
+    display: flex;
+    align-items: center; /* Centra verticalmente imagen y texto */
+    justify-content: flex-start; /* Alinea todo al inicio */
+    gap: 20px; /* Espaciado entre imagen y textos */
+    width: 100%; /* Asegura el ancho completo */
+    margin-bottom: 20px;
+  }
+  
+  .logo img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  
+  .bienvenido {
+    color: #007BFF;
+    font-size: 1.8rem;
+  }
+  
+  .ini {
+    color: #007BFF;
+    font-size: 1.5rem;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  input {
+    padding: 12px;
+    font-size: 1rem;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #0056b3;
+  }
+  
+  button {
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .mensaje,
+  .error {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .mensaje {
+    color: green;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  /* Contenedor principal de la imagen */
+  .suiza {
+    position: absolute; /* Para posicionar la imagen fuera del flujo normal */
+    top: 0; /* Coloca la imagen en la parte superior de la pantalla */
+    right: 0; /* Coloca la imagen al lado derecho */
+    height: 100vh; /* Ajusta la altura al 100% de la ventana (pantalla) */
+    width: 100%; /* Ajusta el ancho al 100% */
+    z-index: -1; /* Mantiene la imagen detrás del formulario */
+    overflow: hidden; /* Asegura que la imagen no sobresalga */
+  }
+  
+  /* Estilo de la imagen */
+  .suiza img {
+    width: 100%; /* Se adapta al ancho del contenedor */
+    height: 100%; /* Se adapta a la altura del contenedor */
+    object-fit: cover; /* Asegura que la imagen se recorte proporcionalmente */
+  }
+  
+  
+  
+  
+  @media (max-width: 768px) {
+    .cabeza {
+      font-size: 1.5rem;
+    }
+  
+    .bienvenido,
+    .ini {
+      font-size: 1.6rem;
+    }
+  
+    input,
+    button {
+      font-size: 0.95rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .cabeza {
+      font-size: 1.4rem;
+    }
+  
+    .bienvenido,
+    .ini {
+      font-size: 1.4rem;
+    }
+  
+    form {
+      width: 85%;
+    }
+  
+    input,
+    button {
+      font-size: 0.9rem;
+    }
+  }
