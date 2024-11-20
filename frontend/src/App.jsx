@@ -13,6 +13,14 @@ import PreriquisitoCursoFrom from './components/form/prerrequisitoCursoForm'
 import PreriquisitoCursoList from './components/lists/PrerrequisitoCursoList'
 import RolFrom from './components/form/rolForm'
 import RolList from './components/lists/RolList'
+import ActividadForm from './components/form/actividadForm'
+import ActividadList from './components/lists/ActividadList'
+import CourseForm from './components/form/courseForm'
+import CourseList from './components/lists/CourseList'
+import GestionGrupoForm from './components/form/gestionGrupoForm'
+import GestionGrupoList from './components/lists/GestionGrupoList'
+
+
 
 function App() {
  
@@ -33,6 +41,12 @@ function App() {
           <Route path='/preriquisitoCursoList' element={<PreriquisitoCursoList></PreriquisitoCursoList>}></Route>
           <Route path='/rolFrom' element={<RolFrom></RolFrom>}></Route>
           <Route path='/rolList' element={<RolList></RolList>}></Route>
+          <Route path='/actividadform' element={<ActividadForm></ActividadForm>}></Route>
+          <Route path='/actividadlist' element={<ActividadList></ActividadList>}></Route>
+          <Route path='/courseform' element={<CourseForm></CourseForm>}></Route>
+          <Route path='/courselist' element={<CourseList></CourseList>}></Route>
+          <Route path='/gestiongrupoform' element={<GestionGrupoForm></GestionGrupoForm>}></Route>
+          <Route path='/gestiongrupolist' element={<GestionGrupoList></GestionGrupoList>}></Route>
         </Routes>
       </BrowserRouter>
     </>

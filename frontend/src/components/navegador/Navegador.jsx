@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { Link } from 'react-router-dom';
 import stilo from './navegadorStilo.module.css'
 
@@ -19,6 +19,12 @@ const Navegador = () => {
                 <Link to='/preriquisitoCursoList' > lista de prerrequisito del curso</Link>
                 <Link to='/rolFrom' > guardar rol</Link>
                 <Link to='/rolList' > lista de rol</Link>
+                <Link to='/actividadForm' > guardar actvidad </Link>
+                <Link to='/actividadList' > Lista de Actividad </Link>
+                <Link to='/courseForm' >guardar course</Link>
+                <Link to='/courseList' >Lista de course </Link>
+                <Link to='/gestionGrupoForm' > guardar gestionGrupo </Link>
+                <Link to='/gestionGrupoList' > Lista de GestionGrupo </Link>
             </nav>
         </div>
     );
