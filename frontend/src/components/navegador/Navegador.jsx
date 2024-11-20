@@ -31,6 +31,10 @@ const Navegador = () => {
                 <Link to='/courseList' > lista de cursos</Link>
                 <Link to='/gestioGrupoFrom' > guardado de gestio de grupos</Link>
                 <Link to='/gestioGrupoList' > lista de gestion de grupo</Link>
+                <Link to='/periodoAcademicoFrom' > guardar periodo academico</Link>
+                <Link to='/periodoAcademicoList' > lista de periodo acedmico</Link>
+                <Link to='/permisoFrom' > guardar permiso</Link>
+                <Link to='/permisoList' > lista de permiso</Link>
             </nav>
         </div>
     );

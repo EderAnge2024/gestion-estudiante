@@ -27,6 +27,10 @@ import GestionGrupoForm from './components/form/GestionGrupoForm'
 import GestionGrupoList from './components/lists/GestionGrupoList'
 import Navegador from './components/navegador/Navegador'
 import VerNotaList from './components/lists/verNotaList'
+import PeriodoAcademicoFrom from './components/form/PeriodoAcademicoForm'
+import PeriodoAcademicoList from './components/lists/PeriodoAcademicoList'
+import PermisoFrom from './components/form/PermisoForm'
+import PermisoList from './components/lists/PermisoList'
 
 function App() {
  
@@ -61,6 +65,10 @@ function App() {
           <Route path='/gestioGrupoFrom' element={<GestionGrupoForm></GestionGrupoForm>}></Route>
           <Route path='/gestioGrupoList' element={<GestionGrupoList></GestionGrupoList>}></Route>
           <Route path='/verNotaList' element={<VerNotaList></VerNotaList>}></Route>
+          <Route path='/periodoAcademicoFrom' element={<PeriodoAcademicoFrom></PeriodoAcademicoFrom>}></Route>
+          <Route path='/periodoAcademicoList' element={<PeriodoAcademicoList></PeriodoAcademicoList>}></Route>
+          <Route path='/permisoFrom' element={<PermisoFrom></PermisoFrom>}></Route>
+          <Route path='/permisoList' element={<PermisoList></PermisoList>}></Route>
         </Routes>
       </BrowserRouter>
     </>
