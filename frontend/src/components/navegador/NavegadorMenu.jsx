@@ -6,7 +6,7 @@ const NavegadorMenu = () => {
     return (
         <div >            
             <nav className={stilo.padre}>
-                <Link to='/menu' className={stilo.link}> Volver Menu </Link>
+                <Link to='/menu' className={stilo.link}> REGRESAR AL MENU </Link>
             </nav>
         </div>
     );

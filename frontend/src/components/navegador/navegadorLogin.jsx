@@ -6,7 +6,7 @@ const NavegadorLogin = () => {
     return (
         <div >            
             <nav className={stilo.padre}>
-                <Link to='/' className={stilo.link}> Inicio </Link>
+                <Link to='/' className={stilo.link}> INICIO </Link>
             </nav>
         </div>
     );
