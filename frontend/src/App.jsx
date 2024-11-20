@@ -13,6 +13,18 @@ import PreriquisitoCursoFrom from './components/form/prerrequisitoCursoForm'
 import PreriquisitoCursoList from './components/lists/PrerrequisitoCursoList'
 import RolFrom from './components/form/rolForm'
 import RolList from './components/lists/RolList'
+import DocenteForm from './components/form/DocenteForm'
+import DocenteList from './components/lists/DocenteList'
+import MatriculaForm from './components/form/MatriculaForm'
+import MatriculaList from './components/lists/MatriculaList'
+import NotaForm from './components/form/NotaForm'
+import NotaList from './components/lists/NotaList'
+import ActividadForm from './components/form/ActividadForm'
+import ActividadList from './components/lists/ActividadList'
+import CourseForm from './components/form/CourseForm'
+import CourseList from './components/lists/CourseList'
+import GestionGrupoForm from './components/form/GestionGrupoForm'
+import GestionGrupoList from './components/lists/GestionGrupoList'
 
 function App() {
  
@@ -33,6 +45,18 @@ function App() {
           <Route path='/preriquisitoCursoList' element={<PreriquisitoCursoList></PreriquisitoCursoList>}></Route>
           <Route path='/rolFrom' element={<RolFrom></RolFrom>}></Route>
           <Route path='/rolList' element={<RolList></RolList>}></Route>
+          <Route path='/docenteFrom' element={<DocenteForm></DocenteForm>}></Route>
+          <Route path='/docenteList' element={<DocenteList></DocenteList>}></Route>
+          <Route path='/matriculaFrom' element={<MatriculaForm></MatriculaForm>}></Route>
+          <Route path='/matriculaList' element={<MatriculaList></MatriculaList>}></Route>
+          <Route path='/notaFrom' element={<NotaForm></NotaForm>}></Route>
+          <Route path='/notaList' element={<NotaList></NotaList>}></Route>
+          <Route path='/actividadFrom' element={<ActividadForm></ActividadForm>}></Route>
+          <Route path='/actividadList' element={<ActividadList></ActividadList>}></Route>
+          <Route path='/courseFrom' element={<CourseForm></CourseForm>}></Route>
+          <Route path='/courseList' element={<CourseList></CourseList>}></Route>
+          <Route path='/gestioGrupoFrom' element={<GestionGrupoForm></GestionGrupoForm>}></Route>
+          <Route path='/gestioGrupoList' element={<GestionGrupoList></GestionGrupoList>}></Route>
         </Routes>
       </BrowserRouter>
     </>
