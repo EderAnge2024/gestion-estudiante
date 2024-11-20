@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PreriquisitoCursoFrom = ()=>{
     const {addPreriquisitoCurso} = usePreriquisitoCursoStore()
@@ -36,7 +36,7 @@ const PreriquisitoCursoFrom = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>PreriquisitoCurso Form</h1>
             <form 
             onSubmit={handleSubmit}>

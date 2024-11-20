@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react"
 import useActividadStore from "../../store/ActividadStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const ActividadList = ()=>{
-    const {fetchActividad, Actividad, deleteActividad, updateActividad} = useActividadStore()
+    const {fetchActividads, actividads, deleteActividad, updateActividad} = useActividadStore()
     const [editingActividad, setEditingActividad] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ usuario_id: '',rol: '',accion: '',fecha: '',descripcion: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
-        fetchActividad()
+        fetchActividads()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
     const handleDelete = (id)=>{
         if(window.confirm("Are you sure?")){
             deleteActividad(id)
-            fetchActividad() // Refresca 
+            fetchActividads() // Refresca 
         }  
     }
      //////----Agregado----///
@@ -38,13 +38,13 @@ const ActividadList = ()=>{
     const handleUpdate = async () => {
         await updateActividad(editingActividad.id, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingActividad(null) // Cierra el formulario de edición
-        fetchActividad() // Luego recarga la lista de estudiantes
+        fetchActividads() // Luego recarga la lista de estudiantes
     }
     /////-------------////
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >
@@ -52,7 +52,7 @@ const ActividadList = ()=>{
 
                 <div>
                     {
-                        Actividad.map((user) => (
+                        actividads.map((user) => (
                             <div key={user.id}>
                                 <h3>{user.id}<br></br> {user.usuario_id} {user.rol} {user.accion} {user.fecha} {user.descripcion}</h3>
                                 <button onClick={() => handleDelete(user.id)}>❌</button>

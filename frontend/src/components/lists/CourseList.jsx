@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react"
 import useCourseStore from "../../store/CourseStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const CourseList = ()=>{
-    const {fetchCourse, Course, deleteCourse, updateCourse} = useCourseStore()
+    const {fetchCourses, courses, deleteCourse, updateCourse} = useCourseStore()
     const [editingCourse, setEditingCourse] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ planEstudio_id: '',docente_id: '',nombre: '',credito: '',ciclo: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
-        fetchCourse()
+        fetchCourses()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
     const handleDelete = (id)=>{
         if(window.confirm("Are you sure?")){
             deleteCourse(id)
-            fetchCourse() // Refresca 
+            fetchCourses() // Refresca 
         }  
     }
      //////----Agregado----///
@@ -38,13 +38,13 @@ const CourseList = ()=>{
     const handleUpdate = async () => {
         await updateCourse(editingCourse.id, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingCourse(null) // Cierra el formulario de edición
-        fetchCourse() // Luego recarga la lista de estudiantes
+        fetchCourses() // Luego recarga la lista de estudiantes
     }
     /////-------------////
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >
@@ -52,7 +52,7 @@ const CourseList = ()=>{
 
                 <div>
                     {
-                        Course.map((user) => (
+                        courses.map((user) => (
                             <div key={user.id}>
                                 <h3>{user.id}<br></br> {user.planEstudio_id} {user.docente_id} {user.nombre} {user.credito} {user.ciclo}</h3>
                                 <button onClick={() => handleDelete(user.id)}>❌</button>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useNotaStore from "../../store/NotaStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const NotaList = ()=>{
     const {fetchNotas, notas, deleteNota, updateNota} = useNotaStore()
@@ -44,7 +44,7 @@ const NotaList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div>

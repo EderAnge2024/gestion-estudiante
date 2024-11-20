@@ -1,7 +1,7 @@
 import { useState } from "react"
 // import axios from 'axios'
 import useGestionGrupoStore from "../../store/GestionGrupoStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const GestionGrupoForm = ()=>{
     const {addGestionGrupo} = useGestionGrupoStore()
@@ -35,7 +35,7 @@ const GestionGrupoForm = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>GestionGrupo Form</h1>
             <form 
             onSubmit={handleSubmit}>

@@ -25,6 +25,8 @@ import CourseForm from './components/form/CourseForm'
 import CourseList from './components/lists/CourseList'
 import GestionGrupoForm from './components/form/GestionGrupoForm'
 import GestionGrupoList from './components/lists/GestionGrupoList'
+import Navegador from './components/navegador/Navegador'
+import VerNotaList from './components/lists/verNotaList'
 
 function App() {
  
@@ -33,6 +35,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login></Login>}/>
+          <Route path='/menu' element={<Navegador></Navegador>}/>  
           <Route path='/studentForm' element={<StudentForm></StudentForm>}/>
           <Route path='/studentList' element={<StudentList></StudentList>}></Route>
           <Route path='/userFrom' element={<UserForm></UserForm>}></Route>
@@ -57,6 +60,7 @@ function App() {
           <Route path='/courseList' element={<CourseList></CourseList>}></Route>
           <Route path='/gestioGrupoFrom' element={<GestionGrupoForm></GestionGrupoForm>}></Route>
           <Route path='/gestioGrupoList' element={<GestionGrupoList></GestionGrupoList>}></Route>
+          <Route path='/verNotaList' element={<VerNotaList></VerNotaList>}></Route>
         </Routes>
       </BrowserRouter>
     </>

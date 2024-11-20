@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import usePlanEstudioStore from "../../store/PlanEstudioStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const PlanEstudioList = ()=>{
     const {fetchPlanEstudios, planEstudios, deletePlanEstudio, updatePlanEstudio} = usePlanEstudioStore()
@@ -44,7 +44,7 @@ const PlanEstudioList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >

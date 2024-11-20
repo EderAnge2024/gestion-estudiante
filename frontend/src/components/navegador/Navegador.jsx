@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import stilo from './navegadorStilo.module.css'
+import stilo from './navegadorMneuStilo.module.css'
 
 const Navegador = () => {
     return (
         <div >            
-            <nav className={stilo}>
+            <nav className={stilo.nav}>
                 <Link to='/'> Inicio</Link>
                 <Link to='/studentForm' > FORMULARIO DE GUARDAR</Link>
                 <Link to='/studentList' > EDITAR Y ELIMNAR </Link>
@@ -19,11 +19,11 @@ const Navegador = () => {
                 <Link to='/preriquisitoCursoList' > lista de prerrequisito del curso</Link>
                 <Link to='/rolFrom' > guardar rol</Link>
                 <Link to='/rolList' > lista de rol</Link>
-                <Link to='/docenteFrom' > guradado de docentes</Link>
+                <Link to='/docenteFrom' > guardado de docentes</Link>
                 <Link to='/docenteList' > lista de docentes</Link>
-                <Link to='/matriculaFrom' > guradado de matriculas</Link>
+                <Link to='/matriculaFrom' > guardado de matriculas</Link>
                 <Link to='/matriculaList' > lista de matriculas</Link>
-                <Link to='/notaFrom' > guradado de nota</Link>
+                <Link to='/notaFrom' > guardado de nota</Link>
                 <Link to='/notaList' > lista de notas</Link>
                 <Link to='/actividadFrom' > guardado de actividad</Link>
                 <Link to='/actividadList' > lista de actividades</Link>

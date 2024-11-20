@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 import useGestionAulaStore from "../../store/GestioAulaStore"
 
 const GestionAulaList = ()=>{
@@ -44,7 +44,7 @@ const GestionAulaList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >

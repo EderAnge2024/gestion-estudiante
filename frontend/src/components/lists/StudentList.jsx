@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useStudentStore from "../../store/StudentStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const StudentList = ()=>{
     const {fetchStudents, students, deleteStudent, updateStudent} = useStudentStore()
@@ -44,7 +44,7 @@ const StudentList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >

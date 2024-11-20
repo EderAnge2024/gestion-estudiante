@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useUsuarioStore from "../../store/UserStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const UserList = ()=>{
     const {fetchUsuarios, usuarios, deleteUsuario, updateUsuario} = useUsuarioStore()
@@ -44,7 +44,7 @@ const UserList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >

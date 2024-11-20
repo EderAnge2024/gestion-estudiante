@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react"
 import useGestionGrupoStore from "../../store/GestionGrupoStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const GestionGrupoList = ()=>{
-    const {fetchGestionGrupo, GestionGrupo, deleteGestionGrupo, updateGestionGrupo} = useGestionGrupoStore()
+    const {fetchGestionGrupos, gestionGrupos, deleteGestionGrupo, updateGestionGrupo} = useGestionGrupoStore()
     const [editingGestionGrupo, setEditingGestionGrupo] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ curso_id: '',docente_id: '',periodoAcademico_id: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
-        fetchGestionGrupo()
+        fetchGestionGrupos()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
     const handleDelete = (id)=>{
         if(window.confirm("Are you sure?")){
             deleteGestionGrupo(id)
-            fetchGestionGrupo() // Refresca 
+            fetchGestionGrupos() // Refresca 
         }  
     }
      //////----Agregado----///
@@ -38,13 +38,13 @@ const GestionGrupoList = ()=>{
     const handleUpdate = async () => {
         await updateGestionGrupo(editingGestionGrupo.id, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingGestionGrupo(null) // Cierra el formulario de edición
-        fetchGestionGrupo() // Luego recarga la lista de estudiantes
+        fetchGestionGrupos() // Luego recarga la lista de estudiantes
     }
     /////-------------////
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >
@@ -52,7 +52,7 @@ const GestionGrupoList = ()=>{
 
                 <div>
                     {
-                        GestionGrupo.map((user) => (
+                        gestionGrupos.map((user) => (
                             <div key={user.id}>
                                 <h3>{user.id}<br></br> {user.curso_id} {user.docente_id} {user.periodoAcademico_id} </h3>
                                 <button onClick={() => handleDelete(user.id)}>❌</button>

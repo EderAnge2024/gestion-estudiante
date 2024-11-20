@@ -1,7 +1,7 @@
 import { useState } from "react"
 // import axios from 'axios'
 import useActividadStore from "../../store/ActividadStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const ActividadForm = ()=>{
     const {addActividad} = useActividadStore()
@@ -39,7 +39,7 @@ const ActividadForm = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>Aula Form</h1>
             <form 
             onSubmit={handleSubmit}>

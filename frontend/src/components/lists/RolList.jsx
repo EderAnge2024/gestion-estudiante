@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useRolStore from "../../store/RolStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const RolList = ()=>{
     const {fetchRols, rols, deleteRol, updateRol} = useRolStore()
@@ -44,7 +44,7 @@ const RolList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >

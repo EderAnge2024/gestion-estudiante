@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import useDocenteStore from "../../store/DocenteStore"
-import Navegador from "../navegador/Navegador"
-
+import NavegadorMenu from "../navegador/NavegadorMenu"
 const DocenteList = ()=>{
     const {fetchDocentes, docentes, deleteDocente, updateDocente} = useDocenteStore()
     const [editingDocente, setEditingDocente] = useState(null) // Almacena el estudiante que se está editando
@@ -44,7 +43,7 @@ const DocenteList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >

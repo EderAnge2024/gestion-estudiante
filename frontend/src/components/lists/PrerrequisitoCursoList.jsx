@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const PreriquisitoCursoList = ()=>{
     const {fetchPreriquisitoCursos, preriquisitoCursos, deletePreriquisitoCurso, updatePreriquisitoCurso} = usePreriquisitoCursoStore()
@@ -44,7 +44,7 @@ const PreriquisitoCursoList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >

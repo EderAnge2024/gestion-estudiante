@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 import useMatriculaStore from "../../store/MatriculaStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const MatriculaForm = ()=>{
     const {addMatricula} = useMatriculaStore()
@@ -42,7 +42,7 @@ const MatriculaForm = ()=>{
 
     return(
         <div>
-        <div><Navegador></Navegador></div>
+        <div><NavegadorMenu></NavegadorMenu></div>
         <h1>Matricula Form</h1>
         <form 
         onSubmit={handleSubmit}>

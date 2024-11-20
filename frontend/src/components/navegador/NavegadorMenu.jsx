@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import stilo from './navegadorStilo.module.css'
 
-const NavegadorIncicio = () => {
+const NavegadorMenu = () => {
     return (
         <div >            
             <nav className={stilo.padre}>
-                <Link to='/verNotaList' className={stilo.link}> Nota de estudiantes </Link>
+                <Link to='/menu' className={stilo.link}> Volver Menu </Link>
             </nav>
         </div>
     );
 }
 
-export default NavegadorIncicio;
+export default NavegadorMenu;

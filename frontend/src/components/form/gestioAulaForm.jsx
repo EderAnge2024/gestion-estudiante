@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 import useGestionAulaStore from "../../store/GestioAulaStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const GestionAulaFrom = ()=>{
     const {addGestionAula} = useGestionAulaStore()
@@ -35,7 +35,7 @@ const GestionAulaFrom = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>Aula Form</h1>
             <form 
             onSubmit={handleSubmit}>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 import usePlanEstudioStore from "../../store/PlanEstudioStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PlanEstudioFrom = ()=>{
     const {addPlanEstudio} = usePlanEstudioStore()
@@ -35,7 +35,7 @@ const PlanEstudioFrom = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>plan de estudio Form</h1>
             <form 
             onSubmit={handleSubmit}>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useMatriculaStore from "../../store/MatriculaStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const MatriculaList = ()=>{
     const {fetchMatriculas, matriculas, deleteMatricula, updateMatricula} = useMatriculaStore()
@@ -44,7 +44,7 @@ const MatriculaList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >
