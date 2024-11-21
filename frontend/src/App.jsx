@@ -31,6 +31,9 @@ import PeriodoAcademicoFrom from './components/form/PeriodoAcademicoForm'
 import PeriodoAcademicoList from './components/lists/PeriodoAcademicoList'
 import PermisoFrom from './components/form/PermisoForm'
 import PermisoList from './components/lists/PermisoList'
+import NavegadorUsuario from './components/navegador/NavegadorUsuario'
+import NavegadorMenu2 from './components/navegador/navegadorUsuarioParticipantes'
+import NavegadorMenu from './components/navegador/NavegadorMenu'
 
 function App() {
  
@@ -39,7 +42,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login></Login>}/>
-          <Route path='/menu' element={<Navegador></Navegador>}/>  
+          <Route path='/navegadorIntegrantes' element={<Navegador></Navegador>}/>  
+          <Route path='/navegadorMenu2' element={<NavegadorMenu2></NavegadorMenu2>}/>  
+          <Route path='/navegadorMenu' element={<NavegadorMenu></NavegadorMenu>}/>  
+          <Route path='/navegadorUsuario' element={<NavegadorUsuario></NavegadorUsuario>}/>  
           <Route path='/studentForm' element={<StudentForm></StudentForm>}/>
           <Route path='/studentList' element={<StudentList></StudentList>}></Route>
           <Route path='/userFrom' element={<UserForm></UserForm>}></Route>

@@ -40,14 +40,14 @@ const ActividadForm = ()=>{
     return(
         <div>
             <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>Aula Form</h1>
+            <h1>ACTIVIDAD Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input
                 type="text"
                 placeholder="Enter usuario_id"
                 required
-                name="usuario"
+                name="usuario_id"
                 value={actividadData.usuario_id}
                 onChange={handleInputchange}
                 />

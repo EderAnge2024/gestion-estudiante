@@ -8,7 +8,7 @@ const useCourseStore = create((set)=>({
             const response = await axios.post('http://localhost:3001/course',course)
             set((state)=>({courses: [...state.courses, response.data]}))// crea una copia el "..."
         } catch (error) {
-            console.log("Error adding Course", error.message)
+            console.log("Error adding user", error.message)
         }
     },
     fetchCourses: async()=>{

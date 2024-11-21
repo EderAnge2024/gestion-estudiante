@@ -48,7 +48,7 @@ const UserList = ()=>{
         <div>
             
             <div >
-                <h1>Student List</h1>
+                <h1>Users List</h1>
 
                 <div>
                     {

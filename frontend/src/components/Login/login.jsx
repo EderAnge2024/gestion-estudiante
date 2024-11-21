@@ -26,7 +26,7 @@ const Login = () => {
                 setError(null); // Limpiar errores previos
 
                 // Redirigir al usuario al dashboard
-                navigate('/menu');
+                navigate('/navegadorMenu2');
             }
         } catch (error) {
             setError('Usuario o contraseña incorrectos');

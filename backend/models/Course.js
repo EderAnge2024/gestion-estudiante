@@ -29,11 +29,11 @@ const Course = sequelize.define('Course',{
     },
     credito: {
         type: DataTypes.STRING,
-    allowNull: false
+        allowNull: false
     },
     ciclo: {
         type: DataTypes.STRING,
-    allowNull: false
+        allowNull: false
     }
 }, {
     tableName: 'Courses', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
@@ -41,6 +41,6 @@ const Course = sequelize.define('Course',{
 })
 // Definir la relación con el modelo Usuario si es necesario
 Course.belongsTo(require('./Docente'), { foreignKey: 'docente_id' });
-Course.belongsTo(require('./PlanEstudio'), { foreignKey: 'planEstudio_id' });
+Course.belongsTo(require('./PlanEstudio'), { foreignKey: 'planEstudio_id'});
 
 module.exports= Course    
