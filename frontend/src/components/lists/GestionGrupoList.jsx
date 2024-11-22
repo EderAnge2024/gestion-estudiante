@@ -5,7 +5,7 @@ import NavegadorMenu from "../navegador/NavegadorMenu"
 const GestionGrupoList = ()=>{
     const {fetchGestionGrupos, gestionGrupos, deleteGestionGrupo, updateGestionGrupo} = useGestionGrupoStore()
     const [editingGestionGrupo, setEditingGestionGrupo] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ curso_id: '',docente_id: '',periodoAcademico_id: ''}) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ courseId: '',docenteId: '',periodoAcademicoId: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -13,9 +13,9 @@ const GestionGrupoList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (gestionGrupoId)=>{
         if(window.confirm("Are you sure?")){
-            deleteGestionGrupo(id)
+            deleteGestionGrupo(gestionGrupoId)
             fetchGestionGrupos() // Refresca 
         }  
     }
@@ -23,7 +23,7 @@ const GestionGrupoList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (gestiongrupo) => {  
         setEditingGestionGrupo(gestiongrupo) // Establece el estudiante en edición
-        setFormData({ curso_id: gestiongrupo.curso_id, docente_id: gestiongrupo.docente_id, periodoAcademico_id: gestiongrupo.periodoAcademico_id}) // Rellena los campos con los datos actuales
+        setFormData({ courseId: gestiongrupo.courseId, docenteId: gestiongrupo.docenteId, periodoAcademicoId: gestiongrupo.periodoAcademicoId}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -36,7 +36,7 @@ const GestionGrupoList = ()=>{
 
     // Actualiza el estudiante en el servstudent_idor y refresca la lista
     const handleUpdate = async () => {
-        await updateGestionGrupo(editingGestionGrupo.id, formData) // Espera a que updatePreriquisitoCurso complete la actualización
+        await updateGestionGrupo(editingGestionGrupo.gestionGrupoId, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingGestionGrupo(null) // Cierra el formulario de edición
         fetchGestionGrupos() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const GestionGrupoList = ()=>{
                 <div>
                     {
                         gestionGrupos.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.curso_id} {user.docente_id} {user.periodoAcademico_id} </h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.gestionGrupoId}>
+                                <h3>{user.gestionGrupoId}<br></br> {user.courseId} {user.docenteId} {user.periodoAcademicoId} </h3>
+                                <button onClick={() => handleDelete(user.gestionGrupoId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -68,24 +68,24 @@ const GestionGrupoList = ()=>{
                             <h3>Edit GestionGrupo</h3>
                             <input 
                                 type="text" 
-                                name="curso_id" 
-                                value={formData.curso_id} 
+                                name="cursoId" 
+                                value={formData.courseId} 
                                 onChange={handleInputChange} 
-                                placeholder="curso_id"
+                                placeholder="cursoId"
                             />
                             <input 
                                 type="text" 
-                                name="docente_id" 
-                                value={formData.docente_id} 
+                                name="docenteId" 
+                                value={formData.docenteId} 
                                 onChange={handleInputChange} 
-                                placeholder="docente_id"
+                                placeholder="docenteId"
                             />
                             <input 
                                 type="text" 
-                                name="periodoAcademico_id" 
-                                value={formData.periodoAcademico_id} 
+                                name="periodoAcademicoId" 
+                                value={formData.periodoAcademicoId} 
                                 onChange={handleInputChange} 
-                                placeholder="periodoAcademico_id"
+                                placeholder="periodoAcademicoId"
                             />
                             
                         

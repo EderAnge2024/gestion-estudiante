@@ -2,17 +2,17 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
 const PlanEstudio = sequelize.define('PlanEstudio', {
-    id: {
+    planEstudioId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    student_id: {
+    studentId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Students', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'studentId' // Clave primaria de la tabla 'Students'
         }
     },
     meta: {
@@ -27,6 +27,6 @@ const PlanEstudio = sequelize.define('PlanEstudio', {
     tableName: 'PlanEstudios', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 });
-PlanEstudio.belongsTo(require('./Student'), { foreignKey: 'student_id' });
+PlanEstudio.belongsTo(require('./Student'), { foreignKey: 'studentId' });
 
 module.exports = PlanEstudio;

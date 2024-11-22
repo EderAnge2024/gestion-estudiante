@@ -19,22 +19,22 @@ const usePeriodoAcademicoStore = create((set)=>({
             console.log("Error fecthing periodoAcademicos", error.message)
         }
     },
-    deletePeriodoAcademico: async(id)=>{
+    deletePeriodoAcademico: async(periodoAcademicoId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/periodoAcademico/${id}`)
+            const response = await axios.delete(`http://localhost:3001/periodoAcademico/${periodoAcademicoId}`)
             console.log("periodoAcademico delete:",response.data)
-            set((state)=>({periodoAcademicos: state.periodoAcademicos.filter(periodoAcademico=>periodoAcademico.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({periodoAcademicos: state.periodoAcademicos.filter(periodoAcademico=>periodoAcademico.periodoAcademicoId !== periodoAcademicoId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting periodoAcademico:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updatePeriodoAcademico: async (id, updatedData) => {
+    updatePeriodoAcademico: async (periodoAcademicoId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/periodoAcademico/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/periodoAcademico/${periodoAcademicoId}`, updatedData)
             console.log("periodoAcademico updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({periodoAcademicos: state.periodoAcademicos.map((periodoAcademico)=> periodoAcademico.id === id ? {...periodoAcademico, ...response.data} : periodoAcademico)})) // actualiza el estudiante en el estado
+            set((state) => ({periodoAcademicos: state.periodoAcademicos.map((periodoAcademico)=> periodoAcademico.periodoAcademicoId === periodoAcademicoId ? {...periodoAcademico, ...response.data} : periodoAcademico)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating periodoAcademico:", error.message)
         }

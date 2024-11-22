@@ -5,7 +5,7 @@ import NavegadorMenu from "../navegador/NavegadorMenu"
 const PreriquisitoCursoList = ()=>{
     const {fetchPreriquisitoCursos, preriquisitoCursos, deletePreriquisitoCurso, updatePreriquisitoCurso} = usePreriquisitoCursoStore()
     const [editingPreriquisitoCurso, setEditingPreriquisitoCurso] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ student_id: '',curso_id: '',requisito: ''}) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ studentId: '',courseId: '',requisito: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -13,9 +13,9 @@ const PreriquisitoCursoList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (preriquisitoCursoId)=>{
         if(window.confirm("Are you sure?")){
-            deletePreriquisitoCurso(id)
+            deletePreriquisitoCurso(preriquisitoCursoId)
             fetchPreriquisitoCursos() // Refresca 
         }  
     }
@@ -23,7 +23,7 @@ const PreriquisitoCursoList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (preriquisitoCurso) => {  
         setEditingPreriquisitoCurso(preriquisitoCurso) // Establece el estudiante en edición
-        setFormData({ student_id: preriquisitoCurso.student_id, curso_id: preriquisitoCurso.curso_id, requisito: preriquisitoCurso.requisito}) // Rellena los campos con los datos actuales
+        setFormData({ studentId: preriquisitoCurso.studentId, courseId: preriquisitoCurso.courseId, requisito: preriquisitoCurso.requisito}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -34,9 +34,9 @@ const PreriquisitoCursoList = ()=>{
         })
     }
 
-    // Actualiza el estudiante en el servstudent_idor y refresca la lista
+    // Actualiza el estudiante en el servstudentIdor y refresca la lista
     const handleUpdate = async () => {
-        await updatePreriquisitoCurso(editingPreriquisitoCurso.id, formData) // Espera a que updatePreriquisitoCurso complete la actualización
+        await updatePreriquisitoCurso(editingPreriquisitoCurso.preriquisitoCursoId, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingPreriquisitoCurso(null) // Cierra el formulario de edición
         fetchPreriquisitoCursos() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const PreriquisitoCursoList = ()=>{
                 <div>
                     {
                         preriquisitoCursos.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.student_id} {user.curso_id} {user.requisito}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.preriquisitoCursoId}>
+                                <h3>{user.preriquisitoCursoId}<br></br> {user.studentId} {user.courseId} {user.requisito}</h3>
+                                <button onClick={() => handleDelete(user.preriquisitoCursoId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -68,17 +68,17 @@ const PreriquisitoCursoList = ()=>{
                             <h3>Edit preriquisitoCurso</h3>
                             <input 
                                 type="text" 
-                                name="student_id" 
-                                value={formData.student_id} 
+                                name="studentId" 
+                                value={formData.studentId} 
                                 onChange={handleInputChange} 
-                                placeholder="student_id"
+                                placeholder="studentId"
                             />
                             <input 
                                 type="text" 
-                                name="curso_id" 
-                                value={formData.curso_id} 
+                                name="courseId" 
+                                value={formData.courseId} 
                                 onChange={handleInputChange} 
-                                placeholder="curso_id"
+                                placeholder="courseId"
                             />
                             <input 
                                 type="text" 

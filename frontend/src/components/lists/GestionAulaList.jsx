@@ -13,9 +13,9 @@ const GestionAulaList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (gestionAulaId)=>{
         if(window.confirm("Are you sure?")){
-            deleteGestionAula(id)
+            deleteGestionAula(gestionAulaId)
             fetchGestionAulas() // Refresca 
         }  
     }
@@ -36,7 +36,7 @@ const GestionAulaList = ()=>{
 
     // Actualiza el estudiante en el servnombreor y refresca la lista
     const handleUpdate = async () => {
-        await updateGestionAula(editingGestionAula.id, formData) // Espera a que updateGestionAula complete la actualización
+        await updateGestionAula(editingGestionAula.gestionAulaId, formData) // Espera a que updateGestionAula complete la actualización
         setEditingGestionAula(null) // Cierra el formulario de edición
         fetchGestionAulas() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const GestionAulaList = ()=>{
                 <div>
                     {
                         gestionAulas.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.nombre} {user.descripcion} {user.estado}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.gestionAulaId}>
+                                <h3>{user.gestionAulaId}<br></br> {user.nombre} {user.descripcion} {user.estado}</h3>
+                                <button onClick={() => handleDelete(user.gestionAulaId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))

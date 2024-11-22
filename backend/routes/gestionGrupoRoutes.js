@@ -5,9 +5,9 @@ const gestionGrupoRouters = Router()
 // create nuew student
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 gestionGrupoRouters.post("/",async(req, res)=>{
-    const {id, curso_id,docente_id, periodoAcademico_id} = req.body
+    const {gestionGrupoId, courseId,docenteId, periodoAcademicoId} = req.body
     try {
-        const newGestioGrupo = await createGestionGrupoController({id, curso_id,docente_id, periodoAcademico_id})
+        const newGestioGrupo = await createGestionGrupoController({gestionGrupoId, courseId,docenteId, periodoAcademicoId})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newGestioGrupo)
     } catch (error) {
@@ -25,11 +25,11 @@ gestionGrupoRouters.get("/",async(req,res)=>{
 })
 
 // para actualizar update
-gestionGrupoRouters.put("/:id", async(req,res)=>{
-    const {id}= req.params
+gestionGrupoRouters.put("/:gestionGrupoId", async(req,res)=>{
+    const {gestionGrupoId}= req.params
     const gestionGrupoData= req.body
     try {
-        const updateGestionGrupo = await updateGestionGrupoByIdController(id, gestionGrupoData)
+        const updateGestionGrupo = await updateGestionGrupoByIdController(gestionGrupoId, gestionGrupoData)
         if(!updateGestionGrupo){
             return res.status(404).json({error: "GestionGrupo no encontrado"})
         }
@@ -41,10 +41,10 @@ gestionGrupoRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-gestionGrupoRouters.delete("/:id", async(req, res)=>{
-    const {id} = req.params
+gestionGrupoRouters.delete("/:gestionGrupoId", async(req, res)=>{
+    const {gestionGrupoId} = req.params
     try {
-        const deletedestionGrupo = await deletedGestionGrupoByIdController(id)
+        const deletedestionGrupo = await deletedGestionGrupoByIdController(gestionGrupoId)
         if(!deletedestionGrupo){
             return res.status.apply(404).json({error: "GestionGrupo no encontrado"})
         }

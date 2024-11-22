@@ -1,10 +1,10 @@
 const Usuario= require('../models/Usuario')
 const bcrypt= require('bcrypt')
 
-const createUsuarioController = async({id,nombreUsuario,contraseña})=>{
+const createUsuarioController = async({usuarioId,nombreUsuario,contraseña})=>{
     const hashedPassword = await bcrypt.hash(contraseña,10)
     try {
-        const newUsuario = await Usuario.create({id,nombreUsuario,contraseña:hashedPassword})
+        const newUsuario = await Usuario.create({usuarioId,nombreUsuario,contraseña:hashedPassword})
         return newUsuario
     } catch (error) {
         throw new Error(error.message)
@@ -21,9 +21,9 @@ const getAllUsuariosController = async () =>{
 }
 
 // para actualizar
-const updateUsuarioByIdController = async (id, usuarioData)=>{
+const updateUsuarioByIdController = async (usuarioId, usuarioData)=>{
     try {
-        const usuario = await Usuario.findByPk(id)
+        const usuario = await Usuario.findByPk(usuarioId)
         if(!usuario){
             return null
         }
@@ -35,9 +35,9 @@ const updateUsuarioByIdController = async (id, usuarioData)=>{
 }
 // para eliminar
 
-const deletedUsuarioByIdController = async(id)=>{
+const deletedUsuarioByIdController = async(usuarioId)=>{
    try {
-    const usuario= await Usuario.findByPk(id)
+    const usuario= await Usuario.findByPk(usuarioId)
     if(!usuario){
         return null
     }

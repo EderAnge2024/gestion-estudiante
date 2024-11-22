@@ -2,33 +2,33 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
 const GestionGrupo = sequelize.define('GestionGrupo', {
-    id: {
+    gestionGrupoId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    curso_id: {
+    courseId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Courses', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'courseId' // Clave primaria de la tabla 'Students'
         }
     },
-    docente_id: {
+    docenteId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Docentes', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'docenteId' // Clave primaria de la tabla 'Students'
         }
     },
-    periodoAcademico_id: {
+    periodoAcademicoId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'PeriodoAcademicos', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'periodoAcademicoId' // Clave primaria de la tabla 'Students'
         }
     }
 }, {
@@ -36,7 +36,7 @@ const GestionGrupo = sequelize.define('GestionGrupo', {
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 });
 
-GestionGrupo.belongsTo(require('./Course'), { foreignKey: 'curso_id' });
-GestionGrupo.belongsTo(require('./Docente'), { foreignKey: 'docente_id' });
+GestionGrupo.belongsTo(require('./Course'), { foreignKey: 'courseId' });
+GestionGrupo.belongsTo(require('./Docente'), { foreignKey: 'docenteId' });
 
 module.exports = GestionGrupo;

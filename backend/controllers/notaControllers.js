@@ -1,7 +1,8 @@
 const Nota= require('../models/Nota')
-const createNotaController = async({id,curso_id,student_id,fecha_ingre_nota,nota})=>{
+
+const createNotaController = async({notaId,courseId,studentId,fecha_ingre_nota,nota})=>{
     try {
-        const newNota = await Nota.create({id,curso_id,student_id,fecha_ingre_nota,nota})
+        const newNota = await Nota.create({notaId,courseId,studentId,fecha_ingre_nota,nota})
         return newNota
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +19,9 @@ const getAllNotasController = async () =>{
 }
 
 // para actualizar
-const updateNotaByIdController = async (id, notaData)=>{
+const updateNotaByIdController = async (notaId, notaData)=>{
     try {
-        const nota = await Nota.findByPk(id)
+        const nota = await Nota.findByPk(notaId)
         if(!nota){
             return null
         }
@@ -32,9 +33,9 @@ const updateNotaByIdController = async (id, notaData)=>{
 }
 // para eliminar
 
-const deletedNotaByIdController = async(id)=>{
+const deletedNotaByIdController = async(notaId)=>{
    try {
-    const nota= await Nota.findByPk(id)
+    const nota= await Nota.findByPk(notaId)
     if(!nota){
         return null
     }

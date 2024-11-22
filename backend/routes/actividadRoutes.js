@@ -5,9 +5,9 @@ const actividadRouters = Router()
 // create nuew Actividad
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 actividadRouters.post("/",async(req, res)=>{
-    const {id, usuario_id, rol, accion, fecha, descripcion} = req.body
+    const {actividadId, usuarioId, rol, accion, fecha, descripcion} = req.body
     try {
-        const newActividad = await createActividadController({id, usuario_id, rol, accion, fecha, descripcion})
+        const newActividad = await createActividadController({actividadId, usuarioId, rol, accion, fecha, descripcion})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newActividad)
     } catch (error) {
@@ -25,11 +25,11 @@ actividadRouters.get("/",async(req,res)=>{
 })
 
 // para actualizar update
-actividadRouters.put("/:id", async(req,res)=>{
-    const {id}= req.params
+actividadRouters.put("/:actividadId", async(req,res)=>{
+    const {actividadId}= req.params
     const actividadData= req.body
     try {
-        const updateActividad = await updateActividadByIdController(id, actividadData)
+        const updateActividad = await updateActividadByIdController(actividadId, actividadData)
         if(!updateActividad){
             return res.status(404).json({error: "studiante no encontrado"})
         }
@@ -41,14 +41,14 @@ actividadRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-actividadRouters.delete("/:id", async(req, res)=>{
-    const {id} = req.params
+actividadRouters.delete("/:actividadId", async(req, res)=>{
+    const {actividadId} = req.params
     try {
-        const deletedActividad = await deletedActividadByIdController(id)
+        const deletedActividad = await deletedActividadByIdController(actividadId)
         if(!deletedActividad){
-            return res.status.apply(404).json({error: "Studiante no encontrado"})
+            return res.status.apply(404).json({error: "actividad no encontrado"})
         }
-        res.status(200).json({message: "Estudiante eliminado existozamente"})
+        res.status(200).json({message: "actividad eliminado existozamente"})
     } catch (error) {
         res.status(500).json({error: error.message})
     }

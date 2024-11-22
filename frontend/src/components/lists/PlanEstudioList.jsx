@@ -5,7 +5,7 @@ import NavegadorMenu from "../navegador/NavegadorMenu"
 const PlanEstudioList = ()=>{
     const {fetchPlanEstudios, planEstudios, deletePlanEstudio, updatePlanEstudio} = usePlanEstudioStore()
     const [editingPlanEstudio, setEditingPlanEstudio] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ student_id: '',meta: '',herramienta: ''}) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ studentId: '',meta: '',herramienta: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -13,9 +13,9 @@ const PlanEstudioList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (planEstudioId)=>{
         if(window.confirm("Are you sure?")){
-            deletePlanEstudio(id)
+            deletePlanEstudio(planEstudioId)
             fetchPlanEstudios() // Refresca 
         }  
     }
@@ -23,7 +23,7 @@ const PlanEstudioList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (planEstudio) => {  
         setEditingPlanEstudio(planEstudio) // Establece el estudiante en edición
-        setFormData({ student_id: planEstudio.student_id, meta: planEstudio.meta, herramienta: planEstudio.herramienta}) // Rellena los campos con los datos actuales
+        setFormData({ studentId: planEstudio.studentId, meta: planEstudio.meta, herramienta: planEstudio.herramienta}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -34,9 +34,9 @@ const PlanEstudioList = ()=>{
         })
     }
 
-    // Actualiza el estudiante en el servstudent_idor y refresca la lista
+    // Actualiza el estudiante en el servstudentIdor y refresca la lista
     const handleUpdate = async () => {
-        await updatePlanEstudio(editingPlanEstudio.id, formData) // Espera a que updatePlanEstudio complete la actualización
+        await updatePlanEstudio(editingPlanEstudio.planEstudioId, formData) // Espera a que updatePlanEstudio complete la actualización
         setEditingPlanEstudio(null) // Cierra el formulario de edición
         fetchPlanEstudios() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const PlanEstudioList = ()=>{
                 <div>
                     {
                         planEstudios.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.student_id} {user.meta} {user.herramienta}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.planEstudioId}>
+                                <h3>{user.planEstudioId}<br></br> {user.studentId} {user.meta} {user.herramienta}</h3>
+                                <button onClick={() => handleDelete(user.planEstudioId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -68,10 +68,10 @@ const PlanEstudioList = ()=>{
                             <h3>Edit planEstudio</h3>
                             <input 
                                 type="text" 
-                                name="student_id" 
-                                value={formData.student_id} 
+                                name="studentId" 
+                                value={formData.studentId} 
                                 onChange={handleInputChange} 
-                                placeholder="student_id"
+                                placeholder="studentId"
                             />
                             <input 
                                 type="text" 

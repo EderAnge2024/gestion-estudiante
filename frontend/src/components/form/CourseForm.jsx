@@ -7,8 +7,8 @@ const CourseForm = ()=>{
     const {addCourse} = useCourseStore()
 
     const [CourseData, setCourseData] = useState({
-        planEstudio_id:"",
-        docente_id:"",
+        planEstudioId:"",
+        docenteId:"",
         nombre:"",
         credito:"",
         ciclo:""
@@ -27,8 +27,8 @@ const CourseForm = ()=>{
         e.preventDefault();
         addCourse(CourseData)
         setCourseData({
-            planEstudio_id:"",
-            docente_id:"",
+            planEstudioId:"",
+            docenteId:"",
             nombre:"",
             credito:"",
             ciclo:""
@@ -45,18 +45,18 @@ const CourseForm = ()=>{
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter planEstudio_id"
+                placeholder="Enter planEstudioId"
                 required
-                name="planEstudio_id"
-                value={CourseData.planEstudio_id}
+                name="planEstudioId"
+                value={CourseData.planEstudioId}
                 onChange={handleInputchange}
                 />
                 <input
                 type="text"
-                placeholder="Enter docente_id"
+                placeholder="Enter docenteId"
                 required
-                name="docente_id"
-                value={CourseData.docente_id}
+                name="docenteId"
+                value={CourseData.docenteId}
                 onChange={handleInputchange}
                 />
                 <input

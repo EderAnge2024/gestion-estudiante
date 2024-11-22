@@ -19,22 +19,22 @@ const useMatriculaStore = create((set)=>({
             console.log("Error fecthing matriculas", error.message)
         }
     },
-    deleteMatricula: async(id)=>{
+    deleteMatricula: async(matriculaId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/matricula/${id}`)
+            const response = await axios.delete(`http://localhost:3001/matricula/${matriculaId}`)
             console.log("Matricula delete:",response.data)
-            set((state)=>({matriculas: state.matriculas.filter(matricula=>matricula.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({matriculas: state.matriculas.filter(matricula=>matricula.matriculaId !== matriculaId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting matricula:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updateMatricula: async (id, updatedData) => {
+    updateMatricula: async (matriculaId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/matricula/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/matricula/${matriculaId}`, updatedData)
             console.log("Matricula updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({matriculas: state.matriculas.map((matricula)=> matricula.id === id ? {...matricula, ...response.data} : matricula)})) // actualiza el estudiante en el estado
+            set((state) => ({matriculas: state.matriculas.map((matricula)=> matricula.matriculaId === matriculaId ? {...matricula, ...response.data} : matricula)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating matricula:", error.message)
         }

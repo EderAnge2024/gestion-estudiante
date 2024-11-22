@@ -1,7 +1,7 @@
 const PeriodoAcademico= require('../models/PeriodoAcademico')
-const createPeriodoAcademicoController = async({id, docente_id, fechaInicio,fechaFinal,estado,ciclo})=>{
+const createPeriodoAcademicoController = async({periodoAcademicoId, docenteId, fechaInicio,fechaFinal,estado,ciclo})=>{
     try {
-        const newPeriodoAcademico = await PeriodoAcademico.create({id, docente_id, fechaInicio,fechaFinal,estado,ciclo})
+        const newPeriodoAcademico = await PeriodoAcademico.create({periodoAcademicoId, docenteId, fechaInicio,fechaFinal,estado,ciclo})
         return newPeriodoAcademico
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllPeriodoAcademicosController = async () =>{
 }
 
 // para actualizar
-const updatePeriodoAcademicoByIdController = async (id, periodoAcademicoData)=>{
+const updatePeriodoAcademicoByIdController = async (periodoAcademicoId, periodoAcademicoData)=>{
     try {
-        const periodoAcademico = await PeriodoAcademico.findByPk(id)
+        const periodoAcademico = await PeriodoAcademico.findByPk(periodoAcademicoId)
         if(!periodoAcademico){
             return null
         }
@@ -32,9 +32,9 @@ const updatePeriodoAcademicoByIdController = async (id, periodoAcademicoData)=>{
 }
 // para eliminar
 
-const deletedPeriodoAcademicoByIdController = async(id)=>{
+const deletedPeriodoAcademicoByIdController = async(periodoAcademicoId)=>{
    try {
-    const periodoAcademico= await PeriodoAcademico.findByPk(id)
+    const periodoAcademico= await PeriodoAcademico.findByPk(periodoAcademicoId)
     if(!periodoAcademico){
         return null
     }

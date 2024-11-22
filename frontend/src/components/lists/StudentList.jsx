@@ -13,9 +13,9 @@ const StudentList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (studentId)=>{
         if(window.confirm("Are you sure?")){
-            deleteStudent(id)
+            deleteStudent(studentId)
             fetchStudents() // Refresca 
         }  
     }
@@ -36,7 +36,7 @@ const StudentList = ()=>{
 
     // Actualiza el estudiante en el servdnior y refresca la lista
     const handleUpdate = async () => {
-        await updateStudent(editingStudent.id, formData) // Espera a que updateStudent complete la actualización
+        await updateStudent(editingStudent.studentId, formData) // Espera a que updateStudent complete la actualización
         setEditingStudent(null) // Cierra el formulario de edición
         fetchStudents() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const StudentList = ()=>{
                 <div>
                     {
                         students.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.dni} {user.nombre} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.studentId}>
+                                <h3>{user.studentId}<br></br> {user.dni} {user.nombre} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
+                                <button onClick={() => handleDelete(user.studentId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))

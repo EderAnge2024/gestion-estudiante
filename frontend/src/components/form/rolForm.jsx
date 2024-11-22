@@ -7,7 +7,7 @@ const RolFrom = ()=>{
     const {addRol} = useRolStore()
 
     const [rolData, setRolData] = useState({
-        usuario_id:"",
+        usuarioId:"",
         rol:""
     });
     console.log(rolData);
@@ -24,7 +24,7 @@ const RolFrom = ()=>{
         e.preventDefault();
         addRol(rolData)
         setRolData({
-            usuario_id:"",
+            usuarioId:"",
             rol:""
         })
         alert("rol added successfully")
@@ -39,10 +39,10 @@ const RolFrom = ()=>{
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter usuario_id"
+                placeholder="Enter usuarioId"
                 required
-                name="usuario_id"
-                value={rolData.usuario_id}
+                name="usuarioId"
+                value={rolData.usuarioId}
                 onChange={handleInputchange}
                 />
                 <input

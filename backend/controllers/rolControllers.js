@@ -1,7 +1,7 @@
 const Rol= require('../models/Rol')
-const createRolController = async({id, usuario_id,rol})=>{
+const createRolController = async({rolId, usuarioId,rol})=>{
     try {
-        const newRol = await Rol.create({id, usuario_id,rol})
+        const newRol = await Rol.create({rolId, usuarioId,rol})
         return newRol
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllRolsController = async () =>{
 }
 
 // para actualizar
-const updateRolByIdController = async (id, rolData)=>{
+const updateRolByIdController = async (rolId, rolData)=>{
     try {
-        const rol = await Rol.findByPk(id)
+        const rol = await Rol.findByPk(rolId)
         if(!rol){
             return null
         }
@@ -32,9 +32,9 @@ const updateRolByIdController = async (id, rolData)=>{
 }
 // para eliminar
 
-const deletedRolByIdController = async(id)=>{
+const deletedRolByIdController = async(rolId)=>{
    try {
-    const rol= await Rol.findByPk(id)
+    const rol= await Rol.findByPk(rolId)
     if(!rol){
         return null
     }

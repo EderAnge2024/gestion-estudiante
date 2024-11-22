@@ -1,7 +1,7 @@
 const PlanEstudio= require('../models/PlanEstudio')
-const createPlanEstudioController = async({id,student_id,meta,herramienta})=>{
+const createPlanEstudioController = async({planEstudioId,studentId,meta,herramienta})=>{
     try {
-        const newPlanEstudio = await PlanEstudio.create({id,student_id,meta,herramienta})
+        const newPlanEstudio = await PlanEstudio.create({planEstudioId,studentId,meta,herramienta})
         return newPlanEstudio
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllPlanEstudiosController = async () =>{
 }
 
 // para actualizar
-const updatePlanEstudioByIdController = async (id, planEstudiData)=>{
+const updatePlanEstudioByIdController = async (planEstudioId, planEstudiData)=>{
     try {
-        const planEstudio = await PlanEstudio.findByPk(id)
+        const planEstudio = await PlanEstudio.findByPk(planEstudioId)
         if(!planEstudio){
             return null
         }
@@ -32,9 +32,9 @@ const updatePlanEstudioByIdController = async (id, planEstudiData)=>{
 }
 // para eliminar
 
-const deletedPlanEstudioByIdController = async(id)=>{
+const deletedPlanEstudioByIdController = async(planEstudioId)=>{
    try {
-    const planEstudio= await PlanEstudio.findByPk(id)
+    const planEstudio= await PlanEstudio.findByPk(planEstudioId)
     if(!planEstudio){
         return null
     }

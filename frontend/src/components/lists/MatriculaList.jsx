@@ -5,7 +5,7 @@ import NavegadorMenu from "../navegador/NavegadorMenu"
 const MatriculaList = ()=>{
     const {fetchMatriculas, matriculas, deleteMatricula, updateMatricula} = useMatriculaStore()
     const [editingMatricula, setEditingMatricula] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ fecha: '',carrera: '',estudent_id: '',grupo_id: '',periodoAcademico_id: '' }) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ fecha: '',carrera: '',estudentId: '',grupoId: '',periodoAcademicoId: '' }) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -13,9 +13,9 @@ const MatriculaList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (matriculaId)=>{
         if(window.confirm("Are you sure?")){
-            deleteMatricula(id)
+            deleteMatricula(matriculaId)
             fetchMatriculas() // Refresca 
         }  
     }
@@ -23,7 +23,7 @@ const MatriculaList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (matricula) => {  
         setEditingMatricula(matricula) // Establece el estudiante en edición
-        setFormData({ fecha: matricula.fecha, carrera: matricula.carrera, estudent_id: matricula.estudent_id, grupo_id: matricula.grupo_id, periodoAcademico_id: matricula.periodoAcademico_id}) // Rellena los campos con los datos actuales
+        setFormData({ fecha: matricula.fecha, carrera: matricula.carrera, estudentId: matricula.estudentId, grupoId: matricula.grupoId, periodoAcademicoId: matricula.periodoAcademicoId}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -36,7 +36,7 @@ const MatriculaList = ()=>{
 
     // Actualiza el estudiante en el servdnior y refresca la lista
     const handleUpdate = async () => {
-        await updateMatricula(editingMatricula.id, formData) // Espera a que updateMatricula complete la actualización
+        await updateMatricula(editingMatricula.matriculaId, formData) // Espera a que updateMatricula complete la actualización
         setEditingMatricula(null) // Cierra el formulario de edición
         fetchMatriculas() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const MatriculaList = ()=>{
                 <div>
                     {
                         matriculas.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.fecha} {user.carrera} {user.estudent_id} {user.grupo_id} {user.periodoAcademico_id}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.matriculaId}>
+                                <h3>{user.matriculaId}<br></br> {user.fecha} {user.carrera} {user.estudentId} {user.grupoId} {user.periodoAcademicoId}</h3>
+                                <button onClick={() => handleDelete(user.matriculaId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -82,24 +82,24 @@ const MatriculaList = ()=>{
                             />
                             <input 
                                 type="text" 
-                                name="estudent_id" 
-                                value={formData.estudent_id} 
+                                name="estudentId" 
+                                value={formData.estudentId} 
                                 onChange={handleInputChange} 
-                                placeholder="estudent_id"
+                                placeholder="estudentId"
                             />
                             <input 
                                 type="text" 
-                                name="grupo_id" 
-                                value={formData.grupo_id} 
+                                name="grupoId" 
+                                value={formData.grupoId} 
                                 onChange={handleInputChange} 
-                                placeholder="grupo_id"
+                                placeholder="grupoId"
                             />
                             <input 
                                 type="text" 
-                                name="periodoAcademico_id" 
-                                value={formData.periodoAcademico_id} 
+                                name="periodoAcademicoId" 
+                                value={formData.periodoAcademicoId} 
                                 onChange={handleInputChange} 
-                                placeholder="periodoAcademico_id"
+                                placeholder="periodoAcademicoId"
                             />
                             <button onClick={handleUpdate}>Save</button>
                             <button onClick={() => setEditingMatricula(null)}>Cancel</button>

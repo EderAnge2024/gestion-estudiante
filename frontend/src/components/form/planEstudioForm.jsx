@@ -7,7 +7,7 @@ const PlanEstudioFrom = ()=>{
     const {addPlanEstudio} = usePlanEstudioStore()
 
     const [planEstudioData, setPlanEstudioData] = useState({
-        student_id:"",
+        studentId:"",
         meta:"",
         herramienta:""
     });
@@ -25,7 +25,7 @@ const PlanEstudioFrom = ()=>{
         e.preventDefault();
         addPlanEstudio(planEstudioData)
         setPlanEstudioData({
-            student_id:"",
+            studentId:"",
             meta:"",
             herramienta:""
         })
@@ -41,10 +41,10 @@ const PlanEstudioFrom = ()=>{
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter student_id"
+                placeholder="Enter studentId"
                 required
-                name="student_id"
-                value={planEstudioData.student_id}
+                name="studentId"
+                value={planEstudioData.studentId}
                 onChange={handleInputchange}
                 />
                 <input

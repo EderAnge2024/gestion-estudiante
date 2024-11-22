@@ -2,7 +2,7 @@ const { DataTypes} = require('sequelize')
 const sequelize = require('../db')
 
 const Docente = sequelize.define('Docente',{
-    id: {
+    docenteId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true

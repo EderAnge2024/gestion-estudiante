@@ -19,22 +19,22 @@ const usePreriquisitoCursoStore = create((set)=>({
             console.log("Error fecthing preriquisitoCursos", error.message)
         }
     },
-    deletePreriquisitoCurso: async(id)=>{
+    deletePreriquisitoCurso: async(preriquisitoCursoId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/preriquisitoCurso/${id}`)
+            const response = await axios.delete(`http://localhost:3001/preriquisitoCurso/${preriquisitoCursoId}`)
             console.log("preriquisitoCurso delete:",response.data)
-            set((state)=>({preriquisitoCursos: state.preriquisitoCursos.filter(preriquisitoCurso=>preriquisitoCurso.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({preriquisitoCursos: state.preriquisitoCursos.filter(preriquisitoCurso=>preriquisitoCurso.preriquisitoCursoId !== preriquisitoCursoId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting preriquisitoCurso:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updatePreriquisitoCurso: async (id, updatedData) => {
+    updatePreriquisitoCurso: async (preriquisitoCursoId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/preriquisitoCurso/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/preriquisitoCurso/${preriquisitoCursoId}`, updatedData)
             console.log("preriquisitoCurso updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({preriquisitoCursos: state.preriquisitoCursos.map((preriquisitoCurso)=> preriquisitoCurso.id === id ? {...preriquisitoCurso, ...response.data} : preriquisitoCurso)})) // actualiza el estudiante en el estado
+            set((state) => ({preriquisitoCursos: state.preriquisitoCursos.map((preriquisitoCurso)=> preriquisitoCurso.preriquisitoCursoId === preriquisitoCursoId ? {...preriquisitoCurso, ...response.data} : preriquisitoCurso)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating preriquisitoCurso:", error.message)
         }

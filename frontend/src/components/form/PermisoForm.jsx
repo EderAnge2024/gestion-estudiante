@@ -7,7 +7,7 @@ const PermisoFrom = ()=>{
     const {addPermiso} = usePermisoStore()
 
     const [permisoData, setPermisoData] = useState({
-        rol_id:"",
+        rolId:"",
         accion:"",
         descripcion:""
     });
@@ -25,7 +25,7 @@ const PermisoFrom = ()=>{
         e.preventDefault();
         addPermiso(permisoData)
         setPermisoData({
-            rol_id:"",
+            rolId:"",
             accion:"",
             descripcion:""
         })
@@ -41,10 +41,10 @@ const PermisoFrom = ()=>{
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter rol_id"
+                placeholder="Enter rolId"
                 required
-                name="rol_id"
-                value={permisoData.rol_id}
+                name="rolId"
+                value={permisoData.rolId}
                 onChange={handleInputchange}
                 />
                 <input

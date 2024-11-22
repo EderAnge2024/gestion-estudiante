@@ -7,7 +7,7 @@ const ActividadForm = ()=>{
     const {addActividad} = useActividadStore()
 
     const [actividadData, setActividadData] = useState({
-        usuario_id:"",
+        usuarioId:"",
         rol:"",
         accion:"",
         fecha:"",
@@ -27,7 +27,7 @@ const ActividadForm = ()=>{
         e.preventDefault();
         addActividad(actividadData)
         setActividadData({
-            usuario_id:"",
+            usuarioId:"",
             rol:"",
             accion:"",
             fecha:"",
@@ -45,10 +45,10 @@ const ActividadForm = ()=>{
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter usuario_id"
+                placeholder="Enter usuarioId"
                 required
-                name="usuario_id"
-                value={actividadData.usuario_id}
+                name="usuarioId"
+                value={actividadData.usuarioId}
                 onChange={handleInputchange}
                 />
                 <input

@@ -5,7 +5,7 @@ import NavegadorMenu from "../navegador/NavegadorMenu"
 const NotaList = ()=>{
     const {fetchNotas, notas, deleteNota, updateNota} = useNotaStore()
     const [editingNota, setEditingNota] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ curso_id: '',student_id: '',fecha_ingre_nota: '',nota: '' }) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ courseId: '',studentId: '',fecha_ingre_nota: '',nota: '' }) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -13,9 +13,9 @@ const NotaList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (notaId)=>{
         if(window.confirm("Are you sure?")){
-            deleteNota(id)
+            deleteNota(notaId)
             fetchNotas() // Refresca 
         }  
     }
@@ -23,7 +23,7 @@ const NotaList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (nota) => {  
         setEditingNota(nota) // Establece el estudiante en edición
-        setFormData({ curso_id: nota.curso_id, student_id: nota.student_id, fecha_ingre_nota: nota.fecha_ingre_nota, nota: nota.nota}) // Rellena los campos con los datos actuales
+        setFormData({ courseId: nota.courseId, studentId: nota.studentId, fecha_ingre_nota: nota.fecha_ingre_nota, nota: nota.nota}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -36,7 +36,7 @@ const NotaList = ()=>{
 
     // Actualiza el estudiante en el servdnior y refresca la lista
     const handleUpdate = async () => {
-        await updateNota(editingNota.id, formData) // Espera a que updateNota complete la actualización
+        await updateNota(editingNota.notaId, formData) // Espera a que updateNota complete la actualización
         setEditingNota(null) // Cierra el formulario de edición
         fetchNotas() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const NotaList = ()=>{
                 <div>
                     {
                         notas.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.curso_id} {user.student_id} {user.fecha_ingre_nota} {user.nota}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.notaId}>
+                                <h3>{user.notaId}<br></br> {user.courseId} {user.studentId} {user.fecha_ingre_nota} {user.nota}</h3>
+                                <button onClick={() => handleDelete(user.notaId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -68,17 +68,17 @@ const NotaList = ()=>{
                             <h3>Edit Nota</h3>
                             <input 
                                 type="text" 
-                                name="curso_id" 
-                                value={formData.curso_id} 
+                                name="courseId" 
+                                value={formData.courseId} 
                                 onChange={handleInputChange} 
-                                placeholder="curso_id"
+                                placeholder="courseId"
                             />
                             <input 
                                 type="text" 
-                                name="student_id" 
-                                value={formData.student_id} 
+                                name="studentId" 
+                                value={formData.studentId} 
                                 onChange={handleInputChange} 
-                                placeholder="student_id"
+                                placeholder="studentId"
                             />
                             <input 
                                 type="text" 

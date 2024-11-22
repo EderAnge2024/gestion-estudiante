@@ -19,22 +19,22 @@ const usePlanEstudioStore = create((set)=>({
             console.log("Error fecthing planEstudios", error.message)
         }
     },
-    deletePlanEstudio: async(id)=>{
+    deletePlanEstudio: async(planEstudioId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/planEstudio/${id}`)
+            const response = await axios.delete(`http://localhost:3001/planEstudio/${planEstudioId}`)
             console.log("planEstudio delete:",response.data)
-            set((state)=>({planEstudios: state.planEstudios.filter(planEstudio=>planEstudio.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({planEstudios: state.planEstudios.filter(planEstudio=>planEstudio.planEstudioId !== planEstudioId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting planEstudio:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updatePlanEstudio: async (id, updatedData) => {
+    updatePlanEstudio: async (planEstudioId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/planEstudio/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/planEstudio/${planEstudioId}`, updatedData)
             console.log("planEstudio updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({planEstudios: state.planEstudios.map((planEstudio)=> planEstudio.id === id ? {...planEstudio, ...response.data} : planEstudio)})) // actualiza el estudiante en el estado
+            set((state) => ({planEstudios: state.planEstudios.map((planEstudio)=> planEstudio.planEstudioId === planEstudioId ? {...planEstudio, ...response.data} : planEstudio)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating planEstudio:", error.message)
         }

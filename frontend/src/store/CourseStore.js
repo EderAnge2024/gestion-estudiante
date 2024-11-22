@@ -19,22 +19,22 @@ const useCourseStore = create((set)=>({
             console.log("Error fecthing courses", error.message)
         }
     },
-    deleteCourse: async(id)=>{
+    deleteCourse: async(courseId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/course/${id}`)
+            const response = await axios.delete(`http://localhost:3001/course/${courseId}`)
             console.log("course delete:",response.data)
-            set((state)=>({courses: state.courses.filter(course=>course.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({courses: state.courses.filter(course=>course.courseId !== courseId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting course:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updateCourse: async (id, updatedData) => {
+    updateCourse: async (courseId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/course/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/course/${courseId}`, updatedData)
             console.log("course updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({courses: state.courses.map((course)=> course.id === id ? {...course, ...response.data} : course)})) // actualiza el estudiante en el estado
+            set((state) => ({courses: state.courses.map((course)=> course.courseId === courseId ? {...course, ...response.data} : course)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating course:", error.message)
         }

@@ -5,7 +5,7 @@ import NavegadorMenu from "../navegador/NavegadorMenu"
 const PeriodoAcademicoList = ()=>{
     const {fetchPeriodoAcademicos, periodoAcademicos, deletePeriodoAcademico, updatePeriodoAcademico} = usePeriodoAcademicoStore()
     const [editingPeriodoAcademico, setEditingPeriodoAcademico] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ docente_id: '',fechaInicio: '',fechaFinal: '',estado: '',ciclo: ''}) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ docenteId: '',fechaInicio: '',fechaFinal: '',estado: '',ciclo: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -13,9 +13,9 @@ const PeriodoAcademicoList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (periodoAcademicoId)=>{
         if(window.confirm("Are you sure?")){
-            deletePeriodoAcademico(id)
+            deletePeriodoAcademico(periodoAcademicoId)
             fetchPeriodoAcademicos() // Refresca 
         }  
     }
@@ -23,7 +23,7 @@ const PeriodoAcademicoList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (periodoAcademico) => {  
         setEditingPeriodoAcademico(periodoAcademico) // Establece el estudiante en edición
-        setFormData({ docente_id: periodoAcademico.docente_id, fechaInicio: periodoAcademico.fechaInicio, fechaFinal: periodoAcademico.fechaFinal, estado: periodoAcademico.estado, ciclo: periodoAcademico.ciclo}) // Rellena los campos con los datos actuales
+        setFormData({ docenteId: periodoAcademico.docenteId, fechaInicio: periodoAcademico.fechaInicio, fechaFinal: periodoAcademico.fechaFinal, estado: periodoAcademico.estado, ciclo: periodoAcademico.ciclo}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -34,9 +34,9 @@ const PeriodoAcademicoList = ()=>{
         })
     }
 
-    // Actualiza el estudiante en el servdocente_idor y refresca la lista
+    // Actualiza el estudiante en el servdocenteIdor y refresca la lista
     const handleUpdate = async () => {
-        await updatePeriodoAcademico(editingPeriodoAcademico.id, formData) // Espera a que updatePeriodoAcademico complete la actualización
+        await updatePeriodoAcademico(editingPeriodoAcademico.periodoAcademicoId, formData) // Espera a que updatePeriodoAcademico complete la actualización
         setEditingPeriodoAcademico(null) // Cierra el formulario de edición
         fetchPeriodoAcademicos() // Luego recarga la lista de estudiantes
     }
@@ -53,9 +53,9 @@ const PeriodoAcademicoList = ()=>{
                 <div>
                     {
                         periodoAcademicos.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.docente_id} {user.fechaInicio} {user.fechaFinal} {user.estado} {user.ciclo}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.periodoAcademicoId}>
+                                <h3>{user.periodoAcademicoId}<br></br> {user.docenteId} {user.fechaInicio} {user.fechaFinal} {user.estado} {user.ciclo}</h3>
+                                <button onClick={() => handleDelete(user.periodoAcademicoId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -68,10 +68,10 @@ const PeriodoAcademicoList = ()=>{
                             <h3>Edit periodoAcademico</h3>
                             <input 
                                 type="text" 
-                                name="docente_id" 
-                                value={formData.docente_id} 
+                                name="docenteId" 
+                                value={formData.docenteId} 
                                 onChange={handleInputChange} 
-                                placeholder="docente_id"
+                                placeholder="docenteId"
                             />
                             <input 
                                 type="text" 

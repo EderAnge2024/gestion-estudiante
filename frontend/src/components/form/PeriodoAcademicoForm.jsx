@@ -7,7 +7,7 @@ const PeriodoAcademicoFrom = ()=>{
     const {addPeriodoAcademico} = usePeriodoAcademicoStore()
 
     const [periodoAcademicoData, setPeriodoAcademicoData] = useState({
-        docente_id:"",
+        docenteId:"",
         fechaInicio:"",
         fechaFinal:"",
         estado:"",
@@ -27,7 +27,7 @@ const PeriodoAcademicoFrom = ()=>{
         e.preventDefault();
         addPeriodoAcademico(periodoAcademicoData)
         setPeriodoAcademicoData({
-            docente_id:"",
+            docenteId:"",
             fechaInicio:"",
             fechaFinal:"",
             estado:"",
@@ -45,10 +45,10 @@ const PeriodoAcademicoFrom = ()=>{
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter docente_id"
+                placeholder="Enter docenteId"
                 required
-                name="docente_id"
-                value={periodoAcademicoData.docente_id}
+                name="docenteId"
+                value={periodoAcademicoData.docenteId}
                 onChange={handleInputchange}
                 />
                 <input

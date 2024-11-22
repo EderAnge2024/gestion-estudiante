@@ -7,8 +7,8 @@ const NotaForm = ()=>{
     const {addNota} = useNotaStore()
 
     const [notaData, setNotaData] = useState({
-        curso_id:"",
-        student_id:"",
+        courseId:"",
+        studentId:"",
         fecha_ingre_nota:"",
         nota:"",
     
@@ -29,8 +29,8 @@ const NotaForm = ()=>{
         addNota(notaData)
         setNotaData({
             
-            curso_id:"",
-            student_id:"",
+            courseId:"",
+            studentId:"",
             fecha_ingre_nota:"",
             nota:"",
         })
@@ -46,18 +46,18 @@ const NotaForm = ()=>{
         onSubmit={handleSubmit}>
             <input
             type="text"
-            placeholder="Enter curso_id"
+            placeholder="Enter courseId"
             required
-            name="curso_id"
-            value={notaData.curso_id}
+            name="courseId"
+            value={notaData.courseId}
             onChange={handleInputchange}
             />
             <input
             type="text"
-            placeholder="Enter student_id"
+            placeholder="Enter studentId"
             required
-            name="student_id"
-            value={notaData.student_id}
+            name="studentId"
+            value={notaData.studentId}
             onChange={handleInputchange}
             />
             <input

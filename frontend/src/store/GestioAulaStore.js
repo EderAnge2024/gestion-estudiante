@@ -19,22 +19,22 @@ const useGestionAulaStore = create((set)=>({
             console.log("Error fecthing gestionAulas", error.message)
         }
     },
-    deleteGestionAula: async(id)=>{
+    deleteGestionAula: async(gestionAulaId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/gestionAula/${id}`)
+            const response = await axios.delete(`http://localhost:3001/gestionAula/${gestionAulaId}`)
             console.log("gestionAula delete:",response.data)
-            set((state)=>({gestionAulas: state.gestionAulas.filter(gestionAula=>gestionAula.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({gestionAulas: state.gestionAulas.filter(gestionAula=>gestionAula.gestionAulaId !== gestionAulaId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting gestionAula:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updateGestionAula: async (id, updatedData) => {
+    updateGestionAula: async (gestionAulaId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/gestionAula/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/gestionAula/${gestionAulaId}`, updatedData)
             console.log("gestionAula updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({gestionAulas: state.gestionAulas.map((gestionAula)=> gestionAula.id === id ? {...gestionAula, ...response.data} : gestionAula)})) // actualiza el estudiante en el estado
+            set((state) => ({gestionAulas: state.gestionAulas.map((gestionAula)=> gestionAula.gestionAulaId === gestionAulaId ? {...gestionAula, ...response.data} : gestionAula)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating gestionAula:", error.message)
         }

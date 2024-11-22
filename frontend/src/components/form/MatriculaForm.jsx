@@ -9,9 +9,9 @@ const MatriculaForm = ()=>{
     const [matriculaData, setMatriculaData] = useState({
         fecha:"",
         carrera:"",
-        estudent_id:"",
-        grupo_id:"",
-        periodoAcademico_id:""
+        studentId:"",
+        gestionGrupoId:"",
+        periodoAcademicoId:""
     
     
     });
@@ -29,12 +29,11 @@ const MatriculaForm = ()=>{
         e.preventDefault();
         addMatricula(matriculaData)
         setMatriculaData({
-            
             fecha:"",
             carrera:"",
-            estudent_id:"",
-            grupo_id:"",
-            periodoAcademico_id:""
+            studentId:"",
+            gestionGrupoId:"",
+            periodoAcademicoId:""
         })
         alert("matricula added successfully")
        
@@ -64,26 +63,26 @@ const MatriculaForm = ()=>{
             />
             <input
             type="text"
-            placeholder="Enter estudent_id"
+            placeholder="Enter studentId"
             required
-            name="estudent_id"
-            value={matriculaData.estudent_id}
+            name="studentId"
+            value={matriculaData.studentId}
             onChange={handleInputchange}
             />
             <input
             type="text"
-            placeholder="Enter grupo_id"
+            placeholder="Enter gestionGrupoId"
             required
-            name="grupo_id"
-            value={matriculaData.grupo_id}
+            name="gestionGrupoId"
+            value={matriculaData.gestionGrupoId}
             onChange={handleInputchange}
             />
             <input
             type="text"
-            placeholder="Enter periodoAcademico_id"
+            placeholder="Enter periodoAcademicoId"
             required
-            name="periodoAcademico_id"
-            value={matriculaData.periodoAcademico_id}
+            name="periodoAcademicoId"
+            value={matriculaData.periodoAcademicoId}
             onChange={handleInputchange}
             />
             <button>save</button>

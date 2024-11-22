@@ -19,22 +19,22 @@ const useActividadStore = create((set)=>({
             console.log("Error fecthing actividads", error.message)
         }
     },
-    deleteActividad: async(id)=>{
+    deleteActividad: async(actividadId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/actividad/${id}`)
+            const response = await axios.delete(`http://localhost:3001/actividad/${actividadId}`)
             console.log("actividad delete:",response.data)
-            set((state)=>({actividads: state.actividads.filter(actividad=>actividad.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({actividads: state.actividads.filter(actividad=>actividad.actividadId !== actividadId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting actividad:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updateActividad: async (id, updatedData) => {
+    updateActividad: async (actividadId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/actividad/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/actividad/${actividadId}`, updatedData)
             console.log("actividad updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({actividads: state.actividads.map((actividad)=> actividad.id === id ? {...actividad, ...response.data} : actividad)})) // actualiza el estudiante en el estado
+            set((state) => ({actividads: state.actividads.map((actividad)=> actividad.actividadId === actividadId ? {...actividad, ...response.data} : actividad)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating gestionAula:", error.message)
         }
