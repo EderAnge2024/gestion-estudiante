@@ -1,17 +1,31 @@
-import { useState } from "react"
+import { useState, useEffect } from "react";
 import axios from 'axios'
 import usePermisoStore from "../../store/PermisoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PermisoFrom = ()=>{
     const {addPermiso} = usePermisoStore()
-
+    const [roles,setRoles] = useState([])
     const [permisoData, setPermisoData] = useState({
         rolId:"",
         accion:"",
         descripcion:""
     });
-    console.log(permisoData);
+    
+
+    // Obtener la lista de usuarios al cargar el componente
+    useEffect(() => {
+    const fetchUsuarios = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/rol"); // Cambiar a la URL adecuada de tu API
+        setRoles(response.data); // Almacenar los usuarios en el estado
+      } catch (error) {
+        console.error("Error al obtener los usuarios:", error);
+      }
+    };
+
+    fetchUsuarios();
+  }, []);
 
     const handleInputchange = (e)=>{
         const {name,value} = e.target;
@@ -36,17 +50,22 @@ const PermisoFrom = ()=>{
     return(
         <div>
             <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>Student Form</h1>
+            <h1>Permios Form</h1>
             <form 
             onSubmit={handleSubmit}>
-                <input
-                type="text"
-                placeholder="Enter rolId"
-                required
+                <select
                 name="rolId"
                 value={permisoData.rolId}
                 onChange={handleInputchange}
-                />
+                required
+                >      
+                <option value="">Seleccionar rol</option>
+                {roles.map((rolss) => (
+                  <option key={rolss.rolId} value={rolss.rolId}>
+                    {rolss.rol} {/* Muestra el nombre del usuario */}
+                  </option>
+                ))}
+                </select>
                 <input
                 type="text"
                 placeholder="Enter accion"
