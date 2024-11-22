@@ -40,7 +40,7 @@ const ActividadForm = ()=>{
     return(
         <div>
             <div><Navegador></Navegador></div>
-            <h1>Aula Form</h1>
+            <h1>Actividad Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input

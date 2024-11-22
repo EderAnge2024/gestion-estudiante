@@ -2,8 +2,8 @@ import {create} from 'zustand'
 import axios from 'axios'  // para hacer peticiones
 
 const useGestionGrupoStore = create((set)=>({
-    actividad: [],
-    addcgestiongrupo: async(course)=>{
+    GestionGrupo: [],
+    addcGestionGrupo: async(gestiongrupo)=>{
         try {
             const response = await axios.post('http://localhost:3001/gestiongrupo',gestiongrupo)
             set((state)=>({course: [...state.gestiongrupo, response.data]}))// crea una copia el "..."
@@ -11,15 +11,15 @@ const useGestionGrupoStore = create((set)=>({
             console.log("Error adding GestionGrupo", error.message)
         }
     },
-    fetchgestiongrupo: async()=>{
+    fetchGestionGrupo: async()=>{
         try {
             const response = await axios.get('http://localhost:3001/gestiongrupo')
-            set({course: response.data})
+            set({gestiongrupo: response.data})
         } catch (error) {
             console.log("Error fecthing Gestiongrupo", error.message)
         }
     },
-    deletegestiongrupo: async(id)=>{
+    deleteGestionGrupo: async(id)=>{
         try {
             const response = await axios.delete(`http://localhost:3001/gestiongrupo/${id}`)
             console.log("gestiongrupo delete:",response.data)
@@ -29,7 +29,7 @@ const useGestionGrupoStore = create((set)=>({
         }
     },
     //____----------Agregado---------------________
-    updategestiongrupo: async (id, updatedData) => {
+    updateGestionGrupo: async (id, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
             const response = await axios.put(`http://localhost:3001/gestiongrupo/${id}`, updatedData)
             console.log("gestiongrupo updated:", response.data)

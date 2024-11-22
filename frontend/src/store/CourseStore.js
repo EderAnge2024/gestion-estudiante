@@ -2,8 +2,8 @@ import {create} from 'zustand'
 import axios from 'axios'  // para hacer peticiones
 
 const useCourseStore = create((set)=>({
-    actividad: [],
-    addcourse: async(course)=>{
+    Course: [],
+    addCourse: async(course)=>{
         try {
             const response = await axios.post('http://localhost:3001/course',course)
             set((state)=>({course: [...state.course, response.data]}))// crea una copia el "..."
@@ -11,7 +11,7 @@ const useCourseStore = create((set)=>({
             console.log("Error adding Course", error.message)
         }
     },
-    fetchcourse: async()=>{
+    fetchCourse: async()=>{
         try {
             const response = await axios.get('http://localhost:3001/course')
             set({course: response.data})
@@ -19,7 +19,7 @@ const useCourseStore = create((set)=>({
             console.log("Error fecthing Course", error.message)
         }
     },
-    deletecourse: async(id)=>{
+    deleteCourse: async(id)=>{
         try {
             const response = await axios.delete(`http://localhost:3001/course/${id}`)
             console.log("course delete:",response.data)
@@ -29,7 +29,7 @@ const useCourseStore = create((set)=>({
         }
     },
     //____----------Agregado---------------________
-    updatecourse: async (id, updatedData) => {
+    updateCourse: async (id, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
             const response = await axios.put(`http://localhost:3001/course/${id}`, updatedData)
             console.log("course updated:", response.data)

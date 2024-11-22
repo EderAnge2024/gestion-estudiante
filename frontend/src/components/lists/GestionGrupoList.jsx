@@ -23,7 +23,7 @@ const GestionGrupoList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (gestiongrupo) => {  
         setEditingGestionGrupo(gestiongrupo) // Establece el estudiante en edición
-        setFormData({ curso_id: gestiongrupo.curso_id, docente_id: gestiongrupo.docente_id, periodoAcademico_id: gestiongrupo.periodoAcademico_id}) // Rellena los campos con los datos actuales
+        setFormData({ curso_id: GestionGrupo.curso_id, docente_id: gestiongrupo.docente_id, periodoAcademico_id: gestiongrupo.periodoAcademico_id}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición

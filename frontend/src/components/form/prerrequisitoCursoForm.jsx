@@ -1,5 +1,5 @@
 import { useState } from "react"
-import axios from 'axios'
+// import axios from 'axios'
 import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore";
 import Navegador from "../navegador/Navegador";
 

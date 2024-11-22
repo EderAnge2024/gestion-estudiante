@@ -3,7 +3,7 @@ import axios from 'axios'  // para hacer peticiones
 
 const useActividadStore = create((set)=>({
     actividad: [],
-    addactividad: async(actividad)=>{
+    addActividad: async(actividad)=>{
         try {
             const response = await axios.post('http://localhost:3001/actividad',actividad)
             set((state)=>({actividad: [...state.actividad, response.data]}))// crea una copia el "..."
@@ -11,7 +11,7 @@ const useActividadStore = create((set)=>({
             console.log("Error adding Actividad", error.message)
         }
     },
-    fetchactividad: async()=>{
+    fetchActividad: async()=>{
         try {
             const response = await axios.get('http://localhost:3001/actividad')
             set({actividad: response.data})
@@ -19,7 +19,7 @@ const useActividadStore = create((set)=>({
             console.log("Error fecthing Actividad", error.message)
         }
     },
-    deleteactividad: async(id)=>{
+    deleteActividad: async(id)=>{
         try {
             const response = await axios.delete(`http://localhost:3001/actividad/${id}`)
             console.log("actividad delete:",response.data)
@@ -29,7 +29,7 @@ const useActividadStore = create((set)=>({
         }
     },
     //____----------Agregado---------------________
-    updateactividad: async (id, updatedData) => {
+    updateActividad: async (id, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
             const response = await axios.put(`http://localhost:3001/actividad/${id}`, updatedData)
             console.log("actividad updated:", response.data)
