@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import NavegadorIncicio from '../navegador/navaegadorIncio';
+import NavegadorIncicio from '../navegador/navegadorInicio';
 import style from "./login.module.css";
 import logosuiza from "../IMG/logosuiza.png";
 import suiza from "../IMG/Suiza.jpg";

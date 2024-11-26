@@ -1,0 +1,112 @@
+/* ActividadForm.module.css */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .text {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #4a4e69;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  form select,
+  form input {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  form select:focus,
+  form input:focus {
+    border-color: #4a4e69;
+    outline: none;
+    box-shadow: 0 0 6px rgba(74, 78, 105, 0.3);
+  }
+  
+  form input::placeholder {
+    color: #bbb;
+  }
+  
+  form button {
+    background-color: #4a4e69;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #373a56;
+  }
+  
+  form button:active {
+    background-color: #2d2f45;
+  }
+  
+  /* Responsividad */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  
+    form {
+      padding: 15px;
+    }
+  
+    .text {
+      font-size: 1.5rem;
+    }
+  
+    form select,
+    form input,
+    form button {
+      font-size: 0.85rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .text {
+      font-size: 1.2rem;
+    }
+  
+    form {
+      padding: 10px;
+    }
+  
+    form select,
+    form input {
+      padding: 8px;
+      font-size: 0.8rem;
+    }
+  
+    form button {
+      font-size: 0.85rem;
+      padding: 8px;
+    }
+  }
+  

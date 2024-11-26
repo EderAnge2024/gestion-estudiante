@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import useActividadStore from "../../store/ActividadStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 import axios from "axios";
+import style from './ActividadForm.module.css'
 
 const ActividadForm = () => {
   const { addActividad } = useActividadStore();
@@ -52,10 +53,10 @@ const ActividadForm = () => {
 
   return (
     <div>
-      <div>
+      <div className={style.container}>
         <NavegadorMenu />
       </div>
-      <h1>Formulario de Actividad</h1>
+      <h1 className={style.text}>Formulario de Actividad</h1>
       <form onSubmit={handleSubmit}>
         {/* Selector de usuario */}
         <select

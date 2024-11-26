@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import stilo from './navegadorMneuStilo.module.css'
+import style from './Navegador.module.css'
 
 const Navegador = () => {
     return (
         <div >            
-            <nav className={stilo.nav}>
+            <nav className={style.nav}>
                 <Link to='/navegadorMenu'> Inicio</Link>
                 <Link to='/gestionAulaFrom' >GUARDAR GESTION DE AULAS</Link>
                 <Link to='/gestionAulaList' >LISTA DE GESTION DE AULAS</Link>

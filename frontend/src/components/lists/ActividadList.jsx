@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import useActividadStore from "../../store/ActividadStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import style from './ActividadList.module.css'
 
 const ActividadList = ()=>{
     const {fetchActividads, actividads, deleteActividad, updateActividad} = useActividadStore()
@@ -43,7 +44,7 @@ const ActividadList = ()=>{
     /////-------------////
 
     return (
-        <div>
+        <div className={style.conteiner}>
             <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
