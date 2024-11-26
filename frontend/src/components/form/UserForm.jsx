@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
 import useUserStore from "../../store/UserStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const UserForm = ()=>{
     const {addUsuario} = useUserStore()
@@ -35,8 +35,8 @@ const UserForm = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
-            <h1>Student Form</h1>
+            <div><NavegadorMenu></NavegadorMenu></div>
+            <h1>User Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input

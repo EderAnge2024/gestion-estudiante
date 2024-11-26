@@ -1,16 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import stilo from './navegadorStilo.module.css'
+import stilo from './navegadorMneuStilo.module.css'
 
 const Navegador = () => {
     return (
         <div >            
-            <nav className={stilo}>
-                <Link to='/'> Inicio</Link>
-                <Link to='/studentForm' > FORMULARIO DE GUARDAR</Link>
-                <Link to='/studentList' > EDITAR Y ELIMNAR </Link>
-                <Link to='/userList' > Lista de Usuarios </Link>
-                <Link to='/userFrom' > guardar usuario</Link>
+            <nav className={stilo.nav}>
+                <Link to='/navegadorMenu'> Inicio</Link>
+                <Link to='/gestionAulaFrom' >GUARDAR GESTION DE AULAS</Link>
+                <Link to='/gestionAulaList' >LISTA DE GESTION DE AULAS</Link>
+                <Link to='/studentForm' >GUARDAR ESTUDIANTES</Link>
+                <Link to='/studentList' >LISTA DE ESTUDIANTES </Link>
+                <Link to='/docenteFrom' >GUARDAR DOCENTE</Link>
+                <Link to='/docenteList' >LISTA DE DOCENTES</Link>
+                <Link to='/planEstudioFrom' >GUARDAR PLAN ESTUDIO</Link>
+                <Link to='/planEstudioList' >LISTA DE PLAN DE ESTUDIOS</Link>
+                <Link to='/courseFrom' >GUARDAR CURSO</Link>
+                <Link to='/courseList' >LISTA DE CURSOS</Link>
+                <Link to='/preriquisitoCursoFrom' >GUARDAR PRERREQUISITO DE CURSO</Link>
+                <Link to='/preriquisitoCursoList' >LISTA DE PRERREQUISITO DE CURSOS</Link>
+
+                <Link to='/periodoAcademicoFrom' >GUARDAR PERIODO ACADEMICO</Link>
+                <Link to='/periodoAcademicoList' >LISTA DE PERIODO ACADEMICO</Link>
+                <Link to='/gestioGrupoFrom' >GUARDAR GESTION DE GRUPOS</Link>
+                <Link to='/gestioGrupoList' >LISTA DE GESTION DE GRUPOS</Link>
+                <Link to='/matriculaFrom' >GUARDAR MATRICULA</Link>
+                <Link to='/matriculaList' >LISTA DE MATRICULA</Link>
+                <Link to='/notaFrom' >GUARDAR NOTA</Link>
+                <Link to='/notaList' >LISTA DE NOTAS</Link>
+                
+                
+                
             </nav>
         </div>
     );

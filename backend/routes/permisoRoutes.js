@@ -5,9 +5,9 @@ const permisoRouters = Router()
 // create nuew student
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 permisoRouters.post("/",async(req, res)=>{
-    const {id, rol_id,accion,descripcion} = req.body
+    const {permisoId, rolId,accion,descripcion} = req.body
     try {
-        const newPermiso = await createPermisoController({id, rol_id,accion,descripcion})
+        const newPermiso = await createPermisoController({permisoId, rolId,accion,descripcion})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newPermiso)
     } catch (error) {
@@ -25,13 +25,13 @@ permisoRouters.get("/",async(req,res)=>{
 })
 
 // para actualizar update
-permisoRouters.put("/:id", async(req,res)=>{
-    const {id}= req.params
+permisoRouters.put("/:permisoId", async(req,res)=>{
+    const {permisoId}= req.params
     const permisoData= req.body
     try {
-        const updatePermiso = await updatePermisoByIdController(id, permisoData)
+        const updatePermiso = await updatePermisoByIdController(permisoId, permisoData)
         if(!updatePermiso){
-            return res.status(404).json({error: "studiante no encontrado"})
+            return res.status(404).json({error: "permiso no encontrado"})
         }
         res.status(200).json(updatePermiso)
     } catch (error) {
@@ -41,14 +41,14 @@ permisoRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-permisoRouters.delete("/:id", async(req, res)=>{
-    const {id} = req.params
+permisoRouters.delete("/:permisoId", async(req, res)=>{
+    const {permisoId} = req.params
     try {
-        const deletedPermiso = await deletedPermisoByIdController(id)
+        const deletedPermiso = await deletedPermisoByIdController(permisoId)
         if(!deletedPermiso){
-            return res.status.apply(404).json({error: "Studiante no encontrado"})
+            return res.status.apply(404).json({error: "permiso no encontrado"})
         }
-        res.status(200).json({message: "Estudiante eliminado existozamente"})
+        res.status(200).json({message: "permiso eliminado existozamente"})
     } catch (error) {
         res.status(500).json({error: error.message})
     }

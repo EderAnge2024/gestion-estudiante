@@ -5,9 +5,9 @@ const gestionAulaRouters = Router()
 // create nuew GestionAula
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 gestionAulaRouters.post("/",async(req, res)=>{
-    const {id,nombre,descripcion, estado} = req.body
+    const {gestionAulaId,nombre,descripcion, estado} = req.body
     try {
-        const newGestionAula = await createGestionAulaController({id,nombre,descripcion, estado})
+        const newGestionAula = await createGestionAulaController({gestionAulaId,nombre,descripcion, estado})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newGestionAula)
     } catch (error) {
@@ -25,11 +25,11 @@ gestionAulaRouters.get("/",async(req,res)=>{
 })
 
 // para actualizar update
-gestionAulaRouters.put("/:id", async(req,res)=>{
-    const {id}= req.params
+gestionAulaRouters.put("/:gestionAulaId", async(req,res)=>{
+    const {gestionAulaId}= req.params
     const gestionAulaData= req.body
     try {
-        const updateGestionAula = await updateGestionAulaByIdController(id, gestionAulaData)
+        const updateGestionAula = await updateGestionAulaByIdController(gestionAulaId, gestionAulaData)
         if(!updateGestionAula){
             return res.status(404).json({error: "aula no encontrado"})
         }
@@ -41,10 +41,10 @@ gestionAulaRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-gestionAulaRouters.delete("/:id", async(req, res)=>{
-    const {id} = req.params
+gestionAulaRouters.delete("/:gestionAulaId", async(req, res)=>{
+    const {gestionAulaId} = req.params
     try {
-        const deletedGestionAula = await deletedGestionAulaByIdController(id)
+        const deletedGestionAula = await deletedGestionAulaByIdController(gestionAulaId)
         if(!deletedGestionAula){
             return res.status.apply(404).json({error: "aula no encontrado"})
         }

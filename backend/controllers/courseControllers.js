@@ -1,7 +1,12 @@
 const Course= require('../models/Course')
-const createCourseController = async({id,planEstudio_id,docente_id,name,credits})=>{
+//const Docente = require('../models/Docente');
+//const PlanEstudio = require('../models/PlanEstudio');
+
+
+
+const createCourseController = async({courseId,planEstudioId,docenteId,nombre,credito,ciclo})=>{
     try {
-        const newCourse = await Course.create({id,planEstudio_id,docente_id,name,credits})
+        const newCourse = await Course.create({courseId,planEstudioId,docenteId,nombre,credito,ciclo})
         return newCourse
     } catch (error) {
         throw new Error(error.message)
@@ -16,9 +21,9 @@ const getAllCourseController = async () =>{
         throw new Error(error.message)
     }
 }
-const updateCourseByIdController = async (id, courseData)=>{
+const updateCourseByIdController = async (courseId, courseData)=>{
     try {
-        const course = await Course.findByPk(id)
+        const course = await Course.findByPk(courseId)
         if(!course){
             return null
         }
@@ -28,9 +33,9 @@ const updateCourseByIdController = async (id, courseData)=>{
         throw new Error(error.message)
     }
 }
-const deletedCourseByIdController = async(id)=>{
+const deletedCourseByIdController = async(courseId)=>{
     try {
-     const course= await Course.findByPk(id)
+     const course= await Course.findByPk(courseId)
      if(!course){
          return null
      }

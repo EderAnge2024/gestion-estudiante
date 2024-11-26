@@ -1,7 +1,7 @@
 const GestionAula= require('../models/GestionAula')
-const createGestionAulaController = async({id,nombre,descripcion,estado})=>{
+const createGestionAulaController = async({gestionAulaId,nombre,descripcion,estado})=>{
     try {
-        const newGestionAula = await GestionAula.create({id,nombre,descripcion,estado})
+        const newGestionAula = await GestionAula.create({gestionAulaId,nombre,descripcion,estado})
         return newGestionAula
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllGestionAulasController = async () =>{
 }
 
 // para actualizar
-const updateGestionAulaByIdController = async (id, gestionAulaData)=>{
+const updateGestionAulaByIdController = async (gestionAulaId, gestionAulaData)=>{
     try {
-        const gestionAula = await GestionAula.findByPk(id)
+        const gestionAula = await GestionAula.findByPk(gestionAulaId)
         if(!gestionAula){
             return null
         }
@@ -32,9 +32,9 @@ const updateGestionAulaByIdController = async (id, gestionAulaData)=>{
 }
 // para eliminar
 
-const deletedGestionAulaByIdController = async(id)=>{
+const deletedGestionAulaByIdController = async(gestionAulaId)=>{
    try {
-    const gestionAula= await GestionAula.findByPk(id)
+    const gestionAula= await GestionAula.findByPk(gestionAulaId)
     if(!gestionAula){
         return null
     }

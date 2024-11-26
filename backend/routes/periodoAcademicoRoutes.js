@@ -5,9 +5,9 @@ const periodoAcademicoRouters = Router()
 // create nuew PeriodoAcademico
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 periodoAcademicoRouters.post("/",async(req, res)=>{
-    const {id, docente_id, fechaInicio,fechaFinal,estado,ciclo} = req.body
+    const {periodoAcademicoId, docenteId, fechaInicio,fechaFinal,estado,ciclo} = req.body
     try {
-        const newPeriodoAcademico = await createPeriodoAcademicoController({id, docente_id, fechaInicio,fechaFinal,estado,ciclo})
+        const newPeriodoAcademico = await createPeriodoAcademicoController({periodoAcademicoId, docenteId, fechaInicio,fechaFinal,estado,ciclo})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newPeriodoAcademico)
     } catch (error) {
@@ -25,11 +25,11 @@ periodoAcademicoRouters.get("/",async(req,res)=>{
 })
 
 // para actualizar update
-periodoAcademicoRouters.put("/:id", async(req,res)=>{
-    const {id}= req.params
+periodoAcademicoRouters.put("/:periodoAcademicoId", async(req,res)=>{
+    const {periodoAcademicoId}= req.params
     const periodoAcademicoData= req.body
     try {
-        const updatePeriodoAcademico = await updatePeriodoAcademicoByIdController(id, periodoAcademicoData)
+        const updatePeriodoAcademico = await updatePeriodoAcademicoByIdController(periodoAcademicoId, periodoAcademicoData)
         if(!updatePeriodoAcademico){
             return res.status(404).json({error: "studiante no encontrado"})
         }
@@ -41,10 +41,10 @@ periodoAcademicoRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-periodoAcademicoRouters.delete("/:id", async(req, res)=>{
-    const {id} = req.params
+periodoAcademicoRouters.delete("/:periodoAcademicoId", async(req, res)=>{
+    const {periodoAcademicoId} = req.params
     try {
-        const deletedPeriodoAcademico = await deletedPeriodoAcademicoByIdController(id)
+        const deletedPeriodoAcademico = await deletedPeriodoAcademicoByIdController(periodoAcademicoId)
         if(!deletedPeriodoAcademico){
             return res.status.apply(404).json({error: "PeriodoAcademico no encontrado"})
         }

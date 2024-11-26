@@ -1,7 +1,7 @@
 const Docente= require('../models/Docente')
-const createDocenteController = async({id,nombre,apellido,telefono,direccion,email})=>{
+const createDocenteController = async({docenteId,nombre,apellido,telefono,direccion,email})=>{
     try {
-        const newDocente = await Docente.create({id,nombre,apellido,telefono,direccion,email})
+        const newDocente = await Docente.create({docenteId,nombre,apellido,telefono,direccion,email})
         return newDocente
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllDocentesController = async () =>{
 }
 
 // para actualizar
-const updateDocenteByIdController = async (id, docenteData)=>{
+const updateDocenteByIdController = async (docenteId, docenteData)=>{
     try {
-        const docente = await Docente.findByPk(id)
+        const docente = await Docente.findByPk(docenteId)
         if(!docente){
             return null
         }
@@ -32,9 +32,9 @@ const updateDocenteByIdController = async (id, docenteData)=>{
 }
 // para eliminar
 
-const deletedDocenteByIdController = async(id)=>{
+const deletedDocenteByIdController = async(docenteId)=>{
    try {
-    const docente= await Docente.findByPk(id)
+    const docente= await Docente.findByPk(docenteId)
     if(!docente){
         return null
     }
