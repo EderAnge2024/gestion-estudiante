@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import stilo from './navegadorMneuStilo.module.css'
+import style from './NavegadorUsuario.module.css'
 
 const NavegadorUsuario = () => {
     return (
         <div >            
-            <nav className={stilo.nav}>
-                <Link to='/'> Inicio</Link>
+            <nav className={style.nav}>
+                <Link to='/navegadorMenu2'> Inicio</Link>
                 <Link to='/userFrom' >GUARDAR USUARIO</Link>
                 <Link to='/userList' >LISTA DE USUARIOS </Link>
                 <Link to='/rolFrom' >GUARDAR ROL</Link>

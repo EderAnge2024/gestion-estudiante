@@ -1,0 +1,46 @@
+/* Contenedor principal del nav */
+.padre {
+    display: flex;
+    justify-content: center; /* Centra los enlaces horizontalmente */
+    align-items: center; /* Centra los enlaces verticalmente */
+    background-color: #f4f4f4; /* Fondo claro */
+    padding: 15px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    border-bottom: 2px solid #ccc; /* Línea debajo del nav */
+    gap: 15px; /* Espaciado uniforme entre los enlaces */
+    height: 70px; /* Altura fija del contenedor */
+}
+
+/* Estilo de los enlaces */
+.link {
+    color: #333; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita para resaltar */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #e9e9e9; /* Fondo gris claro */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para los botones */
+}
+
+/* Hover y foco */
+.link:hover,
+.link:focus {
+    background-color: #007bff; /* Fondo azul */
+    color: white; /* Texto blanco */
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .padre {
+        flex-direction: column; /* Cambia a columna */
+        align-items: stretch; /* Los enlaces ocupan todo el ancho */
+        height: auto; /* Ajusta la altura */
+    }
+
+    .link {
+        text-align: center; /* Centra el texto */
+        width: 100%; /* Ocupa el ancho completo */
+    }
+}

@@ -3,6 +3,9 @@ import axios from 'axios'  // para hacer peticiones
 
 const useMatriculaStore = create((set)=>({
     matriculas: [],
+    students:{},
+    periodoAcademicos:{},
+    gestionGrupos:{},
     addMatricula: async(matricula)=>{
         try {
             const response = await axios.post('http://localhost:3001/matricula',matricula)
@@ -38,7 +41,45 @@ const useMatriculaStore = create((set)=>({
         } catch (error) {
             console.log("Error updating matricula:", error.message)
         }
-    }
+    },
+    // Obtener students desde la API
+    fetchStudents: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/student'); // Ajusta la URL según tu API
+            const studentsData = response.data.reduce((acc, student) => {
+                acc[student.studentId] = student.nombre; // Mapea studentId con el nombre del nombre
+                return acc;
+            }, {}); // Transforma la lista de students en un objeto
+            set({ students: studentsData }); // Actualiza el estado con los students
+        } catch (error) {
+            console.log("Error al obtener students:", error.message);
+        }
+    },
+    fetchPeriodoAcademicos: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/periodoAcademico'); // Ajusta la URL según tu API
+            const periodoAcademicosData = response.data.reduce((acc, periodoAcademico) => {
+                acc[periodoAcademico.periodoAcademicoId] = periodoAcademico.ciclo; // Mapea periodoAcademicoId con el ciclo del nombre
+                return acc;
+            }, {}); // Transforma la lista de periodoAcademicos en un objeto
+            set({ periodoAcademicos: periodoAcademicosData }); // Actualiza el estado con los periodoAcademicos
+        } catch (error) {
+            console.log("Error al obtener periodoAcademicos:", error.message);
+        }
+    },
+    
+    fetchGestionGrupos: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/gestionGrupo'); // Ajusta la URL según tu API
+            const gestionGruposData = response.data.reduce((acc, gestionGrupo) => {
+                acc[gestionGrupo.gestionGrupoId] = gestionGrupo.gestionGrupoId; // Mapea gestionGrupoId con el gestionGrupoId del nombre
+                return acc;
+            }, {}); // Transforma la lista de gestionGrupos en un objeto
+            set({ gestionGrupos: gestionGruposData }); // Actualiza el estado con los gestionGrupos
+        } catch (error) {
+            console.log("Error al obtener gestionGrupos:", error.message);
+        }
+    },
     
 }))
 

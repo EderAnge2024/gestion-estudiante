@@ -3,13 +3,16 @@ import useGestionGrupoStore from "../../store/GestionGrupoStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const GestionGrupoList = ()=>{
-    const {fetchGestionGrupos, gestionGrupos, deleteGestionGrupo, updateGestionGrupo} = useGestionGrupoStore()
+    const {fetchGestionGrupos, gestionGrupos, deleteGestionGrupo, updateGestionGrupo,fetchPeriodoAcademicos, periodoAcademicos, fetchDocentes, docentes,fetchCourses,courses} = useGestionGrupoStore()
     const [editingGestionGrupo, setEditingGestionGrupo] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ courseId: '',docenteId: '',periodoAcademicoId: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchGestionGrupos()
+        fetchPeriodoAcademicos()
+        fetchDocentes()
+        fetchCourses()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -54,7 +57,11 @@ const GestionGrupoList = ()=>{
                     {
                         gestionGrupos.map((user) => (
                             <div key={user.gestionGrupoId}>
-                                <h3>{user.gestionGrupoId}<br></br> {user.courseId} {user.docenteId} {user.periodoAcademicoId} </h3>
+                                <h3>
+                                {docentes[user.docenteId]}
+                                {periodoAcademicos[user.periodoAcademicoId]}
+                                {courses[user.courseId]}
+                                {user.gestionGrupoId}<br></br> {user.nombre} {user.nombre} {user.ciclo} </h3>
                                 <button onClick={() => handleDelete(user.gestionGrupoId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
@@ -68,10 +75,10 @@ const GestionGrupoList = ()=>{
                             <h3>Edit GestionGrupo</h3>
                             <input 
                                 type="text" 
-                                name="cursoId" 
+                                name="courseId" 
                                 value={formData.courseId} 
                                 onChange={handleInputChange} 
-                                placeholder="cursoId"
+                                placeholder="courseId"
                             />
                             <input 
                                 type="text" 

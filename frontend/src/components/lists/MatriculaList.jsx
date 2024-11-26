@@ -3,13 +3,16 @@ import useMatriculaStore from "../../store/MatriculaStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const MatriculaList = ()=>{
-    const {fetchMatriculas, matriculas, deleteMatricula, updateMatricula} = useMatriculaStore()
+    const {fetchMatriculas, matriculas, deleteMatricula, updateMatricula,fetchStudents, students,fetchPeriodoAcademicos,periodoAcademicos,fetchGestionGrupos,gestionGrupos} = useMatriculaStore()
     const [editingMatricula, setEditingMatricula] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ fecha: '',carrera: '',estudentId: '',grupoId: '',periodoAcademicoId: '' }) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ fecha: '',carrera: '',studentId: '',gestionGrupoId: '',periodoAcademicoId: '' }) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchMatriculas()
+        fetchStudents()
+        fetchGestionGrupos()
+        fetchPeriodoAcademicos()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -23,7 +26,7 @@ const MatriculaList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (matricula) => {  
         setEditingMatricula(matricula) // Establece el estudiante en edición
-        setFormData({ fecha: matricula.fecha, carrera: matricula.carrera, estudentId: matricula.estudentId, grupoId: matricula.grupoId, periodoAcademicoId: matricula.periodoAcademicoId}) // Rellena los campos con los datos actuales
+        setFormData({ fecha: matricula.fecha, carrera: matricula.carrera, studentId: matricula.studentId, gestionGrupoId: matricula.gestionGrupoId, periodoAcademicoId: matricula.periodoAcademicoId}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -54,7 +57,10 @@ const MatriculaList = ()=>{
                     {
                         matriculas.map((user) => (
                             <div key={user.matriculaId}>
-                                <h3>{user.matriculaId}<br></br> {user.fecha} {user.carrera} {user.estudentId} {user.grupoId} {user.periodoAcademicoId}</h3>
+                                <h3>
+                                    {students[user.studentId]}
+                                    {periodoAcademicos[user.periodoAcademicoId]}
+                                    {user.matriculaId}<br></br> {user.fecha} {user.carrera} {user.nombre} {user.gestionGrupoId} {user.ciclo}</h3>
                                 <button onClick={() => handleDelete(user.matriculaId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
@@ -82,17 +88,17 @@ const MatriculaList = ()=>{
                             />
                             <input 
                                 type="text" 
-                                name="estudentId" 
-                                value={formData.estudentId} 
+                                name="studentId" 
+                                value={formData.studentId} 
                                 onChange={handleInputChange} 
-                                placeholder="estudentId"
+                                placeholder="studentId"
                             />
                             <input 
                                 type="text" 
-                                name="grupoId" 
-                                value={formData.grupoId} 
+                                name="gestionGrupoId" 
+                                value={formData.gestionGrupoId} 
                                 onChange={handleInputChange} 
-                                placeholder="grupoId"
+                                placeholder="gestionGrupoId"
                             />
                             <input 
                                 type="text" 
