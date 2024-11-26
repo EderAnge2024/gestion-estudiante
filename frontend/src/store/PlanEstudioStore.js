@@ -3,6 +3,7 @@ import axios from 'axios'  // para hacer peticiones
 
 const usePlanEstudioStore = create((set)=>({
     planEstudios: [],
+    students:{},
     addPlanEstudio: async(planEstudio)=>{
         try {
             const response = await axios.post('http://localhost:3001/planEstudio',planEstudio)
@@ -38,7 +39,20 @@ const usePlanEstudioStore = create((set)=>({
         } catch (error) {
             console.log("Error updating planEstudio:", error.message)
         }
-    }
+    },
+    // Obtener students desde la API
+    fetchStudents: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/student'); // Ajusta la URL según tu API
+            const studentsData = response.data.reduce((acc, student) => {
+                acc[student.studentId] = student.nombre; // Mapea studentId con el nombre del nombre
+                return acc;
+            }, {}); // Transforma la lista de students en un objeto
+            set({ students: studentsData }); // Actualiza el estado con los students
+        } catch (error) {
+            console.log("Error al obtener students:", error.message);
+        }
+    },
     
 }))
 

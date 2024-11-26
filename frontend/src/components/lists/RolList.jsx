@@ -3,13 +3,14 @@ import useRolStore from "../../store/RolStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const RolList = ()=>{
-    const {fetchRols, rols, deleteRol, updateRol} = useRolStore()
+    const {fetchRols, rols, deleteRol, updateRol,fetchUsuarios, usuarios} = useRolStore()
     const [editingRol, setEditingRol] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ usuarioId: '',rol: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
-        fetchRols()
+        fetchRols(),
+        fetchUsuarios()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -54,7 +55,9 @@ const RolList = ()=>{
                     {
                         rols.map((user) => (
                             <div key={user.rolId}>
-                                <h3>{user.rolId}<br></br> {user.usuarioId} {user.rol} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
+                                <h3>
+                                    {usuarios[user.usuarioId] || "usuario no encontrado"}
+                                    {user.nombreUsuario}<br></br> {user.rol} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
                                 <button onClick={() => handleDelete(user.rolId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>

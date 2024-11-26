@@ -3,13 +3,15 @@ import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const PreriquisitoCursoList = ()=>{
-    const {fetchPreriquisitoCursos, preriquisitoCursos, deletePreriquisitoCurso, updatePreriquisitoCurso} = usePreriquisitoCursoStore()
+    const {fetchPreriquisitoCursos, preriquisitoCursos, deletePreriquisitoCurso, updatePreriquisitoCurso,fetchStudents,students,fetchCourses,courses} = usePreriquisitoCursoStore()
     const [editingPreriquisitoCurso, setEditingPreriquisitoCurso] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ studentId: '',courseId: '',requisito: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchPreriquisitoCursos()
+        fetchCourses()
+        fetchStudents()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -54,7 +56,10 @@ const PreriquisitoCursoList = ()=>{
                     {
                         preriquisitoCursos.map((user) => (
                             <div key={user.preriquisitoCursoId}>
-                                <h3>{user.preriquisitoCursoId}<br></br> {user.studentId} {user.courseId} {user.requisito}</h3>
+                                <h3>
+                                    {students[user.studentId]}
+                                    {courses[user.courseId]}
+                                    {user.preriquisitoCursoId}<br></br> {user.nombre} {user.nombre} {user.requisito}</h3>
                                 <button onClick={() => handleDelete(user.preriquisitoCursoId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>

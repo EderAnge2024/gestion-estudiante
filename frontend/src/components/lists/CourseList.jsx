@@ -3,13 +3,15 @@ import useCourseStore from "../../store/CourseStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const CourseList = ()=>{
-    const {fetchCourses, courses, deleteCourse, updateCourse} = useCourseStore()
+    const {fetchCourses, courses, deleteCourse, updateCourse,fetchDocentes,docentes,fetchPlanEstudios,planEstudios} = useCourseStore()
     const [editingCourse, setEditingCourse] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ planEstudioId: '',docenteId: '',nombre: '',credito: '',ciclo: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchCourses()
+        fetchDocentes()
+        fetchPlanEstudios()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -54,7 +56,11 @@ const CourseList = ()=>{
                     {
                         courses.map((user) => (
                             <div key={user.courseId}>
-                                <h3>{user.courseId}<br></br> {user.planEstudioId} {user.docenteId} {user.nombre} {user.credito} {user.ciclo}</h3>
+                                <h3>
+                                    {docentes[user.docenteId] || "docente no encontrado"}
+                                    {planEstudios[user.planEstudioId] || "plan de estudio  no encontrado"}
+                                    
+                                    {user.courseId}<br></br> {user.meta} {user.nombre} {user.nombre} {user.credito} {user.ciclo}</h3>
                                 <button onClick={() => handleDelete(user.courseId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
@@ -68,17 +74,17 @@ const CourseList = ()=>{
                             <h3>Edit Course</h3>
                             <input 
                                 type="text" 
-                                name="planEstudio_id" 
+                                name="planEstudioId" 
                                 value={formData.planEstudioId} 
                                 onChange={handleInputChange} 
-                                placeholder="planEstudio_id"
+                                placeholder="planEstudioId"
                             />
                             <input 
                                 type="text" 
-                                name="docente_id" 
+                                name="docenteId" 
                                 value={formData.docenteId} 
                                 onChange={handleInputChange} 
-                                placeholder="docente_id"
+                                placeholder="docenteId"
                             />
                             <input 
                                 type="text" 

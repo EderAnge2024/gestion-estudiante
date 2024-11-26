@@ -3,6 +3,7 @@ import axios from 'axios'  // para hacer peticiones
 
 const useRolStore = create((set)=>({
     rols: [],
+    usuarios:{},
     addRol: async(rol)=>{
         try {
             const response = await axios.post('http://localhost:3001/rol',rol)
@@ -38,7 +39,19 @@ const useRolStore = create((set)=>({
         } catch (error) {
             console.log("Error updating rol:", error.message)
         }
-    }
+    },
+    fetchUsuarios: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/usuario'); // Ajusta la URL según tu API
+            const usuariosData = response.data.reduce((acc, usuario) => {
+                acc[usuario.usuarioId] = usuario.nombreUsuario; // Mapea usuarioId con el nombre del nombreUsuario
+                return acc;
+            }, {}); // Transforma la lista de usuarios en un objeto
+            set({ usuarios: usuariosData }); // Actualiza el estado con los usuarios
+        } catch (error) {
+            console.log("Error al obtener usuarios:", error.message);
+        }
+    },
     
 }))
 

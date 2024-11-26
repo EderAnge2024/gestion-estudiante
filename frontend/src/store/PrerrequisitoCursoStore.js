@@ -3,6 +3,8 @@ import axios from 'axios'  // para hacer peticiones
 
 const usePreriquisitoCursoStore = create((set)=>({
     preriquisitoCursos: [],
+    students:{},
+    courses:{},
     addPreriquisitoCurso: async(preriquisitoCurso)=>{
         try {
             const response = await axios.post('http://localhost:3001/preriquisitoCurso',preriquisitoCurso)
@@ -38,7 +40,33 @@ const usePreriquisitoCursoStore = create((set)=>({
         } catch (error) {
             console.log("Error updating preriquisitoCurso:", error.message)
         }
-    }
+    },
+    // Obtener students desde la API
+    fetchCourses: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/course'); // Ajusta la URL según tu API
+            const coursesData = response.data.reduce((acc, course) => {
+                acc[course.courseId] = course.nombre; // Mapea courseId con el nombre del nombre
+                return acc;
+            }, {}); // Transforma la lista de courses en un objeto
+            set({ courses: coursesData }); // Actualiza el estado con los courses
+        } catch (error) {
+            console.log("Error al obtener courses:", error.message);
+        }
+    },
+    fetchStudents: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/student'); // Ajusta la URL según tu API
+            const studentsData = response.data.reduce((acc, student) => {
+                acc[student.studentId] = student.nombre; // Mapea studentId con el nombre del nombre
+                return acc;
+            }, {}); // Transforma la lista de students en un objeto
+            set({ students: studentsData }); // Actualiza el estado con los students
+        } catch (error) {
+            console.log("Error al obtener students:", error.message);
+        }
+    },
+    
     
 }))
 

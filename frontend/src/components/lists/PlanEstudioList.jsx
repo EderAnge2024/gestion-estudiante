@@ -3,13 +3,14 @@ import usePlanEstudioStore from "../../store/PlanEstudioStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const PlanEstudioList = ()=>{
-    const {fetchPlanEstudios, planEstudios, deletePlanEstudio, updatePlanEstudio} = usePlanEstudioStore()
+    const {fetchPlanEstudios, planEstudios, deletePlanEstudio, updatePlanEstudio,fetchStudents, students} = usePlanEstudioStore()
     const [editingPlanEstudio, setEditingPlanEstudio] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ studentId: '',meta: '',herramienta: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchPlanEstudios()
+        fetchStudents()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -54,7 +55,9 @@ const PlanEstudioList = ()=>{
                     {
                         planEstudios.map((user) => (
                             <div key={user.planEstudioId}>
-                                <h3>{user.planEstudioId}<br></br> {user.studentId} {user.meta} {user.herramienta}</h3>
+                                <h3>
+                                    {students[user.studentId]}
+                                    {user.nombre}<br></br> {user.meta} {user.herramienta}</h3>
                                 <button onClick={() => handleDelete(user.planEstudioId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>

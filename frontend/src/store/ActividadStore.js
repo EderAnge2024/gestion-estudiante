@@ -3,10 +3,12 @@ import axios from 'axios'  // para hacer peticiones
 
 const useActividadStore = create((set)=>({
     actividads: [],
+    usuarios: {},
     addActividad: async(actividad)=>{
         try {
             const response = await axios.post('http://localhost:3001/actividad',actividad)
             set((state)=>({actividads: [...state.actividads, response.data]}))// crea una copia el "..."
+            await fetchActividads()
         } catch (error) {
             console.log("Error adding Actividad", error.message)
         }
@@ -38,7 +40,19 @@ const useActividadStore = create((set)=>({
         } catch (error) {
             console.log("Error updating gestionAula:", error.message)
         }
-    }
+    },
+    fetchUsuarios: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/usuario'); // Ajusta la URL según tu API
+            const usuariosData = response.data.reduce((acc, usuario) => {
+                acc[usuario.usuarioId] = usuario.nombreUsuario; // Mapea usuarioId con el nombre del nombreUsuario
+                return acc;
+            }, {}); // Transforma la lista de usuarios en un objeto
+            set({ usuarios: usuariosData }); // Actualiza el estado con los usuarios
+        } catch (error) {
+            console.log("Error al obtener usuarios:", error.message);
+        }
+    },
     
 }))
 

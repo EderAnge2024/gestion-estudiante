@@ -3,6 +3,8 @@ import axios from 'axios'  // para hacer peticiones
 
 const useCourseStore = create((set)=>({
     courses: [],
+    planEstudios:{},
+    docentes:{},
     addCourse: async(course)=>{
         try {
             const response = await axios.post('http://localhost:3001/course',course)
@@ -38,7 +40,32 @@ const useCourseStore = create((set)=>({
         } catch (error) {
             console.log("Error updating course:", error.message)
         }
-    }
+    },
+    // Obtener planEstudios desde la API
+    fetchPlanEstudios: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/planEstudio'); // Ajusta la URL según tu API
+            const planEstudiosData = response.data.reduce((acc, planEstudio) => {
+                acc[planEstudio.planEstudioId] = planEstudio.meta; // Mapea planEstudioId con el nombre del meta
+                return acc;
+            }, {}); // Transforma la lista de planEstudios en un objeto
+            set({ planEstudios: planEstudiosData }); // Actualiza el estado con los planEstudios
+        } catch (error) {
+            console.log("Error al obtener planEstudios:", error.message);
+        }
+    },
+    fetchDocentes: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/docente'); // Ajusta la URL según tu API
+            const docentesData = response.data.reduce((acc, docente) => {
+                acc[docente.docenteId] = docente.nombre; // Mapea docenteId con el nombre del nombre
+                return acc;
+            }, {}); // Transforma la lista de docentes en un objeto
+            set({ docentes: docentesData }); // Actualiza el estado con los docentes
+        } catch (error) {
+            console.log("Error al obtener docentes:", error.message);
+        }
+    },
     
 }))
 

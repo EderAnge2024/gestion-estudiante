@@ -3,13 +3,15 @@ import useNotaStore from "../../store/NotaStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const NotaList = ()=>{
-    const {fetchNotas, notas, deleteNota, updateNota} = useNotaStore()
+    const {fetchNotas, notas, deleteNota, updateNota,fetchStudents,students,fetchCourses,courses} = useNotaStore()
     const [editingNota, setEditingNota] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ courseId: '',studentId: '',fecha_ingre_nota: '',nota: '' }) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchNotas()
+        fetchStudents()
+        fetchCourses()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -54,7 +56,10 @@ const NotaList = ()=>{
                     {
                         notas.map((user) => (
                             <div key={user.notaId}>
-                                <h3>{user.notaId}<br></br> {user.courseId} {user.studentId} {user.fecha_ingre_nota} {user.nota}</h3>
+                                <h3>
+                                    {students[user.studentId]}
+                                    {courses[user.courseId]}
+                                    {user.notaId}<br></br> {user.nombre} {user.nombre} {user.fecha_ingre_nota} {user.nota}</h3>
                                 <button onClick={() => handleDelete(user.notaId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>

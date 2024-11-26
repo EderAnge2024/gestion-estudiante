@@ -1,45 +1,69 @@
-import {create} from 'zustand'
-import axios from 'axios'  // para hacer peticiones
+import { create } from "zustand";
+import axios from "axios";
 
-const usePermisoStore = create((set)=>({
-    permisos: [],
-    addPermiso: async(permiso)=>{
+const usePermisoStore = create((set) => ({
+    permisos: [], // Lista de permisos
+    roles: {}, // Objeto para mapear rolId con su nombre
+
+    // Agregar un nuevo permiso
+    addPermiso: async (permiso) => {
         try {
-            const response = await axios.post('http://localhost:3001/permiso',permiso)
-            set((state)=>({permisos: [...state.permisos, response.data]}))// crea una copia el "..."
+            const response = await axios.post('http://localhost:3001/permiso', permiso);
+            set((state) => ({ permisos: [...state.permisos, response.data] })); // Actualiza la lista de permisos
         } catch (error) {
-            console.log("Error adding user", error.message)
+            console.log("Error al agregar permiso:", error.message);
         }
     },
-    fetchPermisos: async()=>{
+
+    // Obtener todos los permisos
+    fetchPermisos: async () => {
         try {
-            const response = await axios.get('http://localhost:3001/permiso')
-            set({permisos: response.data})
+            const response = await axios.get('http://localhost:3001/permiso');
+            set({ permisos: response.data });
         } catch (error) {
-            console.log("Error fecthing permisos", error.message)
+            console.log("Error al obtener permisos:", error.message);
         }
     },
-    deletePermiso: async(permisoId)=>{
+
+    // Eliminar un permiso
+    deletePermiso: async (permisoId) => {
         try {
-            const response = await axios.delete(`http://localhost:3001/permiso/${permisoId}`)
-            console.log("permiso delete:",response.data)
-            set((state)=>({permisos: state.permisos.filter(permiso=>permiso.permisoId !== permisoId)})) // filtra todos lo estudiantes actualizados o
-        } catch (error) {                                                               // diferentes del id eliminado
-            console.log("Error deleting permiso:", error.message)
+            await axios.delete(`http://localhost:3001/permiso/${permisoId}`);
+            set((state) => ({
+                permisos: state.permisos.filter(permiso => permiso.permisoId !== permisoId)
+            })); // Filtra y elimina el permiso localmente
+        } catch (error) {
+            console.log("Error al eliminar permiso:", error.message);
         }
     },
-    //____----------Agregado---------------________
+
+    // Actualizar un permiso
     updatePermiso: async (permisoId, updatedData) => {
-        try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/permiso/${permisoId}`, updatedData)
-            console.log("permiso updated:", response.data)
-            // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({permisos: state.permisos.map((permiso)=> permiso.permisoId === permisoId ? {...permiso, ...response.data} : permiso)})) // actualiza el estudiante en el estado
+        try {
+            const response = await axios.put(`http://localhost:3001/permiso/${permisoId}`, updatedData);
+            set((state) => ({
+                permisos: state.permisos.map((permiso) =>
+                    permiso.permisoId === permisoId ? { ...permiso, ...response.data } : permiso
+                ),
+            })); // Actualiza el permiso localmente
         } catch (error) {
-            console.log("Error updating permiso:", error.message)
+            console.log("Error al actualizar permiso:", error.message);
         }
-    }
-    
-}))
+    },
 
-export default usePermisoStore
+    // Obtener roles desde la API
+    fetchRoles: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/rol'); // Ajusta la URL según tu API
+            const rolesData = response.data.reduce((acc, role) => {
+                acc[role.rolId] = role.rol; // Mapea rolId con el nombre del rol
+                return acc;
+            }, {}); // Transforma la lista de roles en un objeto
+            set({ roles: rolesData }); // Actualiza el estado con los roles
+        } catch (error) {
+            console.log("Error al obtener roles:", error.message);
+        }
+    },
+}));
+
+export default usePermisoStore;

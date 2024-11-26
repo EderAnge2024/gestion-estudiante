@@ -16,19 +16,19 @@ const Actividad = sequelize.define('Actividad',{
         }
     },
     rol:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     accion:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     fecha:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     descripcion:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     }
 
