@@ -1,13 +1,13 @@
 const {Router}= require('express')
-const {createPreriquisitoCursoController,getAllPreriquisitoCursosController, updatePreriquisitoCursoByIdController,deletedPreriquisitoCursoByIdController} = require('../controllers/prerrequisitoCursoControllers')
+const {createPreriquisitoCursoController,getAllPreriquisitoCursosController, updatePreriquisitoCursoByIdController,deletedPreriquisitoCursoByIdController} = require('../controllers//prerrequisitoCursoControllers')
 const { PreriquisitoCurso } = require('../models')
 const preriquisitoCursoRouters = Router()
 // create nuew student
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 preriquisitoCursoRouters.post("/",async(req, res)=>{
-    const {id, student_id, curso_id, requisito} = req.body
+    const {preriquisitoCursoId, studentId, courseId, requisito} = req.body
     try {
-        const newPreriquisitoCurso = await createPreriquisitoCursoController({id, student_id, curso_id, requisito})
+        const newPreriquisitoCurso = await createPreriquisitoCursoController({preriquisitoCursoId, studentId, courseId, requisito})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newPreriquisitoCurso)
     } catch (error) {
@@ -25,11 +25,11 @@ preriquisitoCursoRouters.get("/",async(req,res)=>{
 })
 
 // para actualizar update
-preriquisitoCursoRouters.put("/:id", async(req,res)=>{
-    const {id}= req.params
+preriquisitoCursoRouters.put("/:preriquisitoCursoId", async(req,res)=>{
+    const {preriquisitoCursoId}= req.params
     const preriquisitoCursoData= req.body
     try {
-        const updatePreriquisitoCurso = await updatePreriquisitoCursoByIdController(id, preriquisitoCursoData)
+        const updatePreriquisitoCurso = await updatePreriquisitoCursoByIdController(preriquisitoCursoId, preriquisitoCursoData)
         if(!updatePreriquisitoCurso){
             return res.status(404).json({error: "studiante no encontrado"})
         }
@@ -41,10 +41,10 @@ preriquisitoCursoRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-preriquisitoCursoRouters.delete("/:id", async(req, res)=>{
-    const {id} = req.params
+preriquisitoCursoRouters.delete("/:preriquisitoCursoId", async(req, res)=>{
+    const {preriquisitoCursoId} = req.params
     try {
-        const deletedPreriquisitoCurso = await deletedPreriquisitoCursoByIdController(id)
+        const deletedPreriquisitoCurso = await deletedPreriquisitoCursoByIdController(preriquisitoCursoId)
         if(!deletedPreriquisitoCurso){
             return res.status.apply(404).json({error: "PreriquisitoCurso no encontrado"})
         }

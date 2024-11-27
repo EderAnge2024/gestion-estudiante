@@ -27,7 +27,7 @@ router.post('/usuario', async (req, res) => {
         }
 
         // Crear un token JWT para mantener la sesión del usuario
-        const token = jwt.sign({ id: usuario.id }, 'secret_key', { expiresIn: '1h' });
+        const token = jwt.sign({ usuarioId: usuario.usuarioId }, 'secret_key', { expiresIn: '1h' });
 
         // Enviar el token al frontend
         res.json({ token, usuario: usuario.nombreUsuario });

@@ -1,7 +1,7 @@
 const Permiso= require('../models/Permiso')
-const createPermisoController = async({id, rol_id,accion,descripcion})=>{
+const createPermisoController = async({permisoId, rolId,accion,descripcion})=>{
     try {
-        const newPermiso = await Permiso.create({id, rol_id,accion,descripcion})
+        const newPermiso = await Permiso.create({permisoId, rolId,accion,descripcion})
         return newPermiso
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllPermisosController = async () =>{
 }
 
 // para actualizar
-const updatePermisoByIdController = async (id, permisoData)=>{
+const updatePermisoByIdController = async (permisoId, permisoData)=>{
     try {
-        const permiso = await Permiso.findByPk(id)
+        const permiso = await Permiso.findByPk(permisoId)
         if(!permiso){
             return null
         }
@@ -32,9 +32,9 @@ const updatePermisoByIdController = async (id, permisoData)=>{
 }
 // para eliminar
 
-const deletedPermisoByIdController = async(id)=>{
+const deletedPermisoByIdController = async(permisoId)=>{
    try {
-    const permiso= await Permiso.findByPk(id)
+    const permiso= await Permiso.findByPk(permisoId)
     if(!permiso){
         return null
     }

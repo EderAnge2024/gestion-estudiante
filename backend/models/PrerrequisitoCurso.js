@@ -2,25 +2,25 @@ const { DataTypes} = require('sequelize')
 const sequelize = require('../db')
 
 const PreriquisitoCurso = sequelize.define('PreriquisitoCurso',{
-    id: {
+    preriquisitoCursoId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement:true
     },
-    student_id: {
+    studentId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Students', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'studentId' // Clave primaria de la tabla 'Students'
         }
     },
-    curso_id: {
+    courseId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Courses', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'courseId' // Clave primaria de la tabla 'Students'
         }
     },
     requisito: {
@@ -31,7 +31,7 @@ const PreriquisitoCurso = sequelize.define('PreriquisitoCurso',{
     tableName: 'PreriquisitoCursos', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 })
-PreriquisitoCurso.belongsTo(require('./Student'), { foreignKey: 'student_id' });
-PreriquisitoCurso.belongsTo(require('./Course'), { foreignKey: 'curso_id' });
+PreriquisitoCurso.belongsTo(require('./Student'), { foreignKey: 'studentId' });
+PreriquisitoCurso.belongsTo(require('./Course'), { foreignKey: 'courseId' });
 
 module.exports= PreriquisitoCurso

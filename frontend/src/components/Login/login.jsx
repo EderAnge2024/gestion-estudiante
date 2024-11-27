@@ -49,7 +49,7 @@ const Login = () => {
                 setError(null); // Limpiar errores previos
 
                 // Redirigir al usuario al dashboard
-                navigate('/studentList');
+                navigate('/navegadorMenu2');
             }
         } catch (error) {
             // Manejo avanzado de errores

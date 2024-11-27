@@ -3,6 +3,7 @@ import axios from 'axios'  // para hacer peticiones
 
 const useRolStore = create((set)=>({
     rols: [],
+    usuarios:{},
     addRol: async(rol)=>{
         try {
             const response = await axios.post('http://localhost:3001/rol',rol)
@@ -19,26 +20,38 @@ const useRolStore = create((set)=>({
             console.log("Error fecthing rols", error.message)
         }
     },
-    deleteRol: async(id)=>{
+    deleteRol: async(rolId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/rol/${id}`)
+            const response = await axios.delete(`http://localhost:3001/rol/${rolId}`)
             console.log("rol delete:",response.data)
-            set((state)=>({rols: state.rols.filter(rol=>rol.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({rols: state.rols.filter(rol=>rol.rolId !== rolId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting rol:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updateRol: async (id, updatedData) => {
+    updateRol: async (rolId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/rol/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/rol/${rolId}`, updatedData)
             console.log("rol updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({rols: state.rols.map((rol)=> rol.id === id ? {...rol, ...response.data} : rol)})) // actualiza el estudiante en el estado
+            set((state) => ({rols: state.rols.map((rol)=> rol.rolId === rolId ? {...rol, ...response.data} : rol)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating rol:", error.message)
         }
-    }
+    },
+    fetchUsuarios: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/usuario'); // Ajusta la URL según tu API
+            const usuariosData = response.data.reduce((acc, usuario) => {
+                acc[usuario.usuarioId] = usuario.nombreUsuario; // Mapea usuarioId con el nombre del nombreUsuario
+                return acc;
+            }, {}); // Transforma la lista de usuarios en un objeto
+            set({ usuarios: usuariosData }); // Actualiza el estado con los usuarios
+        } catch (error) {
+            console.log("Error al obtener usuarios:", error.message);
+        }
+    },
     
 }))
 

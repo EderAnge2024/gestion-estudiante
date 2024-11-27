@@ -1,13 +1,13 @@
 import { useState } from "react"
 // import axios from 'axios'
 import usePlanEstudioStore from "../../store/PlanEstudioStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PlanEstudioFrom = ()=>{
     const {addPlanEstudio} = usePlanEstudioStore()
 
     const [planEstudioData, setPlanEstudioData] = useState({
-        student_id:"",
+        studentId:"",
         meta:"",
         herramienta:""
     });
@@ -25,7 +25,7 @@ const PlanEstudioFrom = ()=>{
         e.preventDefault();
         addPlanEstudio(planEstudioData)
         setPlanEstudioData({
-            student_id:"",
+            studentId:"",
             meta:"",
             herramienta:""
         })
@@ -35,16 +35,16 @@ const PlanEstudioFrom = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>plan de estudio Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter student_id"
+                placeholder="Enter studentId"
                 required
-                name="student_id"
-                value={planEstudioData.student_id}
+                name="studentId"
+                value={planEstudioData.studentId}
                 onChange={handleInputchange}
                 />
                 <input

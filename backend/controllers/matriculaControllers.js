@@ -1,7 +1,7 @@
 const Matricula= require('../models/Matricula')
-const createMatriculaController = async({id, fecha,carrera, estudent_id,grupo_id,periodoAcademico_id})=>{
+const createMatriculaController = async({matriculaId, fecha,carrera, studentId,gestionGrupoId,periodoAcademicoId})=>{
     try {
-        const newMatricula = await Matricula.create({id, fecha,carrera, estudent_id,grupo_id,periodoAcademico_id})
+        const newMatricula = await Matricula.create({matriculaId, fecha,carrera, studentId,gestionGrupoId,periodoAcademicoId})
         return newMatricula
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllMatriculasController = async () =>{
 }
 
 // para actualizar
-const updateMatriculaByIdController = async (id, matriculaData)=>{
+const updateMatriculaByIdController = async (matriculaId, matriculaData)=>{
     try {
-        const matricula = await Matricula.findByPk(id)
+        const matricula = await Matricula.findByPk(matriculaId)
         if(!matricula){
             return null
         }
@@ -32,9 +32,9 @@ const updateMatriculaByIdController = async (id, matriculaData)=>{
 }
 // para eliminar
 
-const deletedMatriculaByIdController = async(id)=>{
+const deletedMatriculaByIdController = async(matriculaId)=>{
    try {
-    const matricula= await Matricula.findByPk(id)
+    const matricula= await Matricula.findByPk(matriculaId)
     if(!matricula){
         return null
     }

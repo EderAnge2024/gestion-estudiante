@@ -1,29 +1,31 @@
 import { useEffect, useState } from "react"
 import useCourseStore from "../../store/CourseStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const CourseList = ()=>{
-    const {fetchCourse, Course, deleteCourse, updateCourse} = useCourseStore()
+    const {fetchCourses, courses, deleteCourse, updateCourse,fetchDocentes,docentes,fetchPlanEstudios,planEstudios} = useCourseStore()
     const [editingCourse, setEditingCourse] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ planEstudio_id: '',docente_id: '',nombre: '',credito: '',ciclo: ''}) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ planEstudioId: '',docenteId: '',nombre: '',credito: '',ciclo: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
-        fetchCourse()
+        fetchCourses()
+        fetchDocentes()
+        fetchPlanEstudios()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (courseId)=>{
         if(window.confirm("Are you sure?")){
-            deleteCourse(id)
-            fetchCourse() // Refresca 
+            deleteCourse(courseId)
+            fetchCourses() // Refresca 
         }  
     }
      //////----Agregado----///
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (Course) => {  
         setEditingCourse(Course) // Establece el estudiante en edición
-        setFormData({ planEstudio_id: Course.planEstudio_id, docente_id: Course.docente_id, nombre: Course.nombre, credito: Course.credito, ciclo: Course.ciclo}) // Rellena los campos con los datos actuales
+        setFormData({ planEstudioId: Course.planEstudioId, docenteId: Course.docenteId, nombre: Course.nombre, credito: Course.credito, ciclo: Course.ciclo}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -36,15 +38,15 @@ const CourseList = ()=>{
 
     // Actualiza el estudiante en el servstudent_idor y refresca la lista
     const handleUpdate = async () => {
-        await updateCourse(editingCourse.id, formData) // Espera a que updatePreriquisitoCurso complete la actualización
+        await updateCourse(editingCourse.courseId, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingCourse(null) // Cierra el formulario de edición
-        fetchCourse() // Luego recarga la lista de estudiantes
+        fetchCourses() // Luego recarga la lista de estudiantes
     }
     /////-------------////
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >
@@ -52,10 +54,14 @@ const CourseList = ()=>{
 
                 <div>
                     {
-                        Course.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.planEstudio_id} {user.docente_id} {user.nombre} {user.credito} {user.ciclo}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                        courses.map((user) => (
+                            <div key={user.courseId}>
+                                <h3>
+                                    {docentes[user.docenteId] || "docente no encontrado"}
+                                    {planEstudios[user.planEstudioId] || "plan de estudio  no encontrado"}
+                                    
+                                    {user.courseId}<br></br> {user.meta} {user.nombre} {user.nombre} {user.credito} {user.ciclo}</h3>
+                                <button onClick={() => handleDelete(user.courseId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -68,17 +74,17 @@ const CourseList = ()=>{
                             <h3>Edit Course</h3>
                             <input 
                                 type="text" 
-                                name="planEstudio_id" 
-                                value={formData.planEstudio_id} 
+                                name="planEstudioId" 
+                                value={formData.planEstudioId} 
                                 onChange={handleInputChange} 
-                                placeholder="planEstudio_id"
+                                placeholder="planEstudioId"
                             />
                             <input 
                                 type="text" 
-                                name="docente_id" 
-                                value={formData.docente_id} 
+                                name="docenteId" 
+                                value={formData.docenteId} 
                                 onChange={handleInputChange} 
-                                placeholder="docente_id"
+                                placeholder="docenteId"
                             />
                             <input 
                                 type="text" 

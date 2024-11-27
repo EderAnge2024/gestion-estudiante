@@ -1,14 +1,14 @@
 const PrerrequisitoCurso= require('../models/PrerrequisitoCurso')
-const createPrerrequisitoCursoController = async({id, student_id, curso_id, requisito})=>{
+const createPreriquisitoCursoController = async({preriquisitoCursoId, studentId, courseId, requisito})=>{
     try {
-        const newPrerrequisitoCurso = await PrerrequisitoCurso.create({id, student_id, curso_id, requisito})
+        const newPrerrequisitoCurso = await PrerrequisitoCurso.create({preriquisitoCursoId, studentId, courseId, requisito})
         return newPrerrequisitoCurso
     } catch (error) {
         throw new Error(error.message)
     }
 }
 // optiene aa todos los estudiantes
-const getAllPrerrequisitoCursosController = async () =>{
+const getAllPreriquisitoCursosController = async () =>{
     try {
         const prerrequisitoCursos = await PrerrequisitoCurso.findAll()
         return prerrequisitoCursos
@@ -18,9 +18,9 @@ const getAllPrerrequisitoCursosController = async () =>{
 }
 
 // para actualizar
-const updatePrerrequisitoCursoByIdController = async (id, prerrequisitoCursoData)=>{
+const updatePreriquisitoCursoByIdController = async (preriquisitoCursoId, prerrequisitoCursoData)=>{
     try {
-        const prerrequisitoCurso = await PrerrequisitoCurso.findByPk(id)
+        const prerrequisitoCurso = await PrerrequisitoCurso.findByPk(preriquisitoCursoId)
         if(!prerrequisitoCurso){
             return null
         }
@@ -32,9 +32,9 @@ const updatePrerrequisitoCursoByIdController = async (id, prerrequisitoCursoData
 }
 // para eliminar
 
-const deletedPrerrequisitoCursoByIdController = async(id)=>{
+const deletedPreriquisitoCursoByIdController = async(preriquisitoCursoId)=>{
    try {
-    const prerrequisitoCurso= await PrerrequisitoCurso.findByPk(id)
+    const prerrequisitoCurso= await PrerrequisitoCurso.findByPk(preriquisitoCursoId)
     if(!prerrequisitoCurso){
         return null
     }
@@ -46,8 +46,8 @@ const deletedPrerrequisitoCursoByIdController = async(id)=>{
 }
 
 module.exports={
-    createPrerrequisitoCursoController,
-    getAllPrerrequisitoCursosController,
-    updatePrerrequisitoCursoByIdController,
-    deletedPrerrequisitoCursoByIdController
+    createPreriquisitoCursoController,
+    getAllPreriquisitoCursosController,
+    updatePreriquisitoCursoByIdController,
+    deletedPreriquisitoCursoByIdController
 }

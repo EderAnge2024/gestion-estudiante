@@ -1,14 +1,14 @@
 import { useState } from "react"
 // import axios from 'axios'
 import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PreriquisitoCursoFrom = ()=>{
     const {addPreriquisitoCurso} = usePreriquisitoCursoStore()
 
     const [preriquisitoCursoData, setPreriquisitoCursoData] = useState({
-        student_id:"",
-        curso_id:"",
+        studentId:"",
+        courseId:"",
         requisito:""       
 
     });
@@ -26,8 +26,8 @@ const PreriquisitoCursoFrom = ()=>{
         e.preventDefault();
         addPreriquisitoCurso(preriquisitoCursoData)
         setPreriquisitoCursoData({
-            student_id:"",
-            curso_id:"",
+            studentId:"",
+            courseId:"",
             requisito:""
         })
         alert("PreriquisitoCurso added successfully")
@@ -36,24 +36,24 @@ const PreriquisitoCursoFrom = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>PreriquisitoCurso Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter student_id"
+                placeholder="Enter studentId"
                 required
-                name="student_id"
-                value={preriquisitoCursoData.student_id}
+                name="studentId"
+                value={preriquisitoCursoData.studentId}
                 onChange={handleInputchange}
                 />
                 <input
                 type="text"
-                placeholder="Enter curso_id"
+                placeholder="Enter courseId"
                 required
-                name="curso_id"
-                value={preriquisitoCursoData.curso_id}
+                name="courseId"
+                value={preriquisitoCursoData.courseId}
                 onChange={handleInputchange}
                 />
                 <input

@@ -2,33 +2,33 @@ const { DataTypes} = require('sequelize')
 const sequelize = require('../db')
 
 const Actividad = sequelize.define('Actividad',{
-    id: {
+    actividadId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement:true
     },
-    usuario_id: {
+    usuarioId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Usuarios', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'usuarioId' // Clave primaria de la tabla 'Students'
         }
     },
     rol:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     accion:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     fecha:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     descripcion:{
-        type: DataTypes. STRING,
+        type: DataTypes.STRING,
         allowNull: false
     }
 
@@ -36,6 +36,6 @@ const Actividad = sequelize.define('Actividad',{
     tableName: 'Actividads', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 })
-Actividad.belongsTo(require('./Usuario'), { foreignKey: 'usuario_id' });
+Actividad.belongsTo(require('./Usuario'), { foreignKey: 'usuarioId' });
 
 module.exports= Actividad

@@ -13,14 +13,27 @@ import PreriquisitoCursoFrom from './components/form/prerrequisitoCursoForm'
 import PreriquisitoCursoList from './components/lists/PrerrequisitoCursoList'
 import RolFrom from './components/form/rolForm'
 import RolList from './components/lists/RolList'
-import ActividadForm from './components/form/actividadForm'
+import DocenteForm from './components/form/DocenteForm'
+import DocenteList from './components/lists/DocenteList'
+import MatriculaForm from './components/form/MatriculaForm'
+import MatriculaList from './components/lists/MatriculaList'
+import NotaForm from './components/form/NotaForm'
+import NotaList from './components/lists/NotaList'
+import ActividadForm from './components/form/ActividadForm'
 import ActividadList from './components/lists/ActividadList'
-import CourseForm from './components/form/courseForm'
+import CourseForm from './components/form/CourseForm'
 import CourseList from './components/lists/CourseList'
-import GestionGrupoForm from './components/form/gestionGrupoForm'
+import GestionGrupoForm from './components/form/GestionGrupoForm'
 import GestionGrupoList from './components/lists/GestionGrupoList'
-
-
+import Navegador from './components/navegador/Navegador'
+import VerNotaList from './components/lists/verNotaList'
+import PeriodoAcademicoFrom from './components/form/PeriodoAcademicoForm'
+import PeriodoAcademicoList from './components/lists/PeriodoAcademicoList'
+import PermisoFrom from './components/form/PermisoForm'
+import PermisoList from './components/lists/PermisoList'
+import NavegadorUsuario from './components/navegador/NavegadorUsuario'
+import NavegadorMenu2 from './components/navegador/navegadorUsuarioParticipantes'
+import NavegadorMenu from './components/navegador/NavegadorMenu'
 
 function App() {
  
@@ -29,6 +42,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login></Login>}/>
+          <Route path='/navegadorIntegrantes' element={<Navegador></Navegador>}/>  
+          <Route path='/navegadorMenu2' element={<NavegadorMenu2></NavegadorMenu2>}/>  
+          <Route path='/navegadorMenu' element={<NavegadorMenu></NavegadorMenu>}/>  
+          <Route path='/navegadorUsuario' element={<NavegadorUsuario></NavegadorUsuario>}/>  
           <Route path='/studentForm' element={<StudentForm></StudentForm>}/>
           <Route path='/studentList' element={<StudentList></StudentList>}></Route>
           <Route path='/userFrom' element={<UserForm></UserForm>}></Route>
@@ -41,12 +58,23 @@ function App() {
           <Route path='/preriquisitoCursoList' element={<PreriquisitoCursoList></PreriquisitoCursoList>}></Route>
           <Route path='/rolFrom' element={<RolFrom></RolFrom>}></Route>
           <Route path='/rolList' element={<RolList></RolList>}></Route>
-          <Route path='/actividadform' element={<ActividadForm></ActividadForm>}></Route>
-          <Route path='/actividadlist' element={<ActividadList></ActividadList>}></Route>
-          <Route path='/courseform' element={<CourseForm></CourseForm>}></Route>
-          <Route path='/courselist' element={<CourseList></CourseList>}></Route>
-          <Route path='/gestiongrupoform' element={<GestionGrupoForm></GestionGrupoForm>}></Route>
-          <Route path='/gestiongrupolist' element={<GestionGrupoList></GestionGrupoList>}></Route>
+          <Route path='/docenteFrom' element={<DocenteForm></DocenteForm>}></Route>
+          <Route path='/docenteList' element={<DocenteList></DocenteList>}></Route>
+          <Route path='/matriculaFrom' element={<MatriculaForm></MatriculaForm>}></Route>
+          <Route path='/matriculaList' element={<MatriculaList></MatriculaList>}></Route>
+          <Route path='/notaFrom' element={<NotaForm></NotaForm>}></Route>
+          <Route path='/notaList' element={<NotaList></NotaList>}></Route>
+          <Route path='/actividadFrom' element={<ActividadForm></ActividadForm>}></Route>
+          <Route path='/actividadList' element={<ActividadList></ActividadList>}></Route>
+          <Route path='/courseFrom' element={<CourseForm></CourseForm>}></Route>
+          <Route path='/courseList' element={<CourseList></CourseList>}></Route>
+          <Route path='/gestioGrupoFrom' element={<GestionGrupoForm></GestionGrupoForm>}></Route>
+          <Route path='/gestioGrupoList' element={<GestionGrupoList></GestionGrupoList>}></Route>
+          <Route path='/verNotaList' element={<VerNotaList></VerNotaList>}></Route>
+          <Route path='/periodoAcademicoFrom' element={<PeriodoAcademicoFrom></PeriodoAcademicoFrom>}></Route>
+          <Route path='/periodoAcademicoList' element={<PeriodoAcademicoList></PeriodoAcademicoList>}></Route>
+          <Route path='/permisoFrom' element={<PermisoFrom></PermisoFrom>}></Route>
+          <Route path='/permisoList' element={<PermisoList></PermisoList>}></Route>
         </Routes>
       </BrowserRouter>
     </>

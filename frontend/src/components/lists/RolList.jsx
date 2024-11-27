@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react"
 import useRolStore from "../../store/RolStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const RolList = ()=>{
-    const {fetchRols, rols, deleteRol, updateRol} = useRolStore()
+    const {fetchRols, rols, deleteRol, updateRol,fetchUsuarios, usuarios} = useRolStore()
     const [editingRol, setEditingRol] = useState(null) // Almacena el estudiante que se está editando
-    const [formData, setFormData] = useState({ usuario_id: '',rol: ''}) // Datos del formulario de edición
+    const [formData, setFormData] = useState({ usuarioId: '',rol: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
-        fetchRols()
+        fetchRols(),
+        fetchUsuarios()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (rolId)=>{
         if(window.confirm("Are you sure?")){
-            deleteRol(id)
+            deleteRol(rolId)
             fetchRols() // Refresca 
         }  
     }
@@ -23,7 +24,7 @@ const RolList = ()=>{
     // Configura el estudiante seleccionado para edición y rellena el formulario con sus datos
     const handleEditClick = (rol) => {  
         setEditingRol(rol) // Establece el estudiante en edición
-        setFormData({ usuario_id: rol.usuario_id, rol: rol.rol}) // Rellena los campos con los datos actuales
+        setFormData({ usuarioId: rol.usuarioId, rol: rol.rol}) // Rellena los campos con los datos actuales
     }
 
     // Maneja los cambios en el formulario de edición
@@ -34,9 +35,9 @@ const RolList = ()=>{
         })
     }
 
-    // Actualiza el estudiante en el servusuario_idor y refresca la lista
+    // Actualiza el estudiante en el servusuarioIdor y refresca la lista
     const handleUpdate = async () => {
-        await updateRol(editingRol.id, formData) // Espera a que updateRol complete la actualización
+        await updateRol(editingRol.rolId, formData) // Espera a que updateRol complete la actualización
         setEditingRol(null) // Cierra el formulario de edición
         fetchRols() // Luego recarga la lista de estudiantes
     }
@@ -44,7 +45,7 @@ const RolList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >
@@ -53,9 +54,11 @@ const RolList = ()=>{
                 <div>
                     {
                         rols.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.usuario_id} {user.rol} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.rolId}>
+                                <h3>
+                                    {usuarios[user.usuarioId] || "usuario no encontrado"}
+                                    {user.nombreUsuario}<br></br> {user.rol} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
+                                <button onClick={() => handleDelete(user.rolId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))
@@ -68,10 +71,10 @@ const RolList = ()=>{
                             <h3>Edit rol</h3>
                             <input 
                                 type="text" 
-                                name="usuario_id" 
-                                value={formData.usuario_id} 
+                                name="usuarioId" 
+                                value={formData.usuarioId} 
                                 onChange={handleInputChange} 
-                                placeholder="usuario_id"
+                                placeholder="usuarioId"
                             />
                             <input 
                                 type="text" 

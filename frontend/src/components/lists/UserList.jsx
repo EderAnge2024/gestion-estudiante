@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useUsuarioStore from "../../store/UserStore"
-import Navegador from "../navegador/Navegador"
+import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const UserList = ()=>{
     const {fetchUsuarios, usuarios, deleteUsuario, updateUsuario} = useUsuarioStore()
@@ -13,9 +13,9 @@ const UserList = ()=>{
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
-    const handleDelete = (id)=>{
+    const handleDelete = (usuarioId)=>{
         if(window.confirm("Are you sure?")){
-            deleteUsuario(id)
+            deleteUsuario(usuarioId)
             fetchUsuarios() // Refresca 
         }  
     }
@@ -36,7 +36,7 @@ const UserList = ()=>{
 
     // Actualiza el estudiante en el servdnior y refresca la lista
     const handleUpdate = async () => {
-        await updateUsuario(editingUsuario.id, formData) // Espera a que updateUsuario complete la actualización
+        await updateUsuario(editingUsuario.usuarioId, formData) // Espera a que updateUsuario complete la actualización
         setEditingUsuario(null) // Cierra el formulario de edición
         fetchUsuarios() // Luego recarga la lista de estudiantes
     }
@@ -44,18 +44,18 @@ const UserList = ()=>{
 
     return (
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
         <div>
             
             <div >
-                <h1>Student List</h1>
+                <h1>Users List</h1>
 
                 <div>
                     {
                         usuarios.map((user) => (
-                            <div key={user.id}>
-                                <h3>{user.id}<br></br> {user.nombreUsuario} {user.contraseña}</h3>
-                                <button onClick={() => handleDelete(user.id)}>❌</button>
+                            <div key={user.usuarioId}>
+                                <h3>{user.usuarioId}<br></br> {user.nombreUsuario} {user.contraseña}</h3>
+                                <button onClick={() => handleDelete(user.usuarioId)}>❌</button>
                                 <button onClick={() => handleEditClick(user)}>✍️</button>
                             </div>
                         ))

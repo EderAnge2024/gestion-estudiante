@@ -5,9 +5,9 @@ const matriculaRouters = Router()
 // create nuew Matricula
 // post = publicar, get= obtner, put= actualizar y delete= eliminar
 matriculaRouters.post("/",async(req, res)=>{
-    const {id, fecha,carrera, estudent_id,grupo_id,periodoAcademico_id} = req.body
+    const {matriculaId, fecha,carrera, studentId,gestionGrupoId,periodoAcademicoId} = req.body
     try {
-        const newMatricula = await createMatriculaController({id, fecha, carrera, estudent_id,grupo_id,periodoAcademico_id})
+        const newMatricula = await createMatriculaController({matriculaId, fecha, carrera, studentId,gestionGrupoId,periodoAcademicoId})
         // 201 se maneja en servidor que dice que todo salio bien
         res.status(201).json(newMatricula)
     } catch (error) {
@@ -25,11 +25,11 @@ matriculaRouters.get("/",async(req,res)=>{
 })
 
 // para actualizar update
-matriculaRouters.put("/:id", async(req,res)=>{
-    const {id}= req.params
+matriculaRouters.put("/:matriculaId", async(req,res)=>{
+    const {matriculaId}= req.params
     const matriculaData= req.body
     try {
-        const updateMatricula = await updateMatriculaByIdController(id, matriculaData)
+        const updateMatricula = await updateMatriculaByIdController(matriculaId, matriculaData)
         if(!updateMatricula){
             return res.status(404).json({error: "matricula no encontrado"})
         }
@@ -41,10 +41,10 @@ matriculaRouters.put("/:id", async(req,res)=>{
 
 // delete o eliminar
 
-matriculaRouters.delete("/:id", async(req, res)=>{
-    const {id} = req.params
+matriculaRouters.delete("/:matriculaId", async(req, res)=>{
+    const {matriculaId} = req.params
     try {
-        const deletedMatricula = await deletedMatriculaByIdController(id)
+        const deletedMatricula = await deletedMatriculaByIdController(matriculaId)
         if(!deletedMatricula){
             return res.status.apply(404).json({error: "matricula no encontrado"})
         }

@@ -19,22 +19,22 @@ const useUsuarioStore = create((set)=>({
             console.log("Error fecthing usuarios", error.message)
         }
     },
-    deleteUsuario: async(id)=>{
+    deleteUsuario: async(usuarioId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/usuario/${id}`)
+            const response = await axios.delete(`http://localhost:3001/usuario/${usuarioId}`)
             console.log("usuario delete:",response.data)
-            set((state)=>({usuarios: state.usuarios.filter(usuario=>usuario.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({usuarios: state.usuarios.filter(usuario=>usuario.usuarioId !== usuarioId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting usuario:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updateUsuario: async (id, updatedData) => {
+    updateUsuario: async (usuarioId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/usuario/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/usuario/${usuarioId}`, updatedData)
             console.log("usuario updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({usuarios: state.usuarios.map((usuario)=> usuario.id === id ? {...usuario, ...response.data} : usuario)})) // actualiza el estudiante en el estado
+            set((state) => ({usuarios: state.usuarios.map((usuario)=> usuario.usuarioId === usuarioId ? {...usuario, ...response.data} : usuario)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating usuario:", error.message)
         }

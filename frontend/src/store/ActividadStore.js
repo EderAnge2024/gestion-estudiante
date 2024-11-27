@@ -2,43 +2,57 @@ import {create} from 'zustand'
 import axios from 'axios'  // para hacer peticiones
 
 const useActividadStore = create((set)=>({
-    actividad: [],
+    actividads: [],
+    usuarios: {},
     addActividad: async(actividad)=>{
         try {
             const response = await axios.post('http://localhost:3001/actividad',actividad)
-            set((state)=>({actividad: [...state.actividad, response.data]}))// crea una copia el "..."
+            set((state)=>({actividads: [...state.actividads, response.data]}))// crea una copia el "..."
+            await fetchActividads()
         } catch (error) {
             console.log("Error adding Actividad", error.message)
         }
     },
-    fetchActividad: async()=>{
+    fetchActividads: async()=>{
         try {
             const response = await axios.get('http://localhost:3001/actividad')
-            set({actividad: response.data})
+            set({actividads: response.data})
         } catch (error) {
-            console.log("Error fecthing Actividad", error.message)
+            console.log("Error fecthing actividads", error.message)
         }
     },
-    deleteActividad: async(id)=>{
+    deleteActividad: async(actividadId)=>{
         try {
-            const response = await axios.delete(`http://localhost:3001/actividad/${id}`)
+            const response = await axios.delete(`http://localhost:3001/actividad/${actividadId}`)
             console.log("actividad delete:",response.data)
-            set((state)=>({actividad: state.actividad.filter(actividad=>actividad.id !== id)})) // filtra todos lo estudiantes actualizados o
+            set((state)=>({actividads: state.actividads.filter(actividad=>actividad.actividadId !== actividadId)})) // filtra todos lo estudiantes actualizados o
         } catch (error) {                                                               // diferentes del id eliminado
             console.log("Error deleting actividad:", error.message)
         }
     },
     //____----------Agregado---------------________
-    updateActividad: async (id, updatedData) => {
+    updateActividad: async (actividadId, updatedData) => {
         try {  // Realiza una solicitud PUT para actualizar el estudiante en el servidor.
-            const response = await axios.put(`http://localhost:3001/actividad/${id}`, updatedData)
+            const response = await axios.put(`http://localhost:3001/actividad/${actividadId}`, updatedData)
             console.log("actividad updated:", response.data)
             // Actualiza el estado localmente, modificando solo el estudiante con el id coincidente.
-            set((state) => ({actividad: state.actividad.map((actividad)=> actividad.id === id ? {...actividad, ...response.data} : actividad)})) // actualiza el estudiante en el estado
+            set((state) => ({actividads: state.actividads.map((actividad)=> actividad.actividadId === actividadId ? {...actividad, ...response.data} : actividad)})) // actualiza el estudiante en el estado
         } catch (error) {
             console.log("Error updating gestionAula:", error.message)
         }
-    }
+    },
+    fetchUsuarios: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/usuario'); // Ajusta la URL según tu API
+            const usuariosData = response.data.reduce((acc, usuario) => {
+                acc[usuario.usuarioId] = usuario.nombreUsuario; // Mapea usuarioId con el nombre del nombreUsuario
+                return acc;
+            }, {}); // Transforma la lista de usuarios en un objeto
+            set({ usuarios: usuariosData }); // Actualiza el estado con los usuarios
+        } catch (error) {
+            console.log("Error al obtener usuarios:", error.message);
+        }
+    },
     
 }))
 

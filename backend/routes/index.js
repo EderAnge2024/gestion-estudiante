@@ -14,6 +14,7 @@ const {permisoRouters} = require('../routes/permisoRoutes')
 const {rolRouters} = require('../routes/rolRoutes')
 const contraRoutes = require('../routes/contraRoutes')
 const {preriquisitoCursoRouters} = require('../routes/prerrequisitoCursoRoutes')
+const {obtenerNotasConDetalles} = require('../controllers/notaEstudianteControllers')
 
 
 //const { Course } = require('../models')
@@ -34,5 +35,6 @@ router.use('/permiso',permisoRouters)
 router.use('/rol',rolRouters)
 router.use('/contra',contraRoutes)
 router.use('/preriquisitoCurso',preriquisitoCursoRouters)
+router.get('/detalles/nota',obtenerNotasConDetalles)  // obtiene las notas de los estudiantes con sus nombres
 
 module.exports = router

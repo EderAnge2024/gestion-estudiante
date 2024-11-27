@@ -2,7 +2,7 @@ const { DataTypes} = require('sequelize')
 const sequelize = require('../db')
 
 const Matricula = sequelize.define('Matricula',{
-    id: {
+    matriculaId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement:true
@@ -15,28 +15,28 @@ const Matricula = sequelize.define('Matricula',{
         type: DataTypes.STRING,
         allowNull:false  
     },
-    estudent_id: {
+    studentId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Students', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'studentId' // Clave primaria de la tabla 'Students'
         }
     },
-    grupo_id: {
+    gestionGrupoId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'GestionGrupos', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'gestionGrupoId' // Clave primaria de la tabla 'Students'
         }
     },
-    periodoAcademico_id: {
+    periodoAcademicoId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'PeriodoAcademicos', // Nombre de la tabla con la que se va arelcionar
-            key: 'id' // Clave primaria de la tabla 'Students'
+            key: 'periodoAcademicoId' // Clave primaria de la tabla 'Students'
         }
     }
 
@@ -44,9 +44,9 @@ const Matricula = sequelize.define('Matricula',{
     tableName: 'Matriculas', // Nombre de la tabla en la base de datos en la que es o con la qvas a relacionar
     timestamps: false // Desactiva las columnas createdAt y updatedAt si no existen
 })
-Matricula.belongsTo(require('./Student'), { foreignKey: 'estudent_id' });
-Matricula.belongsTo(require('./GestionGrupo'), { foreignKey: 'grupo_id' });
-Matricula.belongsTo(require('./PeriodoAcademico'), { foreignKey: 'periodoAcademico_id' });
+Matricula.belongsTo(require('./Student'), { foreignKey: 'studentId' });
+Matricula.belongsTo(require('./GestionGrupo'), { foreignKey: 'gestionGrupoId' });
+Matricula.belongsTo(require('./PeriodoAcademico'), { foreignKey: 'periodoAcademicoId' });
 
 
 module.exports= Matricula

@@ -1,7 +1,7 @@
 const GestionGrupo= require('../models/GestionGrupo')
-const createGestionGrupoController = async({id, curso_id,docente_id, periodoAcademico_id})=>{
+const createGestionGrupoController = async({gestionGrupoId, courseId,docenteId, periodoAcademicoId})=>{
     try {
-        const newGestioGrupo = await GestionGrupo.create({id, curso_id,docente_id, periodoAcademico_id})
+        const newGestioGrupo = await GestionGrupo.create({gestionGrupoId, courseId,docenteId, periodoAcademicoId})
         return newGestioGrupo
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllGestionGruposController = async () =>{
 }
 
 // para actualizar
-const updateGestionGrupoByIdController = async (id, gestionGrupoData)=>{
+const updateGestionGrupoByIdController = async (gestionGrupoId, gestionGrupoData)=>{
     try {
-        const gestionGrupo = await GestionGrupo.findByPk(id)
+        const gestionGrupo = await GestionGrupo.findByPk(gestionGrupoId)
         if(!gestionGrupo){
             return null
         }
@@ -32,9 +32,9 @@ const updateGestionGrupoByIdController = async (id, gestionGrupoData)=>{
 }
 // para eliminar
 
-const deletedGestionGrupoByIdController = async(id)=>{
+const deletedGestionGrupoByIdController = async(gestionGrupoId)=>{
    try {
-    const gestionGrupo= await GestionGrupo.findByPk(id)
+    const gestionGrupo= await GestionGrupo.findByPk(gestionGrupoId)
     if(!gestionGrupo){
         return null
     }

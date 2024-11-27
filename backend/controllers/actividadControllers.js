@@ -1,7 +1,7 @@
 const Actividad= require('../models/Actividad')
-const createActividadController = async({id, usuario_id, rol, accion, fecha, descripcion})=>{
+const createActividadController = async({actividadId, usuarioId, rol, accion, fecha, descripcion})=>{
     try {
-        const newActividad = await Actividad.create({id, usuario_id, rol, accion, fecha, descripcion})
+        const newActividad = await Actividad.create({actividadId, usuarioId, rol, accion, fecha, descripcion})
         return newActividad
     } catch (error) {
         throw new Error(error.message)
@@ -18,9 +18,9 @@ const getAllActividadsController = async () =>{
 }
 
 // para actualizar
-const updateActividadByIdController = async (id, actividadData)=>{
+const updateActividadByIdController = async (actividadId, actividadData)=>{
     try {
-        const actividad = await Actividad.findByPk(id)
+        const actividad = await Actividad.findByPk(actividadId)
         if(!actividad){
             return null
         }
@@ -32,9 +32,9 @@ const updateActividadByIdController = async (id, actividadData)=>{
 }
 // para eliminar
 
-const deletedActividadByIdController = async(id)=>{
+const deletedActividadByIdController = async(actividadId)=>{
    try {
-    const actividad= await Actividad.findByPk(id)
+    const actividad= await Actividad.findByPk(actividadId)
     if(!actividad){
         return null
     }
