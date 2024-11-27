@@ -1,0 +1,120 @@
+select {
+    margin-top: 5px;
+    width: auto; /* Anchura del select */
+    height: 40px; /* Altura del select */
+    padding: 5px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño de la fuente */
+    border: 1px solid #ccc; /* Borde del select */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #0d0c0c; /* Color de fondo */
+    color: #ffffff; /* Color del texto */
+    cursor: pointer; /* Cambia el cursor al pasar */
+}
+.docenteFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px; /* Asegura que ocupe toda la altura del viewport */
+    width: 400px; /* Ocupa todo el ancho */
+    background: linear-gradient(to right, #6a11cb 30%, #2575fc); /* Ajustamos el gradiente para que no sea tan grande */
+    color: #fff;
+  }
+  
+  .docenteFormMenu {
+    top: 20px; /* Ajusta la posición desde la parte superior */
+    left: 20px; /* Ajusta la posición desde la izquierda */
+    z-index: 1000; /* Asegura que esté por encima del contenido */
+  }
+  
+  .docenteFormMenu button {
+    background: #2575fc;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .docenteFormMenu button:hover {
+    background: #1a5fc9;
+  }
+  
+  .docenteFormTitle {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .docenteForm {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+    margin-top: 20px; /* Esto asegura que el formulario esté centrado también */
+  }
+  
+  .docenteForm input {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 100%;
+  }
+  
+  .docenteForm input:focus {
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0px 0px 4px rgba(37, 117, 252, 0.6);
+  }
+  
+  .docenteFormButton {
+    background: #2575fc;
+    color: #fff;
+    border: none;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 100%;
+  }
+  
+  .docenteFormButton:hover {
+    background: #1a5fc9;
+  }
+  
+  @media (max-width: 768px) {
+    .docenteFormTitle {
+      font-size: 1.5rem;
+    }
+  
+    .docenteForm {
+      width: 90%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .docenteFormTitle {
+      font-size: 1.2rem;
+    }
+  
+    .docenteForm {
+      width: 95%;
+      padding: 15px;
+    }
+  
+    .docenteFormButton {
+      padding: 10px;
+      font-size: 0.9rem;
+    }
+  }
+  

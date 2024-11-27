@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 import axios from 'axios'
 import usePlanEstudioStore from "../../store/PlanEstudioStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const PlanEstudioFrom = ()=>{
     const {addPlanEstudio} = usePlanEstudioStore()
@@ -47,10 +48,10 @@ const PlanEstudioFrom = ()=>{
     }
 
     return(
-        <div>
-            <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>plan de estudio Form</h1>
-            <form 
+        <div className={stilo.docenteFormContainer}>
+            <div lassName={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+            <h1 className={stilo.docenteFormTitle}>plan de estudio Form</h1>
+            <form className={stilo.docenteForm} 
             onSubmit={handleSubmit}>
                 <select
                     name="studentId"

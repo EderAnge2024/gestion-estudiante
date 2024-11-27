@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 import axios from 'axios'
 import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const PreriquisitoCursoFrom = ()=>{
     const {addPreriquisitoCurso} = usePreriquisitoCursoStore()
@@ -57,10 +58,10 @@ const PreriquisitoCursoFrom = ()=>{
     }
 
     return(
-        <div>
-            <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>PreriquisitoCurso Form</h1>
-            <form 
+        <div className={stilo.docenteFormContainer}>
+            <div className={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+            <h1 className={stilo.docenteFormTitle}>PreriquisitoCurso Form</h1>
+            <form className={stilo.docenteForm}
             onSubmit={handleSubmit}>
                 <select
                   name="studentId"

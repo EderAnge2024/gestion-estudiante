@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useRolStore from "../../store/RolStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const RolFrom = () => {
   const { addRol } = useRolStore();
@@ -47,12 +48,13 @@ const RolFrom = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className={stilo.docenteFormContainer}>
+      <div className={stilo.docenteFormMenu}>
         <NavegadorMenu />
       </div>
-      <h1>Asignar Rol</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className={stilo.docenteFormTitle}>Asignar Rol</h1>
+      <form className={stilo.docenteForm} 
+      onSubmit={handleSubmit}>
         {/* Selector de usuario */}
         <select
           name="usuarioId"

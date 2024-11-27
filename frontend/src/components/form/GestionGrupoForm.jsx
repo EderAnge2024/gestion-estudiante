@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 import axios from 'axios'
 import NavegadorMenu from "../navegador/NavegadorMenu";
 import useGestionGrupoStore from "../../store/GestionGrupoStore"
+import stilo from "./stilo.module.css";
 
 const GestionGrupoForm = ()=>{
     const {addGestionGrupo} = useGestionGrupoStore()
@@ -60,10 +61,10 @@ const GestionGrupoForm = ()=>{
     }
 
     return(
-        <div>
-            <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>GestionGrupo Form</h1>
-            <form 
+        <div className={stilo.docenteFormContainer}>
+            <div className={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+            <h1 className={stilo.docenteFormTitle}>GestionGrupo Form</h1>
+            <form className={stilo.docenteForm}
             onSubmit={handleSubmit}>
                 
                 <select

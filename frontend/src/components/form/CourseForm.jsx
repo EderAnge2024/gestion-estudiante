@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useCourseStore from "../../store/CourseStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const CourseForm = () => {
   const { addCourse } = useCourseStore();
@@ -58,10 +59,10 @@ const CourseForm = () => {
   };
 
   return (
-    <div>
-      <NavegadorMenu />
-      <h1>Course Form</h1>
-      <form onSubmit={handleSubmit}>
+    <div className={stilo.docenteFormContainer}>
+      <div className={stilo.docenteFormMenu}><NavegadorMenu /></div>
+      <h1 className={stilo.docenteFormTitle}>Course Form</h1>
+      <form  className={stilo.docenteForm} onSubmit={handleSubmit}>
         <select
           name="planEstudioId"
           value={CourseData.planEstudioId}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import useNotaStore from "../../store/NotaStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const NotaForm = ()=>{
     const {addNota} = useNotaStore()
@@ -61,10 +62,10 @@ const NotaForm = ()=>{
     }
 
     return(
-        <div>
-        <div><NavegadorMenu></NavegadorMenu></div>
-        <h1>Nota Form</h1>
-        <form 
+        <div className={stilo.docenteFormContainer}>
+        <div className={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+        <h1 className={stilo.docenteFormTitle}>Nota Form</h1>
+        <form className={stilo.docenteForm}
         onSubmit={handleSubmit}>
                
                 <select

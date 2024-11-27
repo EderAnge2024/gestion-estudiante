@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import usePermisoStore from "../../store/PermisoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const PermisoFrom = ()=>{
     const {addPermiso} = usePermisoStore()
@@ -48,10 +49,10 @@ const PermisoFrom = ()=>{
     }
 
     return(
-        <div>
-            <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>Permios Form</h1>
-            <form 
+        <div className={stilo.docenteFormContainer}>
+            <div className={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+            <h1 className={stilo.docenteFormTitle}>Permios Form</h1>
+            <form className={stilo.docenteForm}
             onSubmit={handleSubmit}>
                 <select
                 name="rolId"

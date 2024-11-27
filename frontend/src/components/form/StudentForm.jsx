@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from 'axios'
 import useStudentStore from "../../store/StudentStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const StudentForm = ()=>{
     const {addStudent} = useStudentStore()
@@ -44,10 +45,10 @@ const StudentForm = ()=>{
     }
 
     return(
-        <div>
-            <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>Student Form</h1>
-            <form 
+        <div className={stilo.docenteFormContainer}>
+            <div className={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+            <h1 className={stilo.docenteFormTitle}>Student Form</h1>
+            <form className={stilo.docenteForm}
             onSubmit={handleSubmit}>
                 <input
                 type="text"

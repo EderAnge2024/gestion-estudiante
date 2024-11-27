@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import useActividadStore from "../../store/ActividadStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 import axios from "axios";
+import stilo from "./stilo.module.css";
 
 const ActividadForm = () => {
   const { addActividad } = useActividadStore();
@@ -50,12 +51,12 @@ const ActividadForm = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className={stilo.docenteFormContainer}>
+      <div className={stilo.docenteFormMenu}>
         <NavegadorMenu />
       </div>
-      <h1>Formulario de Actividad</h1>
-      <form onSubmit={handleSubmit}>
+      <h1 className={stilo.docenteFormTitle}>Formulario de Actividad</h1>
+      <form className={stilo.docenteForm} onSubmit={handleSubmit}>
         {/* Selector de usuario */}
         <select
           name="usuarioId"

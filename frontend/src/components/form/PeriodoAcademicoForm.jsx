@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import usePeriodoAcademicoStore from "../../store/PeriodoAcademicoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const PeriodoAcademicoFrom = ()=>{
     const {addPeriodoAcademico} = usePeriodoAcademicoStore()
@@ -56,10 +57,10 @@ const PeriodoAcademicoFrom = ()=>{
     }
 
     return(
-        <div>
-            <div><NavegadorMenu></NavegadorMenu></div>
-            <h1>Periodo Academico Form</h1>
-            <form 
+        <div className={stilo.docenteFormContainer}>
+            <div className={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+            <h1 className={stilo.docenteFormTitle}>Periodo Academico Form</h1>
+            <form className={stilo.docenteForm} 
             onSubmit={handleSubmit}>
                 <select
                   name="docenteId"

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from 'axios'
 import useMatriculaStore from "../../store/MatriculaStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import stilo from "./stilo.module.css";
 
 const MatriculaForm = ()=>{
     const {addMatricula} = useMatriculaStore()
@@ -66,10 +67,10 @@ const MatriculaForm = ()=>{
     }
 
     return(
-        <div>
-        <div><NavegadorMenu></NavegadorMenu></div>
-        <h1>Matricula Form</h1>
-        <form 
+        <div className={stilo.docenteFormContainer}>
+        <div className={stilo.docenteFormMenu}><NavegadorMenu></NavegadorMenu></div>
+        <h1 className={stilo.docenteFormTitle}>Matricula Form</h1>
+        <form className={stilo.docenteForm}
         onSubmit={handleSubmit}>
             <input
             type="text"
