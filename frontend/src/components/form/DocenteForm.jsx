@@ -1,96 +1,91 @@
-import { useState } from "react"
-import axios from 'axios'
+import { useState } from "react";
 import useDocenteStore from "../../store/DocenteStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
-import style from './DocenteForm.module.css'
+import style from './DocenteForm.module.css';
 
-const DocenteForm = ()=>{
-    const {addDocente} = useDocenteStore()
+const DocenteForm = () => {
+    const { addDocente } = useDocenteStore();
 
     const [docenteData, setDocenteData] = useState({
-        nombre:"",
-        apellido:"",
-        telefono:"",
-        direccion:"",
-        email:""
-    
-    
+        nombre: "",
+        apellido: "",
+        telefono: "",
+        direccion: "",
+        email: ""
     });
-    console.log(docenteData);
 
-    const handleInputchange = (e)=>{
-        const {name,value} = e.target;
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
         setDocenteData({
             ...docenteData,
-            [name]:value
-        })
+            [name]: value
+        });
+    };
 
-    }
-    const handleSubmit = async (e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
-        addDocente(docenteData)
+        addDocente(docenteData);
         setDocenteData({
-            
-            nombre:"",
-            apellido:"",
-            telefono:"",
-            direccion:"",
-            email:""
-        })
-        alert("docente added successfully")
-       
-    }
+            nombre: "",
+            apellido: "",
+            telefono: "",
+            direccion: "",
+            email: ""
+        });
+        alert("Docente added successfully");
+    };
 
-    return(
-        <div className={style.container}>
-        <div className={style.menu}><NavegadorMenu></NavegadorMenu></div>
-        <h1>Docente Form</h1>
-        <form 
-        onSubmit={handleSubmit}>
-            <input
-            type="text"
-            placeholder="Enter nombre"
-            required
-            name="nombre"
-            value={docenteData.nombre}
-            onChange={handleInputchange}
-            />
-            <input
-            type="text"
-            placeholder="Enter apellido"
-            required
-            name="apellido"
-            value={docenteData.apellido}
-            onChange={handleInputchange}
-            />
-            <input
-            type="text"
-            placeholder="Enter telefono"
-            required
-            name="telefono"
-            value={docenteData.telefono}
-            onChange={handleInputchange}
-            />
-            <input
-            type="text"
-            placeholder="Enter direccion"
-            required
-            name="direccion"
-            value={docenteData.direccion}
-            onChange={handleInputchange}
-            />
-            <input
-            type="text"
-            placeholder="Enter email"
-            required
-            name="email"
-            value={docenteData.email}
-            onChange={handleInputchange}
-            />
-            <button>save</button>
-        </form>
-    </div>
-)
-}
-export default DocenteForm
+    return (
+        <div className={style.docenteFormContainer}>
+            <div className={style.docenteFormMenu}>
+                <NavegadorMenu />
+            </div>
+            <h1 className={style.docenteFormTitle}>Docente Form</h1>
+            <form className={style.docenteForm} onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Enter nombre"
+                    required
+                    name="nombre"
+                    value={docenteData.nombre}
+                    onChange={handleInputChange}
+                />
+                <input
+                    type="text"
+                    placeholder="Enter apellido"
+                    required
+                    name="apellido"
+                    value={docenteData.apellido}
+                    onChange={handleInputChange}
+                />
+                <input
+                    type="text"
+                    placeholder="Enter telefono"
+                    required
+                    name="telefono"
+                    value={docenteData.telefono}
+                    onChange={handleInputChange}
+                />
+                <input
+                    type="text"
+                    placeholder="Enter direccion"
+                    required
+                    name="direccion"
+                    value={docenteData.direccion}
+                    onChange={handleInputChange}
+                />
+                <input
+                    type="text"
+                    placeholder="Enter email"
+                    required
+                    name="email"
+                    value={docenteData.email}
+                    onChange={handleInputChange}
+                />
+                <button className={style.docenteFormButton}>Save</button>
+            </form>
+        </div>
+    );
+};
 
+export default DocenteForm;
