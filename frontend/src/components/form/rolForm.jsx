@@ -10,6 +10,9 @@ const RolFrom = () => {
     usuarioId: "",
     rol: "",
   });
+  console.log(rolData);
+  
+  const roles = ["Admin", "Profesor", "Estudiante"]; // Lista de roles predefinidos
 
   // Obtener la lista de usuarios al cargar el componente
   useEffect(() => {
@@ -65,15 +68,21 @@ const RolFrom = () => {
           ))}
         </select>
 
-        {/* Campo para ingresar el rol */}
-        <input
-          type="text"
-          placeholder="Ingresar rol"
-          required
+        {/* Selector de rol (ComboBox) */}
+        <select
           name="rol"
           value={rolData.rol}
           onChange={handleInputChange}
-        />
+          required
+        >
+          <option value="">Seleccionar rol</option>
+          {roles.map((role, index) => (
+            <option key={index} value={role}>
+              {role} {/* Muestra cada rol de la lista */}
+            </option>
+          ))}
+        </select>
+
         <button>Guardar</button>
       </form>
     </div>

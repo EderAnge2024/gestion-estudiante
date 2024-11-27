@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useUsuarioStore from "../../store/UserStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const UserList = ()=>{
     const {fetchUsuarios, usuarios, deleteUsuario, updateUsuario} = useUsuarioStore()
     const [editingUsuario, setEditingUsuario] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({nombreUsuario: '',contraseña: '' }) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -24,6 +26,7 @@ const UserList = ()=>{
     const handleEditClick = (student) => {  
         setEditingUsuario(student) // Establece el estudiante en edición
         setFormData({ nombreUsuario: student.nombreUsuario, contraseña: student.contraseña}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true);
     }
 
     // Maneja los cambios en el formulario de edición
@@ -38,6 +41,7 @@ const UserList = ()=>{
     const handleUpdate = async () => {
         await updateUsuario(editingUsuario.usuarioId, formData) // Espera a que updateUsuario complete la actualización
         setEditingUsuario(null) // Cierra el formulario de edición
+        setIsModalOpen(false); 
         fetchUsuarios() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -78,8 +82,9 @@ const UserList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingUsuario && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit Student</h3>
                             <input 
                                 type="text" 
@@ -94,9 +99,10 @@ const UserList = ()=>{
                                 value={formData.contraseña} 
                                 onChange={handleInputChange} 
                                 placeholder="contraseña"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingUsuario(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

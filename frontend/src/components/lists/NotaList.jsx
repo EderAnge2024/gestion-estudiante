@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useNotaStore from "../../store/NotaStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const NotaList = ()=>{
     const {fetchNotas, notas, deleteNota, updateNota,fetchStudents,students,fetchCourses,courses} = useNotaStore()
     const [editingNota, setEditingNota] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ courseId: '',studentId: '',fecha_ingre_nota: '',nota: '' }) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -26,6 +28,7 @@ const NotaList = ()=>{
     const handleEditClick = (nota) => {  
         setEditingNota(nota) // Establece el estudiante en edición
         setFormData({ courseId: nota.courseId, studentId: nota.studentId, fecha_ingre_nota: nota.fecha_ingre_nota, nota: nota.nota}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true);
     }
 
     // Maneja los cambios en el formulario de edición
@@ -40,6 +43,7 @@ const NotaList = ()=>{
     const handleUpdate = async () => {
         await updateNota(editingNota.notaId, formData) // Espera a que updateNota complete la actualización
         setEditingNota(null) // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchNotas() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -84,8 +88,9 @@ const NotaList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingNota && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay} >
+                            <div className={modalStyle.modal}>
                             <h3>Edit Nota</h3>
                             <input 
                                 type="text" 
@@ -114,9 +119,10 @@ const NotaList = ()=>{
                                 value={formData.nota} 
                                 onChange={handleInputChange} 
                                 placeholder="nota"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingNota(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

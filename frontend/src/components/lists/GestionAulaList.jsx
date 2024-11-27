@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 import useGestionAulaStore from "../../store/GestioAulaStore"
+import modalStyle from "./studentStilo.module.css";
 
 const GestionAulaList = ()=>{
     const {fetchGestionAulas, gestionAulas, deleteGestionAula, updateGestionAula} = useGestionAulaStore()
     const [editingGestionAula, setEditingGestionAula] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ nombre: '',descripcion: '',estado: ''}) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -24,6 +26,7 @@ const GestionAulaList = ()=>{
     const handleEditClick = (gestionAula) => {  
         setEditingGestionAula(gestionAula) // Establece el estudiante en edición
         setFormData({ nombre: gestionAula.nombre, descripcion: gestionAula.descripcion, estado: gestionAula.estado}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true)
     }
 
     // Maneja los cambios en el formulario de edición
@@ -38,6 +41,7 @@ const GestionAulaList = ()=>{
     const handleUpdate = async () => {
         await updateGestionAula(editingGestionAula.gestionAulaId, formData) // Espera a que updateGestionAula complete la actualización
         setEditingGestionAula(null) // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchGestionAulas() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -78,8 +82,9 @@ const GestionAulaList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingGestionAula && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit gestionAula</h3>
                             <input 
                                 type="text" 
@@ -101,9 +106,10 @@ const GestionAulaList = ()=>{
                                 value={formData.estado} 
                                 onChange={handleInputChange} 
                                 placeholder="estado"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingGestionAula(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

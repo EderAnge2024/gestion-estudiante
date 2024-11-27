@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import useActividadStore from "../../store/ActividadStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import modalStyle from "./studentStilo.module.css";
 
 const ActividadList = () => {
     const { fetchActividads, actividads, deleteActividad, updateActividad, fetchUsuarios, usuarios } = useActividadStore();
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
     const [editingActividad, setEditingActividad] = useState(null); // Actividad que se está editando
     const [formData, setFormData] = useState({
         usuarioId: '',
@@ -37,6 +39,7 @@ const ActividadList = () => {
             fecha: actividad.fecha,
             descripcion: actividad.descripcion
         }); // Rellena los campos con los datos actuales de la actividad
+        setIsModalOpen(true)
     };
 
     // Maneja los cambios en el formulario de edición
@@ -51,6 +54,7 @@ const ActividadList = () => {
     const handleUpdate = async () => {
         await updateActividad(editingActividad.actividadId, formData); // Espera a que se complete la actualización
         setEditingActividad(null); // Cierra el formulario de edición
+        setIsModalOpen(false); 
         fetchActividads(); // Recarga la lista de actividades
     };
 
@@ -97,8 +101,9 @@ const ActividadList = () => {
             </div>
 
             {/* Muestra el formulario de edición solo si hay una actividad seleccionada */}
-            {editingActividad && (
-                <div>
+            {isModalOpen && (
+                <div className={modalStyle.overlay}>
+                    <div className={modalStyle.modal}>
                     <h3>Edit Actividad</h3>
                     <input 
                         type="text" 
@@ -134,9 +139,10 @@ const ActividadList = () => {
                         value={formData.descripcion} 
                         onChange={handleInputChange} 
                         placeholder="descripcion"
-                    />
+                    /><br></br>
                     <button onClick={handleUpdate}>Save</button>
-                    <button onClick={() => setEditingActividad(null)}>Cancel</button>
+                    <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                    </div>
                 </div>
             )}
         </div>

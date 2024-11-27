@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import usePeriodoAcademicoStore from "../../store/PeriodoAcademicoStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const PeriodoAcademicoList = ()=>{
     const {fetchPeriodoAcademicos, periodoAcademicos, deletePeriodoAcademico, updatePeriodoAcademico,fetchDocentes,docentes} = usePeriodoAcademicoStore()
     const [editingPeriodoAcademico, setEditingPeriodoAcademico] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ docenteId: '',fechaInicio: '',fechaFinal: '',estado: '',ciclo: ''}) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -25,6 +27,7 @@ const PeriodoAcademicoList = ()=>{
     const handleEditClick = (periodoAcademico) => {  
         setEditingPeriodoAcademico(periodoAcademico) // Establece el estudiante en edición
         setFormData({ docenteId: periodoAcademico.docenteId, fechaInicio: periodoAcademico.fechaInicio, fechaFinal: periodoAcademico.fechaFinal, estado: periodoAcademico.estado, ciclo: periodoAcademico.ciclo}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true); 
     }
 
     // Maneja los cambios en el formulario de edición
@@ -39,6 +42,7 @@ const PeriodoAcademicoList = ()=>{
     const handleUpdate = async () => {
         await updatePeriodoAcademico(editingPeriodoAcademico.periodoAcademicoId, formData) // Espera a que updatePeriodoAcademico complete la actualización
         setEditingPeriodoAcademico(null) // Cierra el formulario de edición
+        setIsModalOpen(false); 
         fetchPeriodoAcademicos() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -84,8 +88,9 @@ const PeriodoAcademicoList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingPeriodoAcademico && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit periodoAcademico</h3>
                             <input 
                                 type="text" 
@@ -121,9 +126,10 @@ const PeriodoAcademicoList = ()=>{
                                 value={formData.ciclo} 
                                 onChange={handleInputChange} 
                                 placeholder="ciclo"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingPeriodoAcademico(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useRolStore from "../../store/RolStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const RolList = ()=>{
     const {fetchRols, rols, deleteRol, updateRol,fetchUsuarios, usuarios} = useRolStore()
     const [editingRol, setEditingRol] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ usuarioId: '',rol: ''}) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -25,6 +27,7 @@ const RolList = ()=>{
     const handleEditClick = (rol) => {  
         setEditingRol(rol) // Establece el estudiante en edición
         setFormData({ usuarioId: rol.usuarioId, rol: rol.rol}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true);
     }
 
     // Maneja los cambios en el formulario de edición
@@ -39,6 +42,7 @@ const RolList = ()=>{
     const handleUpdate = async () => {
         await updateRol(editingRol.rolId, formData) // Espera a que updateRol complete la actualización
         setEditingRol(null) // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchRols() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -80,8 +84,9 @@ const RolList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingRol && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit rol</h3>
                             <input 
                                 type="text" 
@@ -96,9 +101,10 @@ const RolList = ()=>{
                                 value={formData.rol} 
                                 onChange={handleInputChange} 
                                 placeholder="rol"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingRol(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

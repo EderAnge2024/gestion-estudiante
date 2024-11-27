@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useGestionGrupoStore from "../../store/GestionGrupoStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const GestionGrupoList = ()=>{
     const {fetchGestionGrupos, gestionGrupos, deleteGestionGrupo, updateGestionGrupo,fetchPeriodoAcademicos, periodoAcademicos, fetchDocentes, docentes,fetchCourses,courses} = useGestionGrupoStore()
     const [editingGestionGrupo, setEditingGestionGrupo] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ courseId: '',docenteId: '',periodoAcademicoId: ''}) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -27,6 +29,7 @@ const GestionGrupoList = ()=>{
     const handleEditClick = (gestiongrupo) => {  
         setEditingGestionGrupo(gestiongrupo) // Establece el estudiante en edición
         setFormData({ courseId: gestiongrupo.courseId, docenteId: gestiongrupo.docenteId, periodoAcademicoId: gestiongrupo.periodoAcademicoId}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true); // Abre el modal  
     }
 
     // Maneja los cambios en el formulario de edición
@@ -41,6 +44,7 @@ const GestionGrupoList = ()=>{
     const handleUpdate = async () => {
         await updateGestionGrupo(editingGestionGrupo.gestionGrupoId, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingGestionGrupo(null) // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchGestionGrupos() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -87,8 +91,9 @@ const GestionGrupoList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingGestionGrupo && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit GestionGrupo</h3>
                             <input 
                                 type="text" 
@@ -110,11 +115,10 @@ const GestionGrupoList = ()=>{
                                 value={formData.periodoAcademicoId} 
                                 onChange={handleInputChange} 
                                 placeholder="periodoAcademicoId"
-                            />
-                            
-                        
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingGestionGrupo(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

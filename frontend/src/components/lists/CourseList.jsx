@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useCourseStore from "../../store/CourseStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const CourseList = ()=>{
     const {fetchCourses, courses, deleteCourse, updateCourse,fetchDocentes,docentes,fetchPlanEstudios,planEstudios} = useCourseStore()
     const [editingCourse, setEditingCourse] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ planEstudioId: '',docenteId: '',nombre: '',credito: '',ciclo: ''}) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -26,6 +28,7 @@ const CourseList = ()=>{
     const handleEditClick = (Course) => {  
         setEditingCourse(Course) // Establece el estudiante en edición
         setFormData({ planEstudioId: Course.planEstudioId, docenteId: Course.docenteId, nombre: Course.nombre, credito: Course.credito, ciclo: Course.ciclo}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true)
     }
 
     // Maneja los cambios en el formulario de edición
@@ -40,6 +43,7 @@ const CourseList = ()=>{
     const handleUpdate = async () => {
         await updateCourse(editingCourse.courseId, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingCourse(null) // Cierra el formulario de edición
+        setIsModalOpen(false)
         fetchCourses() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -86,8 +90,9 @@ const CourseList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingCourse && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit Course</h3>
                             <input 
                                 type="text" 
@@ -123,9 +128,10 @@ const CourseList = ()=>{
                                 value={formData.ciclo} 
                                 onChange={handleInputChange} 
                                 placeholder="ciclo"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingCourse(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(false)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

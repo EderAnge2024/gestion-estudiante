@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useMatriculaStore from "../../store/MatriculaStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css"
 
 const MatriculaList = ()=>{
     const {fetchMatriculas, matriculas, deleteMatricula, updateMatricula,fetchStudents, students,fetchPeriodoAcademicos,periodoAcademicos,fetchGestionGrupos,gestionGrupos} = useMatriculaStore()
     const [editingMatricula, setEditingMatricula] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ fecha: '',carrera: '',studentId: '',gestionGrupoId: '',periodoAcademicoId: '' }) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -27,6 +29,7 @@ const MatriculaList = ()=>{
     const handleEditClick = (matricula) => {  
         setEditingMatricula(matricula) // Establece el estudiante en edición
         setFormData({ fecha: matricula.fecha, carrera: matricula.carrera, studentId: matricula.studentId, gestionGrupoId: matricula.gestionGrupoId, periodoAcademicoId: matricula.periodoAcademicoId}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true);
     }
 
     // Maneja los cambios en el formulario de edición
@@ -41,6 +44,7 @@ const MatriculaList = ()=>{
     const handleUpdate = async () => {
         await updateMatricula(editingMatricula.matriculaId, formData) // Espera a que updateMatricula complete la actualización
         setEditingMatricula(null) // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchMatriculas() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -87,8 +91,9 @@ const MatriculaList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingMatricula && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit Matricula</h3>
                             <input 
                                 type="text" 
@@ -124,9 +129,10 @@ const MatriculaList = ()=>{
                                 value={formData.periodoAcademicoId} 
                                 onChange={handleInputChange} 
                                 placeholder="periodoAcademicoId"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingMatricula(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

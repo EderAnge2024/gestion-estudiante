@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import usePermisoStore from "../../store/PermisoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import modalStyle from "./studentStilo.module.css";
 
 const PermisoList = () => {
     const { fetchPermisos, permisos, deletePermiso, updatePermiso, fetchRoles, roles} = usePermisoStore();
     const [editingPermiso, setEditingPermiso] = useState(null); // Almacena el permiso que se está editando
     const [formData, setFormData] = useState({ rolId: '', accion: '', descripcion: '' }); // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de permisos y roles al mostrar el componente
     useEffect(() => {
@@ -25,6 +27,7 @@ const PermisoList = () => {
     const handleEditClick = (permiso) => {
         setEditingPermiso(permiso); // Establece el permiso en edición
         setFormData({ rolId: permiso.rolId, accion: permiso.accion, descripcion: permiso.descripcion }); // Rellena los campos
+        setIsModalOpen(true);
     };
 
     // Maneja los cambios en el formulario de edición
@@ -39,6 +42,7 @@ const PermisoList = () => {
     const handleUpdate = async () => {
         await updatePermiso(editingPermiso.permisoId, formData); // Actualiza el permiso
         setEditingPermiso(null); // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchPermisos(); // Recarga la lista de permisos
     };
 
@@ -83,8 +87,9 @@ const PermisoList = () => {
             </div>
 
             {/* Muestra el formulario de edición solo si hay un permiso seleccionado */}
-            {editingPermiso && (
-                <div>
+            {isModalOpen && (
+                <div className={modalStyle.overlay}>
+                    <div className={modalStyle.modal}>
                     <h3>Edit Permiso</h3>
                     <input
                         type="text"
@@ -106,9 +111,10 @@ const PermisoList = () => {
                         value={formData.descripcion}
                         onChange={handleInputChange}
                         placeholder="Descripción"
-                    />
+                    /><br></br>
                     <button onClick={handleUpdate}>Guardar</button>
-                    <button onClick={() => setEditingPermiso(null)}>Cancelar</button>
+                    <button onClick={() => setIsModalOpen(null)}>Cancelar</button>
+                    </div>
                 </div>
             )}
         </div>

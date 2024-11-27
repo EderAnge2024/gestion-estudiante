@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const PreriquisitoCursoList = ()=>{
     const {fetchPreriquisitoCursos, preriquisitoCursos, deletePreriquisitoCurso, updatePreriquisitoCurso,fetchStudents,students,fetchCourses,courses} = usePreriquisitoCursoStore()
     const [editingPreriquisitoCurso, setEditingPreriquisitoCurso] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ studentId: '',courseId: '',requisito: ''}) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -26,6 +28,7 @@ const PreriquisitoCursoList = ()=>{
     const handleEditClick = (preriquisitoCurso) => {  
         setEditingPreriquisitoCurso(preriquisitoCurso) // Establece el estudiante en edición
         setFormData({ studentId: preriquisitoCurso.studentId, courseId: preriquisitoCurso.courseId, requisito: preriquisitoCurso.requisito}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true);
     }
 
     // Maneja los cambios en el formulario de edición
@@ -40,6 +43,7 @@ const PreriquisitoCursoList = ()=>{
     const handleUpdate = async () => {
         await updatePreriquisitoCurso(editingPreriquisitoCurso.preriquisitoCursoId, formData) // Espera a que updatePreriquisitoCurso complete la actualización
         setEditingPreriquisitoCurso(null) // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchPreriquisitoCursos() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -85,8 +89,9 @@ const PreriquisitoCursoList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingPreriquisitoCurso && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit preriquisitoCurso</h3>
                             <input 
                                 type="text" 
@@ -108,9 +113,10 @@ const PreriquisitoCursoList = ()=>{
                                 value={formData.requisito} 
                                 onChange={handleInputChange} 
                                 placeholder="requisito"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingPreriquisitoCurso(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

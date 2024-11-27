@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import useDocenteStore from "../../store/DocenteStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
+
 const DocenteList = ()=>{
     const {fetchDocentes, docentes, deleteDocente, updateDocente} = useDocenteStore()
     const [editingDocente, setEditingDocente] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ nombre: '',apellido: '',telefono: '',direccion: '',email: '' }) // Datos del formulario de edición
-
+    const [isModalOpen, setIsModalOpen] = useState(false);
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchDocentes()
@@ -23,6 +25,7 @@ const DocenteList = ()=>{
     const handleEditClick = (docente) => {  
         setEditingDocente(docente) // Establece el estudiante en edición
         setFormData({ nombre: docente.nombre, apellido: docente.apellido, telefono: docente.telefono, direccion: docente.direccion, email: docente.email}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true)
     }
 
     // Maneja los cambios en el formulario de edición
@@ -37,6 +40,7 @@ const DocenteList = ()=>{
     const handleUpdate = async () => {
         await updateDocente(editingDocente.docenteId, formData) // Espera a que updateDocente complete la actualización
         setEditingDocente(null) // Cierra el formulario de edición
+        setIsModalOpen(false)
         fetchDocentes() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -83,8 +87,9 @@ const DocenteList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingDocente && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit Docente</h3>
                             <input 
                                 type="text" 
@@ -120,9 +125,10 @@ const DocenteList = ()=>{
                                 value={formData.email} 
                                 onChange={handleInputChange} 
                                 placeholder="email"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingDocente(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(false)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>

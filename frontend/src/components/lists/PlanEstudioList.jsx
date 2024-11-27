@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
 import usePlanEstudioStore from "../../store/PlanEstudioStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
+import modalStyle from "./studentStilo.module.css";
 
 const PlanEstudioList = ()=>{
     const {fetchPlanEstudios, planEstudios, deletePlanEstudio, updatePlanEstudio,fetchStudents, students} = usePlanEstudioStore()
     const [editingPlanEstudio, setEditingPlanEstudio] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ studentId: '',meta: '',herramienta: ''}) // Datos del formulario de edición
+    const [isModalOpen, setIsModalOpen] = useState(false); // Controla la visibilidad del modal
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
@@ -25,6 +27,7 @@ const PlanEstudioList = ()=>{
     const handleEditClick = (planEstudio) => {  
         setEditingPlanEstudio(planEstudio) // Establece el estudiante en edición
         setFormData({ studentId: planEstudio.studentId, meta: planEstudio.meta, herramienta: planEstudio.herramienta}) // Rellena los campos con los datos actuales
+        setIsModalOpen(true);
     }
 
     // Maneja los cambios en el formulario de edición
@@ -39,6 +42,7 @@ const PlanEstudioList = ()=>{
     const handleUpdate = async () => {
         await updatePlanEstudio(editingPlanEstudio.planEstudioId, formData) // Espera a que updatePlanEstudio complete la actualización
         setEditingPlanEstudio(null) // Cierra el formulario de edición
+        setIsModalOpen(false);
         fetchPlanEstudios() // Luego recarga la lista de estudiantes
     }
     /////-------------////
@@ -82,8 +86,9 @@ const PlanEstudioList = ()=>{
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}
-            {editingPlanEstudio && (
-                        <div>
+            {isModalOpen && (
+                        <div className={modalStyle.overlay}>
+                            <div className={modalStyle.modal}>
                             <h3>Edit planEstudio</h3>
                             <input 
                                 type="text" 
@@ -105,9 +110,10 @@ const PlanEstudioList = ()=>{
                                 value={formData.herramienta} 
                                 onChange={handleInputChange} 
                                 placeholder="herramienta"
-                            />
+                            /><br></br>
                             <button onClick={handleUpdate}>Save</button>
-                            <button onClick={() => setEditingPlanEstudio(null)}>Cancel</button>
+                            <button onClick={() => setIsModalOpen(null)}>Cancel</button>
+                            </div>
                         </div>
                     )}
         </div>
