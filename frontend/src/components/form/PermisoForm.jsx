@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import axios from 'axios'
 import usePermisoStore from "../../store/PermisoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './PermisoForm.module.css'
+
+
+
 
 const PermisoFrom = ()=>{
     const {addPermiso} = usePermisoStore()
@@ -48,7 +52,7 @@ const PermisoFrom = ()=>{
     }
 
     return(
-        <div>
+        <div className={style.container}> 
             <div><NavegadorMenu></NavegadorMenu></div>
             <h1>Permios Form</h1>
             <form 

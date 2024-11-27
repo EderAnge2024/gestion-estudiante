@@ -2,6 +2,9 @@ import { useState } from "react"
 import axios from 'axios'
 import usePeriodoAcademicoStore from "../../store/PeriodoAcademicoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './PeriodoAcademicoForm.module.css'
+
+
 
 const PeriodoAcademicoFrom = ()=>{
     const {addPeriodoAcademico} = usePeriodoAcademicoStore()
@@ -38,7 +41,7 @@ const PeriodoAcademicoFrom = ()=>{
     }
 
     return(
-        <div>
+        <div className={style.container}>
             <div><NavegadorMenu></NavegadorMenu></div>
             <h1>Periodo Academico Form</h1>
             <form 

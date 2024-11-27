@@ -2,6 +2,8 @@ import { useState } from "react"
 import axios from 'axios'
 import usePreriquisitoCursoStore from "../../store/PrerrequisitoCursoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './prerrequisitoCursoForm.module.css'
+
 
 const PreriquisitoCursoFrom = ()=>{
     const {addPreriquisitoCurso} = usePreriquisitoCursoStore()
@@ -35,7 +37,7 @@ const PreriquisitoCursoFrom = ()=>{
     }
 
     return(
-        <div>
+        <div className={style.prerrequisitoCursoForm}>
             <div><NavegadorMenu></NavegadorMenu></div>
             <h1>PreriquisitoCurso Form</h1>
             <form 

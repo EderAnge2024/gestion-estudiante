@@ -2,6 +2,8 @@ import { useState } from "react"
 // import axios from 'axios'
 import NavegadorMenu from "../navegador/NavegadorMenu";
 import useGestionGrupoStore from "../../store/GestionGrupoStore"
+import style from './GestionGrupoForm.module.css'
+
 
 const GestionGrupoForm = ()=>{
     const {addGestionGrupo} = useGestionGrupoStore()
@@ -34,7 +36,7 @@ const GestionGrupoForm = ()=>{
     }
 
     return(
-        <div>
+        <div className={style.container}>
             <div><NavegadorMenu></NavegadorMenu></div>
             <h1>GestionGrupo Form</h1>
             <form 

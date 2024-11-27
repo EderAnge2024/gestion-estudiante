@@ -2,6 +2,9 @@ import { useState } from "react"
 import axios from 'axios'
 import usePlanEstudioStore from "../../store/PlanEstudioStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './planEstudioForm.module.css'
+
+
 
 const PlanEstudioFrom = ()=>{
     const {addPlanEstudio} = usePlanEstudioStore()

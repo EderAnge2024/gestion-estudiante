@@ -2,6 +2,8 @@ import { useState } from "react"
 import axios from 'axios'
 import useMatriculaStore from "../../store/MatriculaStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './MatriculaForm.module.css'
+
 
 const MatriculaForm = ()=>{
     const {addMatricula} = useMatriculaStore()
@@ -40,7 +42,7 @@ const MatriculaForm = ()=>{
     }
 
     return(
-        <div>
+        <div className={style.container}>
         <div><NavegadorMenu></NavegadorMenu></div>
         <h1>Matricula Form</h1>
         <form 

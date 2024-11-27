@@ -2,6 +2,8 @@ import { useState } from "react"
 import axios from 'axios'
 import useNotaStore from "../../store/NotaStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './NotaForm.module.css'
+
 
 const NotaForm = ()=>{
     const {addNota} = useNotaStore()
@@ -39,7 +41,7 @@ const NotaForm = ()=>{
     }
 
     return(
-        <div>
+        <div className={style.container}>
         <div><NavegadorMenu></NavegadorMenu></div>
         <h1>Nota Form</h1>
         <form 

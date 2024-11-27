@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useRolStore from "../../store/RolStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './rolForm.module.css'
+
+
+
+
 
 const RolFrom = () => {
   const { addRol } = useRolStore();
@@ -44,7 +49,7 @@ const RolFrom = () => {
   };
 
   return (
-    <div>
+    <div className={style.container}>
       <div>
         <NavegadorMenu />
       </div>

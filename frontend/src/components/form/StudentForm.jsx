@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from 'axios'
 import useStudentStore from "../../store/StudentStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
+import style from './StudentForm.module.css'
 
 const StudentForm = ()=>{
     const {addStudent} = useStudentStore()
@@ -44,7 +45,7 @@ const StudentForm = ()=>{
     }
 
     return(
-        <div>
+        <div className={style.container}>
             <div><NavegadorMenu></NavegadorMenu></div>
             <h1>Student Form</h1>
             <form 
