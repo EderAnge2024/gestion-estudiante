@@ -1,14 +1,14 @@
 import { useState } from "react"
 // import axios from 'axios'
 import useCourseStore from "../../store/CourseStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const CourseForm = ()=>{
     const {addCourse} = useCourseStore()
 
     const [CourseData, setCourseData] = useState({
-        planEstudio_id:"",
-        docente_id:"",
+        planEstudioId:"",
+        docenteId:"",
         nombre:"",
         credito:"",
         ciclo:""
@@ -27,8 +27,8 @@ const CourseForm = ()=>{
         e.preventDefault();
         addCourse(CourseData)
         setCourseData({
-            planEstudio_id:"",
-            docente_id:"",
+            planEstudioId:"",
+            docenteId:"",
             nombre:"",
             credito:"",
             ciclo:""
@@ -39,24 +39,24 @@ const CourseForm = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>Course Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter planEstudio_id"
+                placeholder="Enter planEstudioId"
                 required
-                name="planEstudio_id"
-                value={CourseData.planEstudio_id}
+                name="planEstudioId"
+                value={CourseData.planEstudioId}
                 onChange={handleInputchange}
                 />
                 <input
                 type="text"
-                placeholder="Enter docente_id"
+                placeholder="Enter docenteId"
                 required
-                name="docente_id"
-                value={CourseData.docente_id}
+                name="docenteId"
+                value={CourseData.docenteId}
                 onChange={handleInputchange}
                 />
                 <input

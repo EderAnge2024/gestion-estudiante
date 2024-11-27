@@ -2,41 +2,79 @@
 .nav {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f4f4f4; /* Fondo claro */
-    padding: 10px 20px;
-    border-bottom: 2px solid #ccc; /* Línea sutil debajo */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 15px 30px;
+    border-bottom: 3px solid #007bff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para cada sección */
+.section {
+    margin: 20px;
+    text-align: center;
+}
+
+.section h3 {
+    color: #007bff;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 /* Estilo para los enlaces */
-.nav a {
-    color: #333; /* Color de texto */
-    text-decoration: none; /* Sin subrayado */
+.navLink {
+    color: #333;
+    text-decoration: none;
     margin: 5px 10px;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    padding: 8px 15px;
+    border-radius: 5px;
     font-size: 14px;
-    font-weight: 500; /* Peso de la fuente */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-/* Hover y foco */
-.nav a:hover, 
-.nav a:focus {
-    background-color: #007bff; /* Fondo azul */
-    color: white; /* Texto blanco */
+.navLink:hover {
+    background-color: #007bff;
+    color: #ffffff;
 }
 
-/* Diseño responsivo para pantallas pequeñas */
-@media (max-width: 768px) {
-    .nav {
-        flex-direction: column; /* Cambia a vertical */
-        align-items: flex-start;
-    }
+/* Botones de navegación superior */
+.navigationButtons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
 
-    .nav a {
-        margin: 5px 0;
-    }
+/* Botón "Atrás" */
+.backButton {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+    background-color: #d32f2f;
+}
+
+/* Botón "Inicio" */
+.homeButton {
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.homeButton:hover {
+    background-color: #0056b3;
 }

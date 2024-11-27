@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import { useState } from "react"
-// import axios from 'axios'
-=======
 import { useState, useEffect } from "react";
 import axios from "axios";
->>>>>>> main
 import useRolStore from "../../store/RolStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 
@@ -15,6 +10,8 @@ const RolFrom = () => {
     usuarioId: "",
     rol: "",
   });
+  const [isLoading, setIsLoading] = useState(false); // Indicador de carga
+  const [error, setError] = useState(""); // Manejo de errores
 
   // Obtener la lista de usuarios al cargar el componente
   useEffect(() => {
@@ -24,6 +21,7 @@ const RolFrom = () => {
         setUsuarios(response.data); // Almacenar los usuarios en el estado
       } catch (error) {
         console.error("Error al obtener los usuarios:", error);
+        setError("Error al cargar los usuarios, intenta de nuevo.");
       }
     };
 
@@ -40,20 +38,29 @@ const RolFrom = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addRol(rolData); // Asignar rol usando el store
-    setRolData({
-      usuarioId: "",
-      rol: "",
-    });
-    alert("Rol asignado con éxito");
+    setIsLoading(true);
+    setError(""); // Limpia errores previos
+
+    try {
+      await addRol(rolData); // Asignar rol usando el store
+      setRolData({
+        usuarioId: "",
+        rol: "",
+      });
+      alert("Rol asignado con éxito");
+    } catch (error) {
+      console.error("Error al asignar el rol:", error);
+      setError("Hubo un problema al asignar el rol. Intenta nuevamente.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div>
-      <div>
-        <NavegadorMenu />
-      </div>
+      <NavegadorMenu />
       <h1>Asignar Rol</h1>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         {/* Selector de usuario */}
         <select
@@ -79,7 +86,9 @@ const RolFrom = () => {
           value={rolData.rol}
           onChange={handleInputChange}
         />
-        <button>Guardar</button>
+        <button disabled={isLoading}>
+          {isLoading ? "Guardando..." : "Guardar"}
+        </button>
       </form>
     </div>
   );

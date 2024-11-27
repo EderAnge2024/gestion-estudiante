@@ -1,33 +1,33 @@
 import { useState } from "react"
 // import axios from 'axios'
-import useGestionGrupoStore from "../../store/GestionGrupoStore";
-import Navegador from "../navegador/Navegador";
+import NavegadorMenu from "../navegador/NavegadorMenu";
+import useGestionGrupoStore from "../../store/GestionGrupoStore"
 
 const GestionGrupoForm = ()=>{
     const {addGestionGrupo} = useGestionGrupoStore()
 
-    const [GestionGrupoData, setGestionGrupoData] = useState({
-        curso_id:"",
-        docente_id:"",
-        periodoAcademico_id:""
+    const [gestionGrupoData, setGestionGrupoData] = useState({
+        courseId:"",
+        docenteId:"",
+        periodoAcademicoId:""
     });
-    console.log(GestionGrupoData);
+    console.log(gestionGrupoData);
 
     const handleInputchange = (e)=>{
         const {name,value} = e.target;
         setGestionGrupoData({
-            ...GestionGrupoData,
+            ...gestionGrupoData,
             [name]:value
         })
 
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        addGestionGrupo(GestionGrupoData)
+        addGestionGrupo(gestionGrupoData)
         setGestionGrupoData({
-            curso_id:"",
-            docente_id:"",
-            periodoAcademico_id:""  
+            courseId:"",
+            docenteId:"",
+            periodoAcademicoId:""  
         })
         alert("GestionGrupo added successfully")
        
@@ -35,32 +35,32 @@ const GestionGrupoForm = ()=>{
 
     return(
         <div>
-            <div><Navegador></Navegador></div>
+            <div><NavegadorMenu></NavegadorMenu></div>
             <h1>GestionGrupo Form</h1>
             <form 
             onSubmit={handleSubmit}>
                 <input
                 type="text"
-                placeholder="Enter curso_id"
+                placeholder="Enter courseId"
                 required
-                name="curso_id"
-                value={GestionGrupoData.curso_id}
+                name="courseId"
+                value={gestionGrupoData.courseId}
                 onChange={handleInputchange}
                 />
                 <input
                 type="text"
-                placeholder="Enter docente_id"
+                placeholder="Enter docenteId"
                 required
-                name="docente_id"
-                value={GestionGrupoData.docente_id}
+                name="docenteId"
+                value={gestionGrupoData.docenteId}
                 onChange={handleInputchange}
                 />
                 <input
                 type="text"
-                placeholder="Enter periodoAcademico_id"
+                placeholder="Enter periodoAcademicoId"
                 required
-                name="periodoAcademico_id"
-                value={GestionGrupoData.periodoAcademico_id}
+                name="periodoAcademicoId"
+                value={gestionGrupoData.periodoAcademicoId}
                 onChange={handleInputchange}
                 />
                 <button>save</button>

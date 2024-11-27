@@ -1,39 +1,109 @@
-// import React from 'react';
-import { Link } from 'react-router-dom';
-import style from './Navegador.module.css'
+// Importaciones necesarias
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import style from './Navegador.module.css';
 
+// Array con las secciones y sus enlaces
+const sections = [
+    {
+        title: 'Gestión de Aulas',
+        links: [
+            { path: '/gestionAulaFrom', label: 'GUARDAR GESTION DE AULAS' },
+            { path: '/gestionAulaList', label: 'LISTA DE GESTION DE AULAS' },
+        ],
+    },
+    {
+        title: 'Estudiantes',
+        links: [
+            { path: '/studentForm', label: 'GUARDAR ESTUDIANTES' },
+            { path: '/studentList', label: 'LISTA DE ESTUDIANTES' },
+        ],
+    },
+    {
+        title: 'Docentes',
+        links: [
+            { path: '/docenteFrom', label: 'GUARDAR DOCENTE' },
+            { path: '/docenteList', label: 'LISTA DE DOCENTES' },
+        ],
+    },
+    {
+        title: 'Planes de Estudio',
+        links: [
+            { path: '/planEstudioFrom', label: 'GUARDAR PLAN ESTUDIO' },
+            { path: '/planEstudioList', label: 'LISTA DE PLAN DE ESTUDIOS' },
+        ],
+    },
+    {
+        title: 'Cursos',
+        links: [
+            { path: '/courseFrom', label: 'GUARDAR CURSO' },
+            { path: '/courseList', label: 'LISTA DE CURSOS' },
+            { path: '/preriquisitoCursoFrom', label: 'GUARDAR PRERREQUISITO DE CURSO' },
+            { path: '/preriquisitoCursoList', label: 'LISTA DE PRERREQUISITO DE CURSOS' },
+        ],
+    },
+    {
+        title: 'Periodos Académicos',
+        links: [
+            { path: '/periodoAcademicoFrom', label: 'GUARDAR PERIODO ACADEMICO' },
+            { path: '/periodoAcademicoList', label: 'LISTA DE PERIODO ACADEMICO' },
+        ],
+    },
+    {
+        title: 'Grupos',
+        links: [
+            { path: '/gestioGrupoFrom', label: 'GUARDAR GESTION DE GRUPOS' },
+            { path: '/gestioGrupoList', label: 'LISTA DE GESTION DE GRUPOS' },
+        ],
+    },
+    {
+        title: 'Matrículas',
+        links: [
+            { path: '/matriculaFrom', label: 'GUARDAR MATRICULA' },
+            { path: '/matriculaList', label: 'LISTA DE MATRICULA' },
+        ],
+    },
+    {
+        title: 'Notas',
+        links: [
+            { path: '/notaFrom', label: 'GUARDAR NOTA' },
+            { path: '/notaList', label: 'LISTA DE NOTAS' },
+        ],
+    },
+];
+
+// Componente Navegador
 const Navegador = () => {
-    return (
-        <div >            
-            <nav className={style.nav}>
-                <Link to='/navegadorMenu2'> Inicio</Link>
-                <Link to='/gestionAulaFrom' >GUARDAR GESTION DE AULAS</Link>
-                <Link to='/gestionAulaList' >LISTA DE GESTION DE AULAS</Link>
-                <Link to='/studentForm' >GUARDAR ESTUDIANTES</Link>
-                <Link to='/studentList' >LISTA DE ESTUDIANTES </Link>
-                <Link to='/docenteFrom' >GUARDAR DOCENTE</Link>
-                <Link to='/docenteList' >LISTA DE DOCENTES</Link>
-                <Link to='/planEstudioFrom' >GUARDAR PLAN ESTUDIO</Link>
-                <Link to='/planEstudioList' >LISTA DE PLAN DE ESTUDIOS</Link>
-                <Link to='/courseFrom' >GUARDAR CURSO</Link>
-                <Link to='/courseList' >LISTA DE CURSOS</Link>
-                <Link to='/preriquisitoCursoFrom' >GUARDAR PRERREQUISITO DE CURSO</Link>
-                <Link to='/preriquisitoCursoList' >LISTA DE PRERREQUISITO DE CURSOS</Link>
+    const navigate = useNavigate(); // Hook para manejar la navegación "Atrás"
 
-                <Link to='/periodoAcademicoFrom' >GUARDAR PERIODO ACADEMICO</Link>
-                <Link to='/periodoAcademicoList' >LISTA DE PERIODO ACADEMICO</Link>
-                <Link to='/gestioGrupoFrom' >GUARDAR GESTION DE GRUPOS</Link>
-                <Link to='/gestioGrupoList' >LISTA DE GESTION DE GRUPOS</Link>
-                <Link to='/matriculaFrom' >GUARDAR MATRICULA</Link>
-                <Link to='/matriculaList' >LISTA DE MATRICULA</Link>
-                <Link to='/notaFrom' >GUARDAR NOTA</Link>
-                <Link to='/notaList' >LISTA DE NOTAS</Link>
-                
-                
-                
+    return (
+        <div>
+            {/* Botones de navegación (Inicio y Atrás) */}
+            <div className={style.navigationButtons}>
+                <button onClick={() => navigate(-1)} className={style.backButton}>
+                    Atrás
+                </button>
+                <Link to="/" className={style.homeButton}>
+                    Cerrar sesion
+                </Link>
+            </div>
+
+            {/* Menú de navegación por secciones */}
+            <nav className={style.nav}>
+                {sections.map((section, index) => (
+                    <div key={index} className={style.section}>
+                        <h3>{section.title}</h3>
+                        {section.links.map((link, idx) => (
+                            <Link key={idx} to={link.path} className={style.navLink}>
+                                {link.label}
+                            </Link>
+                        ))}
+                    </div>
+                ))}
             </nav>
         </div>
     );
-}
+};
 
+// Exportación del componente
 export default Navegador;
