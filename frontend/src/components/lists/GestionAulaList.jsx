@@ -48,18 +48,33 @@ const GestionAulaList = ()=>{
         <div>
             
             <div >
-                <h1>gestionAula List</h1>
+                <h1>GestionAula List</h1>
 
                 <div>
-                    {
-                        gestionAulas.map((user) => (
-                            <div key={user.gestionAulaId}>
-                                <h3>{user.gestionAulaId}<br></br> {user.nombre} {user.descripcion} {user.estado}</h3>
-                                <button onClick={() => handleDelete(user.gestionAulaId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Descripción</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {gestionAulas.map((user) => (
+                      <tr key={user.gestionAulaId}>
+                        <td>{user.nombre}</td>
+                        <td>{user.descripcion}</td>
+                        <td>{user.estado}</td>
+                        <td>
+                          <button onClick={() => handleDelete(user.gestionAulaId)}>❌</button>
+                          <button onClick={() => handleEditClick(user)}>✍️</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

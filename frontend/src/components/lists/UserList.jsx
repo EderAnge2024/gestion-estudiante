@@ -51,15 +51,30 @@ const UserList = ()=>{
                 <h1>Users List</h1>
 
                 <div>
-                    {
-                        usuarios.map((user) => (
-                            <div key={user.usuarioId}>
-                                <h3>{user.usuarioId}<br></br> {user.nombreUsuario} {user.contraseña}</h3>
-                                <button onClick={() => handleDelete(user.usuarioId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>ID Usuario</th>
+                          <th>Nombre de Usuario</th>
+                          <th>Contraseña</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {usuarios.map((user) => (
+                          <tr key={user.usuarioId}>
+                            <td>{user.usuarioId}</td>
+                            <td>{user.nombreUsuario}</td>
+                            <td>{user.contraseña}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.usuarioId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

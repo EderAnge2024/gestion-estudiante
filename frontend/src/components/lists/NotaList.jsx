@@ -53,18 +53,34 @@ const NotaList = ()=>{
                 <h1>Nota List</h1>
 
                 <div>
-                    {
-                        notas.map((user) => (
-                            <div key={user.notaId}>
-                                <h3>
-                                    {students[user.studentId]}
-                                    {courses[user.courseId]}
-                                    {user.notaId}<br></br> {user.nombre} {user.nombre} {user.fecha_ingre_nota} {user.nota}</h3>
-                                <button onClick={() => handleDelete(user.notaId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>Curso</th>
+                          <th>Estudiante</th>
+                          <th>Fecha de Ingreso</th>
+                          <th>Nota</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {notas.map((user) => (
+                          <tr key={user.notaId}>
+                            <td>{courses[user.courseId] || "Curso no encontrado"}
+                                {user.nombre}</td>
+                            <td>{students[user.studentId] || "Estudiante no encontrado"}
+                                {user.nombre}</td>
+                            <td>{user.fecha_ingre_nota}</td>
+                            <td>{user.nota}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.notaId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

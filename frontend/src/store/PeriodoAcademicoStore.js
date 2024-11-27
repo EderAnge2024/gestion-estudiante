@@ -3,6 +3,7 @@ import axios from 'axios'  // para hacer peticiones
 
 const usePeriodoAcademicoStore = create((set)=>({
     periodoAcademicos: [],
+    docentes:{},
     addPeriodoAcademico: async(periodoAcademico)=>{
         try {
             const response = await axios.post('http://localhost:3001/periodoAcademico',periodoAcademico)
@@ -38,7 +39,19 @@ const usePeriodoAcademicoStore = create((set)=>({
         } catch (error) {
             console.log("Error updating periodoAcademico:", error.message)
         }
-    }
+    },
+    fetchDocentes: async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/docente'); // Ajusta la URL según tu API
+            const docentesData = response.data.reduce((acc, docente) => {
+                acc[docente.docenteId] = docente.nombre; // Mapea docenteId con el nombre del nombre
+                return acc;
+            }, {}); // Transforma la lista de docentes en un objeto
+            set({ docentes: docentesData }); // Actualiza el estado con los docentes
+        } catch (error) {
+            console.log("Error al obtener docentes:", error.message);
+        }
+    },
     
 }))
 

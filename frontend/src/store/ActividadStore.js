@@ -8,7 +8,6 @@ const useActividadStore = create((set)=>({
         try {
             const response = await axios.post('http://localhost:3001/actividad',actividad)
             set((state)=>({actividads: [...state.actividads, response.data]}))// crea una copia el "..."
-            await fetchActividads()
         } catch (error) {
             console.log("Error adding Actividad", error.message)
         }

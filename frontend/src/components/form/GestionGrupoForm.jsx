@@ -1,17 +1,43 @@
-import { useState } from "react"
-// import axios from 'axios'
+import { useState,useEffect } from "react"
+import axios from 'axios'
 import NavegadorMenu from "../navegador/NavegadorMenu";
 import useGestionGrupoStore from "../../store/GestionGrupoStore"
 
 const GestionGrupoForm = ()=>{
     const {addGestionGrupo} = useGestionGrupoStore()
-
+    const [docentes, setDocentes] = useState([]);
+    const [courses,setCourses] = useState([])
+    const [periodoAcademicos,setPeriodoAcademicos] = useState([])
     const [gestionGrupoData, setGestionGrupoData] = useState({
         courseId:"",
         docenteId:"",
         periodoAcademicoId:""
     });
     console.log(gestionGrupoData);
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+          try {
+            const [docentesResponse, coursesResponse,periodoAcademicoResponse] = await Promise.all([
+              axios.get("http://localhost:3001/docente"),
+              axios.get("http://localhost:3001/course"),
+              axios.get("http://localhost:3001/periodoAcademico"),
+            ]);
+    
+            console.log("Docentes:", docentesResponse.data);
+            console.log("PlanEstudios:", coursesResponse.data);
+            console.log("PeriodoAcademico:", periodoAcademicoResponse.data);
+    
+            setDocentes(docentesResponse.data);
+            setCourses(coursesResponse.data);
+            setPeriodoAcademicos(periodoAcademicoResponse.data);
+          } catch (error) {
+            console.error("Error al obtener los usuarios:", error);
+          }
+        };
+    
+        fetchUsuarios();
+      }, []);
 
     const handleInputchange = (e)=>{
         const {name,value} = e.target;
@@ -39,30 +65,46 @@ const GestionGrupoForm = ()=>{
             <h1>GestionGrupo Form</h1>
             <form 
             onSubmit={handleSubmit}>
-                <input
-                type="text"
-                placeholder="Enter courseId"
-                required
-                name="courseId"
-                value={gestionGrupoData.courseId}
-                onChange={handleInputchange}
-                />
-                <input
-                type="text"
-                placeholder="Enter docenteId"
-                required
-                name="docenteId"
-                value={gestionGrupoData.docenteId}
-                onChange={handleInputchange}
-                />
-                <input
-                type="text"
-                placeholder="Enter periodoAcademicoId"
-                required
-                name="periodoAcademicoId"
-                value={gestionGrupoData.periodoAcademicoId}
-                onChange={handleInputchange}
-                />
+                
+                <select
+                  name="docenteId"
+                  value={gestionGrupoData.docenteId}
+                  onChange={handleInputchange}
+                  required
+                >
+                  <option value="">Seleccionar docente</option>
+                  {docentes.map((user) => (
+                    <option key={user.docenteId} value={user.docenteId}>
+                      {user.nombre}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  name="courseId"
+                  value={gestionGrupoData.courseId}
+                  onChange={handleInputchange}
+                  required
+                >
+                  <option value="">Seleccionar course</option>
+                  {courses.map((user) => (
+                    <option key={user.courseId} value={user.courseId}>
+                      {user.nombre}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  name="periodoAcademicoId"
+                  value={gestionGrupoData.periodoAcademicoId}
+                  onChange={handleInputchange}
+                  required
+                >
+                  <option value="">Seleccionar course</option>
+                  {periodoAcademicos.map((user) => (
+                    <option key={user.periodoAcademicoId} value={user.periodoAcademicoId}>
+                      {user.ciclo}
+                    </option>
+                  ))}
+                </select>
                 <button>save</button>
             </form>
         </div>

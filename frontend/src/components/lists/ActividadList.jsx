@@ -63,19 +63,35 @@ const ActividadList = () => {
                 <h1>Actividad List</h1>
 
                 <div>
-                {
-                    actividads.map((user) => (
-                        <div key={user.actividadId}>
-                            <h3>
-                                
-                                {usuarios[user.usuarioId] || "usuario no encontrado"}<br /> 
-                                {user.nombreUsuario}{user.rol} {user.accion} {user.fecha} {user.descripcion}
-                            </h3>
-                            <button onClick={() => handleDelete(user.actividadId)}>❌</button>
-                            <button onClick={() => handleEditClick(user)}>✍️</button>
-                        </div>
-                    ))
-                }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>Usuario</th>
+                          <th>Rol</th>
+                          <th>Acción</th>
+                          <th>Fecha</th>
+                          <th>Descripción</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {actividads.map((user) => (
+                          <tr key={user.actividadId}>
+                            
+                            <td>{usuarios[user.usuarioId] || "Usuario no encontrado"}
+                                {user.nombreUsuario}</td>
+                            <td>{user.rol}</td>
+                            <td>{user.accion}</td>
+                            <td>{user.fecha}</td>
+                            <td>{user.descripcion}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.actividadId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
 
                 </div>
             </div>

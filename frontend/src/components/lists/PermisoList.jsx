@@ -3,7 +3,7 @@ import usePermisoStore from "../../store/PermisoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PermisoList = () => {
-    const { fetchPermisos, permisos, deletePermiso, updatePermiso, fetchRoles, roles } = usePermisoStore();
+    const { fetchPermisos, permisos, deletePermiso, updatePermiso, fetchRoles, roles} = usePermisoStore();
     const [editingPermiso, setEditingPermiso] = useState(null); // Almacena el permiso que se está editando
     const [formData, setFormData] = useState({ rolId: '', accion: '', descripcion: '' }); // Datos del formulario de edición
 
@@ -51,25 +51,34 @@ const PermisoList = () => {
                 <h1>Permiso List</h1>
 
                 <div>
-                    {
-                        permisos.map((user) => (
-                            <div key={user.permisoId}>
-                                <h3>
-                                    <span
-                                        style={{ textDecoration: "underline", cursor: "pointer" }}
-                                        title={roles[user.rolId] || "Cargando nombre..."} // Tooltip con el nombre del rol
-                                    >
-                                        {user.permisoId} {/* Identificador del permiso */}
-                                    </span>
-                                    <br />
-                                    {roles[user.rolId] || user.rolId} {/* Muestra el nombre del rol si está disponible */}
-                                    {user.accion} {user.descripcion}
-                                </h3>
-                                <button onClick={() => handleDelete(user.permisoId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>ID Permiso</th>
+                          <th>Rol</th>
+                          <th>Acción</th>
+                          <th>Descripción</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {permisos.map((user) => (
+                          <tr key={user.permisoId}>
+                            <td>{user.permisoId}</td>
+                            <td>{roles[user.rolId] || "No se encontró"}
+                                {user.rol}
+                            </td>
+                            <td>{user.accion}</td>
+                            <td>{user.descripcion}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.permisoId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
 

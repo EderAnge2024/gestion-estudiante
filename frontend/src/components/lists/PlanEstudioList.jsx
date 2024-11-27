@@ -49,20 +49,36 @@ const PlanEstudioList = ()=>{
         <div>
             
             <div >
-                <h1>planEstudio List</h1>
+                <h1>PlanEstudio List</h1>
 
                 <div>
-                    {
-                        planEstudios.map((user) => (
-                            <div key={user.planEstudioId}>
-                                <h3>
-                                    {students[user.studentId]}
-                                    {user.nombre}<br></br> {user.meta} {user.herramienta}</h3>
-                                <button onClick={() => handleDelete(user.planEstudioId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>ID Plan de Estudio</th>
+                          <th>Estudiante</th>
+                          <th>Meta</th>
+                          <th>Herramienta</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {planEstudios.map((user) => (
+                          <tr key={user.planEstudioId}>
+                            <td>{user.planEstudioId}</td>
+                            <td>{students[user.studentId] || "Estudiante no encontrado"}
+                                {user.nombre}</td>
+                            <td>{user.meta}</td>
+                            <td>{user.herramienta}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.planEstudioId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

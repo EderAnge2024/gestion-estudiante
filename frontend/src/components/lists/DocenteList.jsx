@@ -50,15 +50,36 @@ const DocenteList = ()=>{
                 <h1>Docente List</h1>
 
                 <div>
-                    {
-                        docentes.map((user) => (
-                            <div key={user.docenteId}>
-                                <h3>{user.docenteId}<br></br> {user.dni} {user.nombre} {user.apellido} {user.telefono} {user.direccion} {user.email}</h3>
-                                <button onClick={() => handleDelete(user.docenteId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>Docente ID</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Teléfono</th>
+                          <th>Dirección</th>
+                          <th>Email</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {docentes.map((user) => (
+                          <tr key={user.docenteId}>
+                            <td>{user.docenteId}</td>
+                            <td>{user.nombre}</td>
+                            <td>{user.apellido}</td>
+                            <td>{user.telefono}</td>
+                            <td>{user.direccion}</td>
+                            <td>{user.email}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.docenteId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

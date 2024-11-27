@@ -3,13 +3,14 @@ import usePeriodoAcademicoStore from "../../store/PeriodoAcademicoStore"
 import NavegadorMenu from "../navegador/NavegadorMenu"
 
 const PeriodoAcademicoList = ()=>{
-    const {fetchPeriodoAcademicos, periodoAcademicos, deletePeriodoAcademico, updatePeriodoAcademico} = usePeriodoAcademicoStore()
+    const {fetchPeriodoAcademicos, periodoAcademicos, deletePeriodoAcademico, updatePeriodoAcademico,fetchDocentes,docentes} = usePeriodoAcademicoStore()
     const [editingPeriodoAcademico, setEditingPeriodoAcademico] = useState(null) // Almacena el estudiante que se está editando
     const [formData, setFormData] = useState({ docenteId: '',fechaInicio: '',fechaFinal: '',estado: '',ciclo: ''}) // Datos del formulario de edición
 
     // Cargar la lista de estudiantes al mostrar el componente
     useEffect(()=>{
         fetchPeriodoAcademicos()
+        fetchDocentes()
     },[])
 
     // Elimina el estudiante tras confirmar y actualiza la lista
@@ -48,18 +49,38 @@ const PeriodoAcademicoList = ()=>{
         <div>
             
             <div >
-                <h1>periodoAcademico List</h1>
+                <h1>PeriodoAcademico List</h1>
 
                 <div>
-                    {
-                        periodoAcademicos.map((user) => (
-                            <div key={user.periodoAcademicoId}>
-                                <h3>{user.periodoAcademicoId}<br></br> {user.docenteId} {user.fechaInicio} {user.fechaFinal} {user.estado} {user.ciclo}</h3>
-                                <button onClick={() => handleDelete(user.periodoAcademicoId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>Docente</th>
+                          <th>Fecha Inicio</th>
+                          <th>Fecha Final</th>
+                          <th>Estado</th>
+                          <th>Ciclo</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {periodoAcademicos.map((user) => (
+                          <tr key={user.periodoAcademicoId}>
+                            <td>{docentes[user.docenteId]}
+                                {user.nombre}</td>
+                            <td>{user.fechaInicio}</td>
+                            <td>{user.fechaFinal}</td>
+                            <td>{user.estado}</td>
+                            <td>{user.ciclo}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.periodoAcademicoId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

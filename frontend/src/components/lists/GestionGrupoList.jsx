@@ -54,19 +54,36 @@ const GestionGrupoList = ()=>{
                 <h1>GestionGrupo List</h1>
 
                 <div>
-                    {
-                        gestionGrupos.map((user) => (
-                            <div key={user.gestionGrupoId}>
-                                <h3>
-                                {docentes[user.docenteId]}
-                                {periodoAcademicos[user.periodoAcademicoId]}
-                                {courses[user.courseId]}
-                                {user.gestionGrupoId}<br></br> {user.nombre} {user.nombre} {user.ciclo} </h3>
-                                <button onClick={() => handleDelete(user.gestionGrupoId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>Docente</th>
+                          <th>Curso</th>
+                          <th>Gestión Grupo Ciclo</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {gestionGrupos.map((user) => (
+                          <tr key={user.gestionGrupoId}>
+                            <td>
+                                {docentes[user.docenteId] || "Docente no encontrado"}
+                                {user.nombre}</td>
+                            <td>
+                                {courses[user.courseId] || "Curso no encontrado"}
+                                {user.nombre}</td>
+                            <td>
+                                {periodoAcademicos[user.periodoAcademicoId] || "Periodo académico no encontrado"}
+                                {user.ciclo}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.gestionGrupoId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

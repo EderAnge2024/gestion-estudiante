@@ -45,21 +45,32 @@ const VerNotaList = () => {
 
         {/* Mostrar las notas filtradas */}
         <div>
-          {filteredNotas.length > 0 ? (
-            filteredNotas.map((nota) => (
-              <div key={nota.notaId}>
-                <h3>
-                  {nota.notaId} <br />
-                  Estudiante: {nota.nombreEstudiante} <br />
-                  Curso: {nota.nombreCurso} <br />
-                  Fecha de Ingreso: {nota.fechaIngreso} <br />
-                  Nota: {nota.nota}
-                </h3>
-              </div>
-            ))
-          ) : (
-            <p>No hay notas disponibles.</p>
-          )}
+        {filteredNotas.length > 0 ? (
+              <table border="1">
+                <thead>
+                  <tr>
+                    <th>Nota ID</th>
+                    <th>Estudiante</th>
+                    <th>Curso</th>
+                    <th>Fecha de Ingreso</th>
+                    <th>Nota</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredNotas.map((nota) => (
+                    <tr key={nota.notaId}>
+                      <td>{nota.notaId}</td>
+                      <td>{nota.nombreEstudiante}</td>
+                      <td>{nota.nombreCurso}</td>
+                      <td>{nota.fechaIngreso}</td>
+                      <td>{nota.nota}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p>No hay notas disponibles.</p>
+            )}
         </div>
       </div>
     </div>

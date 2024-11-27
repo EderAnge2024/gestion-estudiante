@@ -1,11 +1,11 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from 'axios'
 import usePeriodoAcademicoStore from "../../store/PeriodoAcademicoStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PeriodoAcademicoFrom = ()=>{
     const {addPeriodoAcademico} = usePeriodoAcademicoStore()
-
+    const [docentes, setDocentes] = useState([]);
     const [periodoAcademicoData, setPeriodoAcademicoData] = useState({
         docenteId:"",
         fechaInicio:"",
@@ -14,6 +14,24 @@ const PeriodoAcademicoFrom = ()=>{
         ciclo:""
     });
     console.log(periodoAcademicoData);
+ 
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+          try {
+            const [docentesResponse] = await Promise.all([
+              axios.get("http://localhost:3001/docente"),
+            ]);
+    
+            console.log("Docentes:", docentesResponse.data);
+    
+            setDocentes(docentesResponse.data);
+          } catch (error) {
+            console.error("Error al obtener los usuarios:", error);
+          }
+        };
+    
+        fetchUsuarios();
+      }, []);
 
     const handleInputchange = (e)=>{
         const {name,value} = e.target;
@@ -43,14 +61,19 @@ const PeriodoAcademicoFrom = ()=>{
             <h1>Periodo Academico Form</h1>
             <form 
             onSubmit={handleSubmit}>
-                <input
-                type="text"
-                placeholder="Enter docenteId"
-                required
-                name="docenteId"
-                value={periodoAcademicoData.docenteId}
-                onChange={handleInputchange}
-                />
+                <select
+                  name="docenteId"
+                  value={periodoAcademicoData.docenteId}
+                  onChange={handleInputchange}
+                  required
+                >
+                  <option value="">Seleccionar docente</option>
+                  {docentes.map((user) => (
+                    <option key={user.docenteId} value={user.docenteId}>
+                      {user.nombre}
+                    </option>
+                  ))}
+                </select>
                 <input
                 type="text"
                 placeholder="Enter fechaInicio"

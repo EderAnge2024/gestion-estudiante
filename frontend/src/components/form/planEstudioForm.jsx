@@ -1,17 +1,30 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import axios from 'axios'
 import usePlanEstudioStore from "../../store/PlanEstudioStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const PlanEstudioFrom = ()=>{
     const {addPlanEstudio} = usePlanEstudioStore()
-
+    const [students,setStudents] = useState ([])
     const [planEstudioData, setPlanEstudioData] = useState({
         studentId:"",
         meta:"",
         herramienta:""
     });
     console.log(planEstudioData);
+
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+          try {
+            const response = await axios.get("http://localhost:3001/student"); // Cambiar a la URL adecuada de tu API
+            setStudents(response.data); // Almacenar los usuarios en el estado
+          } catch (error) {
+            console.error("Error al obtener los usuarios:", error);
+          }
+        };
+    
+        fetchUsuarios();
+      }, []);
 
     const handleInputchange = (e)=>{
         const {name,value} = e.target;
@@ -39,14 +52,20 @@ const PlanEstudioFrom = ()=>{
             <h1>plan de estudio Form</h1>
             <form 
             onSubmit={handleSubmit}>
-                <input
-                type="text"
-                placeholder="Enter studentId"
-                required
-                name="studentId"
-                value={planEstudioData.studentId}
-                onChange={handleInputchange}
-                />
+                <select
+                    name="studentId"
+                    value={planEstudioData.studentId}
+                    onChange={handleInputchange}
+                    required
+                  >
+                    <option value="">Seleccionar estudiante</option>
+                    {students.map((student) => (
+                      <option key={student.studentId} value={student.studentId}>
+                        {student.nombre} {/* Muestra el nombre del usuario */}
+                      </option>
+                    ))}
+                </select>
+
                 <input
                 type="text"
                 placeholder="Enter meta"

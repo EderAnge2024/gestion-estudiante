@@ -1,11 +1,12 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import axios from 'axios'
 import useNotaStore from "../../store/NotaStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 
 const NotaForm = ()=>{
     const {addNota} = useNotaStore()
-
+    const [students,setStudents] = useState([])
+    const [courses,setCourses] = useState([])
     const [notaData, setNotaData] = useState({
         courseId:"",
         studentId:"",
@@ -16,6 +17,27 @@ const NotaForm = ()=>{
     });
     console.log(notaData);
 
+    useEffect(() => {
+        const fetchUsuarios = async () => {
+          try {
+            const [studentsResponse, coursesResponse] = await Promise.all([
+              axios.get("http://localhost:3001/student"),
+              axios.get("http://localhost:3001/course"),
+            ]);
+    
+            console.log("Docentes:", studentsResponse.data);
+            console.log("Course:", coursesResponse.data);
+    
+            setStudents(studentsResponse.data);
+            setCourses(coursesResponse.data);
+          } catch (error) {
+            console.error("Error al obtener los usuarios:", error);
+          }
+        };
+    
+        fetchUsuarios();
+      }, []);
+      
     const handleInputchange = (e)=>{
         const {name,value} = e.target;
         setNotaData({
@@ -44,22 +66,33 @@ const NotaForm = ()=>{
         <h1>Nota Form</h1>
         <form 
         onSubmit={handleSubmit}>
-            <input
-            type="text"
-            placeholder="Enter courseId"
-            required
-            name="courseId"
-            value={notaData.courseId}
-            onChange={handleInputchange}
-            />
-            <input
-            type="text"
-            placeholder="Enter studentId"
-            required
-            name="studentId"
-            value={notaData.studentId}
-            onChange={handleInputchange}
-            />
+               
+                <select
+                  name="courseId"
+                  value={notaData.courseId}
+                  onChange={handleInputchange}
+                  required
+                >
+                  <option value="">Seleccionar course</option>
+                  {courses.map((user) => (
+                    <option key={user.courseId} value={user.courseId}>
+                      {user.nombre}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  name="studentId"
+                  value={notaData.studentId}
+                  onChange={handleInputchange}
+                  required
+                >
+                  <option value="">Seleccionar student</option>
+                  {students.map((user) => (
+                    <option key={user.studentId} value={user.studentId}>
+                      {user.nombre}
+                    </option>
+                  ))}
+                </select>
             <input
             type="text"
             placeholder="Enter fecha_ingre_nota"

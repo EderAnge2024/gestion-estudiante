@@ -51,15 +51,40 @@ const StudentList = ()=>{
                 <h1>Student List</h1>
 
                 <div>
-                    {
-                        students.map((user) => (
-                            <div key={user.studentId}>
-                                <h3>{user.studentId}<br></br> {user.dni} {user.nombre} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
-                                <button onClick={() => handleDelete(user.studentId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>ID Estudiante</th>
+                          <th>DNI</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Teléfono</th>
+                          <th>Email</th>
+                          <th>Apoderado</th>
+                          <th>Dirección</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {students.map((user) => (
+                          <tr key={user.studentId}>
+                            <td>{user.studentId}</td>
+                            <td>{user.dni}</td>
+                            <td>{user.nombre}</td>
+                            <td>{user.apellido}</td>
+                            <td>{user.telefono}</td>
+                            <td>{user.email}</td>
+                            <td>{user.apoderado}</td>
+                            <td>{user.direccion}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.studentId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

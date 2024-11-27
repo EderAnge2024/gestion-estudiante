@@ -52,17 +52,31 @@ const RolList = ()=>{
                 <h1>rol List</h1>
 
                 <div>
-                    {
-                        rols.map((user) => (
-                            <div key={user.rolId}>
-                                <h3>
-                                    {usuarios[user.usuarioId] || "usuario no encontrado"}
-                                    {user.nombreUsuario}<br></br> {user.rol} {user.apellido} {user.telefono} {user.email} {user.apoderado} {user.direccion}</h3>
-                                <button onClick={() => handleDelete(user.rolId)}>❌</button>
-                                <button onClick={() => handleEditClick(user)}>✍️</button>
-                            </div>
-                        ))
-                    }
+                <table border="1">
+                      <thead>
+                        <tr>
+                          <th>ID Rol</th>
+                          <th>Nombre Usuario</th>
+                          <th>Rol</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {rols.map((user) => (
+                          <tr key={user.rolId}>
+                            <td>{user.rolId}</td>
+                            <td>{usuarios[user.usuarioId] || "Usuario no encontrado"}
+                                {user.nombreUsuario}</td>
+                            <td>{user.rol}</td>
+                            <td>
+                              <button onClick={() => handleDelete(user.rolId)}>❌</button>
+                              <button onClick={() => handleEditClick(user)}>✍️</button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+
                 </div>
             </div>
             {/* Muestra el formulario de edición solo si hay un estudiante seleccionado */}

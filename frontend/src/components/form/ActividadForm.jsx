@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import axios from 'axios'
 import useActividadStore from "../../store/ActividadStore";
 import NavegadorMenu from "../navegador/NavegadorMenu";
 import axios from "axios";
@@ -12,7 +11,7 @@ const ActividadForm = () => {
     rol: "",
     accion: "",
     fecha: "",
-    descripcion: "",
+    descripcion: ""
   });
 
   // Obtener la lista de usuarios al cargar el componente
@@ -45,7 +44,7 @@ const ActividadForm = () => {
       rol: "",
       accion: "",
       fecha: "",
-      descripcion: "",
+      descripcion: ""
     });
     alert("Actividad añadida con éxito");
   };
